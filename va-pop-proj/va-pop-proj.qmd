@@ -9,7 +9,6 @@ knitr:
     message: FALSE
     out.width: "100%"
     fig.asp: 0.6
-
 ---
 
 ## Setup
@@ -148,4 +147,3 @@ ggsave("plot.png", plot = plot_final, width = 800, height = 500, units = "px")
 plot_final
 
 ```
-
