@@ -1,7 +1,50 @@
-# Summary
+# plotly
 
-In summary, this book has no content whatsoever.
+This page is a demonstration of a ggplot graph rendered in Quarto.
 
 ```{r}
-1 + 1
+#| label: fig-plotly
+#| fig-cap: "Mortgage delinquency rate by locality"
+
+library(tidyverse)
+library(scales)
+library(lubridate)
+library(plotly)
+
+pha_localities <- c("Richmond city", "Chesterfield County", "Hanover County", "Henrico County")
+
+mort_del <- read_csv("data/mortgage_del.csv") |> 
+  pivot_longer(
+    cols = starts_with("2"),
+    names_to = "period",
+    values_to = "estimate"
+  )|> 
+  mutate(period = ym(period)) |> 
+  filter(State == "VA") |> 
+  subset(Name %in% pha_localities) |> 
+  mutate(estimate = (estimate/100))
+
+plot <- ggplot(mort_del,
+       aes(x = period,
+           y = estimate,
+           color = Name)) +
+  geom_line(stat = "identity", size = 1) +
+  scale_y_continuous(labels = label_percent(accuracy = 0.1), expand = c(0,0), limits = c(0,0.055)) +
+  scale_x_date(date_breaks = "2 years", date_labels = "%Y") +
+  labs(title = "Mortgage delinquency rate by locality",
+       subtitle = "Mortgages 90 or more days delinquent: 2008 to 2021",
+       color = "Locality",
+       caption = "Source: Consumer Financial Protection Bureau, Mortgage Performance Trends.") +
+  theme(axis.title = element_blank(),
+        axis.ticks = element_blank(),
+        panel.background = element_blank(),
+        legend.title = element_blank(),
+        legend.key = element_blank(),
+        axis.line.x = element_line(color = "grey50",
+                                   size = 0.1),
+        panel.grid.major.y = element_line(color = "grey95",
+                                          size = 0.05))
+
+plotly::ggplotly(plot) 
+
 ```

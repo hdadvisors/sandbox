@@ -1,0 +1,4 @@
+- source: project
+  quarto-pub:
+    - id: a6509e42-a019-4f64-bccb-1d61df2283b5
+      url: 'https://quartopub.com/sites/jtknopf/quarto-test'

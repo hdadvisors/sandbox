@@ -1,0 +1,32 @@
+# Leaflet
+
+This page is a demonstration of an interactive Leaflet map rendered in Quarto.
+
+```{r}
+#| label: fig-leaflet
+#| fig-cap: "Federally assisted rental properties in Chesterfield County"
+
+library(tidyverse)
+library(janitor)
+library(leaflet)
+
+nhpd <- read_csv("data/nhpd_chesterfield.csv") |> 
+  clean_names() |> 
+  filter(subsidy_status != "Inactive")
+
+pal <- colorFactor(palette = c("blue", "red", "green", "orange"),
+                   levels = c("LIHTC", "Section 8", "HUD Insured", "Section 202 or Section 236"))
+
+leaflet(nhpd) |>
+  addTiles() |>
+  addCircleMarkers(
+    lng = ~long,
+    lat = ~lat,
+    radius = 4,
+    color = ~pal(subsidy),
+    stroke = FALSE, fillOpacity = 0.5
+  ) |>
+  addLegend("bottomright", pal = pal, values = ~subsidy,
+            title = "Federal program", opacity = 1)
+
+```

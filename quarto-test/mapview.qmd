@@ -1,0 +1,38 @@
+# mapview
+
+This page is a demonstration of an interactive mapview map rendered in Quarto.
+
+```{r}
+#| label: fig-mapview
+#| fig-cap: "HUD insured multifamily properties"
+
+library(mapview)
+library(sf)
+library(tidyverse)
+
+# Load in data (manually downloaded from HUD eGIS site) and select only relevant columns
+
+hud_insured <- read_csv("data/chesterfield_hud_insured.csv") |>  
+  select(1,2,9,10,15,16,18,57,60,74,111,133,140,141)
+
+# Create spatial object using the lat/long coordinate fields
+
+hud_insured_pts <- hud_insured |> 
+  st_as_sf(coords = c("X", "Y"),
+           crs = 4326) %>%
+  st_transform(6440)
+
+# Create map
+
+mapview(
+  hud_insured_pts,
+  label = "PROPERTY_NAME_TEXT",
+  legend = F,
+  popup = F,
+  burst = F,
+  layer.name = "HUD insured multifamily properties"
+)
+
+
+
+```

@@ -1,0 +1,37 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Quarto Test",
+    "section": "",
+    "text": "Warning\n\n\n\nThis site is a test bed for migrating RMarkdown/Bookdown content into Quarto. It was last updated on 2022-09-02."
+  },
+  {
+    "objectID": "ggplot.html",
+    "href": "ggplot.html",
+    "title": "1  ggplot",
+    "section": "",
+    "text": "library(tidyverse)\nlibrary(scales)\n\noews_pct <- read_rds(\"data/oews_pct.rds\")\n\nggplot(oews_pct,\n       aes(x = pct_change,\n           y = wage,\n           fill = wage)) +\n  geom_col() +\n  geom_text(aes(label = label_percent(accuracy = 0.1)(pct_change),\n                color = wage),\n            nudge_x = 0.01) +\n  labs(title = \"Percent change in annual wage by wage percentile\",\n       subtitle = \"Richmond, VA MSA | May 2019 to May 2021\",\n       caption = \"Source: U.S. Bureau of Labor Statistics, Occupational Employment and Wage Statistics.\") +\n  scale_x_continuous(labels = label_percent()) +\n  theme(axis.title = element_blank(),\n        axis.ticks = element_blank(),\n        panel.background = element_blank(),\n        panel.grid.major.y = element_blank(),\n        legend.position = \"none\",\n        panel.grid.major.x = element_line(color = \"grey95\",\n                                          size = 0.05))\n\n\n\n\nFigure 1.1: Percent change in annual wage by wage percentile"
+  },
+  {
+    "objectID": "plotly.html",
+    "href": "plotly.html",
+    "title": "2  plotly",
+    "section": "",
+    "text": "library(tidyverse)\nlibrary(scales)\nlibrary(lubridate)\nlibrary(plotly)\n\npha_localities <- c(\"Richmond city\", \"Chesterfield County\", \"Hanover County\", \"Henrico County\")\n\nmort_del <- read_csv(\"data/mortgage_del.csv\") |> \n  pivot_longer(\n    cols = starts_with(\"2\"),\n    names_to = \"period\",\n    values_to = \"estimate\"\n  )|> \n  mutate(period = ym(period)) |> \n  filter(State == \"VA\") |> \n  subset(Name %in% pha_localities) |> \n  mutate(estimate = (estimate/100))\n\nplot <- ggplot(mort_del,\n       aes(x = period,\n           y = estimate,\n           color = Name)) +\n  geom_line(stat = \"identity\", size = 1) +\n  scale_y_continuous(labels = label_percent(accuracy = 0.1), expand = c(0,0), limits = c(0,0.055)) +\n  scale_x_date(date_breaks = \"2 years\", date_labels = \"%Y\") +\n  labs(title = \"Mortgage delinquency rate by locality\",\n       subtitle = \"Mortgages 90 or more days delinquent: 2008 to 2021\",\n       color = \"Locality\",\n       caption = \"Source: Consumer Financial Protection Bureau, Mortgage Performance Trends.\") +\n  theme(axis.title = element_blank(),\n        axis.ticks = element_blank(),\n        panel.background = element_blank(),\n        legend.title = element_blank(),\n        legend.key = element_blank(),\n        axis.line.x = element_line(color = \"grey50\",\n                                   size = 0.1),\n        panel.grid.major.y = element_line(color = \"grey95\",\n                                          size = 0.05))\n\nplotly::ggplotly(plot) \n\n\n\n\nFigure 2.1: Mortgage delinquency rate by locality"
+  },
+  {
+    "objectID": "leaflet.html",
+    "href": "leaflet.html",
+    "title": "3  Leaflet",
+    "section": "",
+    "text": "library(tidyverse)\nlibrary(janitor)\nlibrary(leaflet)\n\nnhpd <- read_csv(\"data/nhpd_chesterfield.csv\") |> \n  clean_names() |> \n  filter(subsidy_status != \"Inactive\")\n\npal <- colorFactor(palette = c(\"blue\", \"red\", \"green\", \"orange\"),\n                   levels = c(\"LIHTC\", \"Section 8\", \"HUD Insured\", \"Section 202 or Section 236\"))\n\nleaflet(nhpd) |>\n  addTiles() |>\n  addCircleMarkers(\n    lng = ~long,\n    lat = ~lat,\n    radius = 4,\n    color = ~pal(subsidy),\n    stroke = FALSE, fillOpacity = 0.5\n  ) |>\n  addLegend(\"bottomright\", pal = pal, values = ~subsidy,\n            title = \"Federal program\", opacity = 1)\n\n\n\n\nFigure 3.1: Federally assisted rental properties in Chesterfield County"
+  },
+  {
+    "objectID": "mapview.html",
+    "href": "mapview.html",
+    "title": "4  mapview",
+    "section": "",
+    "text": "library(mapview)\nlibrary(sf)\nlibrary(tidyverse)\n\n# Load in data (manually downloaded from HUD eGIS site) and select only relevant columns\n\nhud_insured <- read_csv(\"data/chesterfield_hud_insured.csv\") |>  \n  select(1,2,9,10,15,16,18,57,60,74,111,133,140,141)\n\n# Create spatial object using the lat/long coordinate fields\n\nhud_insured_pts <- hud_insured |> \n  st_as_sf(coords = c(\"X\", \"Y\"),\n           crs = 4326) %>%\n  st_transform(6440)\n\n# Create map\n\nmapview(\n  hud_insured_pts,\n  label = \"PROPERTY_NAME_TEXT\",\n  legend = F,\n  popup = F,\n  burst = F,\n  layer.name = \"HUD insured multifamily properties\"\n)\n\n\n\n\nFigure 4.1: HUD insured multifamily properties"
+  }
+]

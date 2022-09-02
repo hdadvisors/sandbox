@@ -1,26 +1,32 @@
-project:
+project: 
   type: book
+  execute-dir: file
   output-dir: docs
 
 book:
   title: "Quarto Test"
-  author: "Jonathan Knopf"
+  author:
+    - name: Jonathan Knopf
+      affiliations:
+        - HDAdvisors
+  downloads: pdf
   date: today
   chapters:
     - index.qmd
-    - part: "Part 1"
+    - part: "Part 1: Plots"
       chapters:
         - ggplot.qmd
-    - part: "Part 2"
-      chapters:
         - plotly.qmd
-    - part: "End Matter"
+    - part: "Part 2: Maps"
+      chapters:
+        - leaflet.qmd
+        - mapview.qmd
   appendices:
     - references.qmd
 
 knitr:
   opts_chunk: 
-    echo: false
+    echo: true
     warning: false
     message: false
 
