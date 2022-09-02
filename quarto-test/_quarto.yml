@@ -1,0 +1,35 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "Quarto Test"
+  author: "Jonathan Knopf"
+  date: today
+  chapters:
+    - index.qmd
+    - part: "Part 1"
+      chapters:
+        - ggplot.qmd
+    - part: "Part 2"
+      chapters:
+        - plotly.qmd
+    - part: "End Matter"
+  appendices:
+    - references.qmd
+
+knitr:
+  opts_chunk: 
+    echo: false
+    warning: false
+    message: false
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+
+

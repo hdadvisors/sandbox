@@ -1,0 +1,11 @@
+# ggplot
+
+This page is a demonstration of a ggplot graph rendered in Quarto.
+
+```{r}
+#| label: fig-ggplot
+#| fig-cap: "Percent change in annual wage by wage percentile"
+
+
+
+```
