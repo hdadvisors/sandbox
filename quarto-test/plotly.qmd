@@ -1,6 +1,6 @@
 # plotly
 
-This page is a demonstration of a ggplot graph rendered in Quarto.
+This page is a demonstration of a plotly graph rendered in Quarto.
 
 ```{r}
 #| label: fig-plotly
