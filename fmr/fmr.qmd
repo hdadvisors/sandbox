@@ -1,0 +1,92 @@
+---
+title: "fmr"
+format: html
+---
+
+```{r}
+
+library(tidyverse)
+library(readxl)
+library(scales)
+
+library(showtext)
+
+# font_add_google(name = "Open Sans", family = "Open Sans")
+# 
+# showtext_auto()
+
+```
+
+## Import data
+
+Import FMR files for FY 2022 and FY 2023
+
+```{r}
+
+fmr_2022_raw <- read_xlsx("data/FY22_FMRs_revised.xlsx")
+
+fmr_2023_raw <- read_xlsx("data/FY23_FMRs.xlsx")
+
+```
+
+## Wrangle data
+
+Filter to Virginia, remove unnecessary columns, and add columns to denote applicable fiscal year. Collapse records to remove duplicate entries for localities within a single FMR area (i.e., MSA).
+
+```{r}
+
+fmr_2022 <- fmr_2022_raw |> 
+  filter(state == "51") |> 
+  select(metro_code, areaname, fmr_2022 = fmr_2) |> 
+  distinct(metro_code, .keep_all = TRUE)
+
+fmr_2023 <- fmr_2023_raw |> 
+  filter(state == "51") |> 
+  select(metro_code = hud_area_code, areaname = hud_area_name, fmr_2023 = fmr_2) |> 
+  distinct(metro_code, .keep_all = TRUE)
+
+```
+
+Join data and calculate percent change from FY 2022 to FY 2023. Filter for only metro regions.
+
+```{r}
+
+fmrs <- fmr_2022 |> 
+  left_join(select(fmr_2023, fmr_2023, metro_code), by = "metro_code") |> 
+  mutate(pct_chg = ((fmr_2023 - fmr_2022)/fmr_2022)) |> 
+  filter(str_detect(metro_code, "METRO")) |> 
+  mutate(areaname = str_remove_all(areaname, ", VA"),
+         areaname = str_remove_all(areaname, "HUD Metro ")) |> 
+  na.omit()
+
+```
+
+## Plot data
+
+Create ordered lollipop chart of percent change in FMRs from FY 2022 to FY 2023.
+
+```{r}
+
+ggplot(fmrs,
+       aes(x = pct_chg,
+           y = reorder(areaname, pct_chg))) +
+  geom_col(width = 0.175,
+           fill = "#e8977a") +
+  geom_point(size = 1.5,
+             color = "#e8977a") +
+  scale_x_continuous(labels = label_percent(),
+                     expand = expansion(mult = c(0,0.05))) +
+  labs(title = "Percent change in 2-bedroom Fair Market Rent: FY 2022 to FY 2023",
+       caption = "Source: U.S. Department of Housing and Urban Development.") +
+  theme_minimal(base_size = 18) +
+  theme(panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_line(size = 0.15),
+        axis.title = element_blank(),
+        plot.title.position = "plot",
+        )
+
+ggsave("fmr_plot.png", width = 1200, height = 800, units = "px", bg = "#FFFFFF")
+
+```
+
