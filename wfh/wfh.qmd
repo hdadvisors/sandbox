@@ -1,0 +1,82 @@
+---
+title: "qmd"
+format: html
+---
+
+```{r}
+
+library(tidyverse)
+library(tidycensus)
+library(scales)
+
+library(showtext)
+
+font_add_google(name = "Open Sans", family = "Open Sans")
+font_add_google("Roboto")
+
+showtext_auto()
+
+```
+
+```{r}
+
+# vars <- load_variables(2021, "acs1")
+
+sum_var <- "B08301_001"
+wfh_var <- "B08301_021"
+
+years <- c(2019, 2021)
+
+wfh_va_raw <- map_dfr(years, function(yr){
+  
+  whf_va_pull <- get_acs(
+    geography = "county",
+    state = "VA",
+    variables = wfh_var,
+    summary_var = sum_var,
+    year = yr,
+    survey = "acs1"
+  ) |> 
+    mutate(year = yr)
+  
+})
+
+```
+
+```{r}
+
+wfh_va <- wfh_va_raw |> 
+  select(GEOID, NAME, year, estimate, summary_est) |> 
+  mutate(NAME = str_remove_all(NAME, ", Virginia"),
+         year = as.character(year)) |> 
+  drop_na(estimate) |> 
+  mutate(pct = estimate / summary_est) |>
+  group_by(GEOID) |> 
+  filter(n() > 1)
+
+```
+
+
+```{r}
+
+ggplot(wfh_va,
+       aes(x = pct, y = reorder(NAME, pct))) +
+  geom_line(aes(group = NAME), color = "black") +
+  geom_point(aes(color = year), size = 2) +
+  geom_text(aes(label = label_percent(accuracy = 1)(pct)), nudge_y = 0.3) +
+  scale_x_continuous(labels = label_percent()) +
+  labs(title = "Change in percent of workers who work from home",
+       caption = "Source: U.S. Census Bureau, American Community Survey, 1-year estimates.",
+       color = "") +
+  theme_minimal(base_size = 12) +
+  theme(panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_line(size = 0.15),
+        axis.title = element_blank(),
+        legend.position = "right"
+        )
+
+ggsave("wfh_plot.png", width = 800, height = 600, units = "px", bg = "#FFFFFF")
+
+```
+
