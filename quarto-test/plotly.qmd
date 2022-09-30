@@ -11,7 +11,8 @@ library(scales)
 library(lubridate)
 library(plotly)
 
-pha_localities <- c("Richmond city", "Chesterfield County", "Hanover County", "Henrico County")
+pha_localities <- c("Richmond city", "Chesterfield County",
+                    "Hanover County", "Henrico County")
 
 mort_del <- read_csv("data/mortgage_del.csv") |> 
   pivot_longer(
@@ -29,12 +30,14 @@ plot <- ggplot(mort_del,
            y = estimate,
            color = Name)) +
   geom_line(stat = "identity", size = 1) +
-  scale_y_continuous(labels = label_percent(accuracy = 0.1), expand = c(0,0), limits = c(0,0.055)) +
+  scale_y_continuous(labels = label_percent(accuracy = 0.1),
+                     expand = c(0,0), limits = c(0,0.055)) +
   scale_x_date(date_breaks = "2 years", date_labels = "%Y") +
   labs(title = "Mortgage delinquency rate by locality",
        subtitle = "Mortgages 90 or more days delinquent: 2008 to 2021",
        color = "Locality",
-       caption = "Source: Consumer Financial Protection Bureau, Mortgage Performance Trends.") +
+       caption = "Source: Consumer Financial Protection Bureau, 
+       Mortgage Performance Trends.") +
   theme(axis.title = element_blank(),
         axis.ticks = element_blank(),
         panel.background = element_blank(),

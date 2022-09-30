@@ -1,0 +1,20 @@
+{
+  "hash": "61a9c947a09b89d737f5b86b29633ceb",
+  "result": {
+    "markdown": "# mapview\n\nThis page is a demonstration of an interactive mapview map rendered in Quarto.\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(mapview)\nlibrary(sf)\nlibrary(tidyverse)\n\n# Load in data (manually downloaded from HUD eGIS site) and select only relevant columns\n\nhud_insured <- read_csv(\"data/chesterfield_hud_insured.csv\") |>  \n  select(1,2,9,10,15,16,18,57,60,74,111,133,140,141)\n\n# Create spatial object using the lat/long coordinate fields\n\nhud_insured_pts <- hud_insured |> \n  st_as_sf(coords = c(\"X\", \"Y\"),\n           crs = 4326) %>%\n  st_transform(6440)\n\n# Create map\n\nmapview(\n  hud_insured_pts,\n  label = \"PROPERTY_NAME_TEXT\",\n  legend = F,\n  popup = F,\n  burst = F,\n  layer.name = \"HUD insured multifamily properties\"\n)\n```\n\n::: {.cell-output-display}\n![HUD insured multifamily properties](mapview_files/figure-pdf/fig-mapview-1.pdf){#fig-mapview fig-pos='H'}\n:::\n:::\n",
+    "supporting": [
+      "mapview_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {
+      "knitr": [
+        "{\"type\":\"list\",\"attributes\":{},\"value\":[]}"
+      ]
+    },
+    "preserve": null,
+    "postProcess": false
+  }
+}

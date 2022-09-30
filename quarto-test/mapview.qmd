@@ -33,6 +33,4 @@ mapview(
   layer.name = "HUD insured multifamily properties"
 )
 
-
-
 ```

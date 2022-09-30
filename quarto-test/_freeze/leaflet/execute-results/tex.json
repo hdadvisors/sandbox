@@ -1,0 +1,20 @@
+{
+  "hash": "c9f13d43e7b9a26468a65d5d5a913f81",
+  "result": {
+    "markdown": "# Leaflet\n\nThis page is a demonstration of an interactive Leaflet map rendered in Quarto.\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse)\nlibrary(janitor)\nlibrary(leaflet)\n\nnhpd <- read_csv(\"data/nhpd_chesterfield.csv\") |> \n  clean_names() |> \n  filter(subsidy_status != \"Inactive\")\n\npal <- colorFactor(palette = c(\"blue\", \"red\", \"green\", \"orange\"),\n                   levels = c(\"LIHTC\", \"Section 8\", \"HUD Insured\",\n                              \"Section 202 or Section 236\"))\n\nleaflet(nhpd) |> \n  addProviderTiles(providers$CartoDB.Positron) |> \n  addCircleMarkers(\n    lng = ~long,\n    lat = ~lat,\n    radius = 4,\n    color = ~pal(subsidy),\n    stroke = FALSE, fillOpacity = 0.5\n    ) |> \n  addLegend(\"bottomright\", pal = pal, values = ~subsidy,\n            title = \"Federal program\", opacity = 1)\n```\n\n::: {.cell-output-display}\n![Federally assisted rental properties in Chesterfield County](leaflet_files/figure-pdf/fig-leaflet-1.pdf){#fig-leaflet fig-pos='H'}\n:::\n:::\n",
+    "supporting": [
+      "leaflet_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {
+      "knitr": [
+        "{\"type\":\"list\",\"attributes\":{},\"value\":[]}"
+      ]
+    },
+    "preserve": null,
+    "postProcess": false
+  }
+}

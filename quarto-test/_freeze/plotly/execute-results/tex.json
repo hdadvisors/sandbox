@@ -1,0 +1,20 @@
+{
+  "hash": "53684102225f042daa206ed447e98660",
+  "result": {
+    "markdown": "# plotly\n\nThis page is a demonstration of a plotly graph rendered in Quarto.\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse)\nlibrary(scales)\nlibrary(lubridate)\nlibrary(plotly)\n\npha_localities <- c(\"Richmond city\", \"Chesterfield County\",\n                    \"Hanover County\", \"Henrico County\")\n\nmort_del <- read_csv(\"data/mortgage_del.csv\") |> \n  pivot_longer(\n    cols = starts_with(\"2\"),\n    names_to = \"period\",\n    values_to = \"estimate\"\n  )|> \n  mutate(period = ym(period)) |> \n  filter(State == \"VA\") |> \n  subset(Name %in% pha_localities) |> \n  mutate(estimate = (estimate/100))\n\nplot <- ggplot(mort_del,\n       aes(x = period,\n           y = estimate,\n           color = Name)) +\n  geom_line(stat = \"identity\", size = 1) +\n  scale_y_continuous(labels = label_percent(accuracy = 0.1),\n                     expand = c(0,0), limits = c(0,0.055)) +\n  scale_x_date(date_breaks = \"2 years\", date_labels = \"%Y\") +\n  labs(title = \"Mortgage delinquency rate by locality\",\n       subtitle = \"Mortgages 90 or more days delinquent: 2008 to 2021\",\n       color = \"Locality\",\n       caption = \"Source: Consumer Financial Protection Bureau, \n       Mortgage Performance Trends.\") +\n  theme(axis.title = element_blank(),\n        axis.ticks = element_blank(),\n        panel.background = element_blank(),\n        legend.title = element_blank(),\n        legend.key = element_blank(),\n        axis.line.x = element_line(color = \"grey50\",\n                                   size = 0.1),\n        panel.grid.major.y = element_line(color = \"grey95\",\n                                          size = 0.05))\n\nplotly::ggplotly(plot) \n```\n\n::: {.cell-output-display}\n![Mortgage delinquency rate by locality](plotly_files/figure-pdf/fig-plotly-1.pdf){#fig-plotly fig-pos='H'}\n:::\n:::\n",
+    "supporting": [
+      "plotly_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {
+      "knitr": [
+        "{\"type\":\"list\",\"attributes\":{},\"value\":[]}"
+      ]
+    },
+    "preserve": null,
+    "postProcess": false
+  }
+}

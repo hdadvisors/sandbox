@@ -3,6 +3,9 @@ project:
   execute-dir: file
   output-dir: docs
 
+execute:
+  freeze: auto
+
 book:
   title: "Quarto Test"
   author:
@@ -21,8 +24,8 @@ book:
       chapters:
         - leaflet.qmd
         - mapview.qmd
-  appendices:
-    - references.qmd
+  # appendices:
+  #   - references.qmd
 
 knitr:
   opts_chunk: 
@@ -37,5 +40,3 @@ format:
     theme: cosmo
   pdf:
     documentclass: scrreprt
-
-
