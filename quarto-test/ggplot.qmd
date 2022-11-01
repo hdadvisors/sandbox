@@ -98,9 +98,11 @@ oews_bars <- ggplot(oews_pct,
         legend.position = "none",
         panel.grid.major.x = element_line(color = "grey95",
                                           size = 0.05)) +
-  geom_col_interactive(aes(data_id = pct_change, tooltip = pct_change),size = 2)
+  geom_col_interactive(aes(data_id = pct_change, tooltip = percent(pct_change)),size = 2)
 
-bar <- girafe(ggobj = oews_bars)
+bar <- girafe(ggobj = oews_bars, 
+  options = list(
+    opts_sizing(rescale = TRUE, width = .75)))
 
 bar
 
