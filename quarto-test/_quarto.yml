@@ -19,6 +19,7 @@ book:
     - part: "Part 1: Plots"
       chapters:
         - ggplot.qmd
+        - ggiraph.qmd
         - plotly.qmd
     - part: "Part 2: Maps"
       chapters:

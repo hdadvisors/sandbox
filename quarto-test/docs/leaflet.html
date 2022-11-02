@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Quarto Test - 3&nbsp; Leaflet</title>
+<title>Quarto Test - 4&nbsp; Leaflet</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -144,7 +144,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Leaflet</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Leaflet</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -190,7 +190,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./plotly.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">plotly</span></a>
+  <a href="./ggiraph.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">ggiraph</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./plotly.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">plotly</span></a>
   </div>
 </li>
       </ul>
@@ -205,12 +210,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./leaflet.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Leaflet</span></a>
+  <a href="./leaflet.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Leaflet</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./mapview.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">mapview</span></a>
+  <a href="./mapview.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">mapview</span></a>
   </div>
 </li>
       </ul>
@@ -227,7 +232,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Leaflet</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Leaflet</span></h1>
 </div>
 
 
@@ -270,7 +275,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <figure class="figure">
 <div id="htmlwidget-d4467332732723a8b1b2" style="width:100%;height:464px;" class="leaflet html-widget"></div>
 <script type="application/json" data-for="htmlwidget-d4467332732723a8b1b2">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addCircleMarkers","args":[[37.316999,37.497787,37.466243,37.435904,37.513302,37.44824,37.424551,37.42393,37.423208,37.434692,37.434692,37.443725,37.453795,37.453877,37.453795,37.436117,37.354032,37.361922,37.458235,37.301677,37.353418,37.377574,37.358895,37.491672,37.316999,37.310377,37.356203,37.311313,37.477852,37.429632,37.367178,37.420714,37.301677,37.448351],[-77.409995,-77.593367,-77.675564,-77.590299,-77.684255,-77.491445,-77.441617,-77.439656,-77.439995,-77.589832,-77.589832,-77.445608,-77.489098,-77.613718,-77.489098,-77.586339,-77.457,-77.496336,-77.500992,-77.600389,-77.457039,-77.500815,-77.446032,-77.660126,-77.409995,-77.426086,-77.491852,-77.428727,-77.573369,-77.530873,-77.442125,-77.581106,-77.600389,-77.477052],4,null,null,{"interactive":true,"className":"","stroke":false,"color":["#FF0000","#FF0000","#0000FF","#0000FF","#0000FF","#0000FF","#0000FF","#0000FF","#0000FF","#0000FF","#0000FF","#0000FF","#0000FF","#FF0000","#0000FF","#FF0000","#0000FF","#0000FF","#FF0000","#FF0000","#0000FF","#0000FF","#0000FF","#0000FF","#00FF00","#0000FF","#0000FF","#0000FF","#FF0000","#FF0000","#FF0000","#FF0000","#FFA500","#FF0000"],"weight":5,"opacity":0.5,"fill":true,"fillColor":["#FF0000","#FF0000","#0000FF","#0000FF","#0000FF","#0000FF","#0000FF","#0000FF","#0000FF","#0000FF","#0000FF","#0000FF","#0000FF","#FF0000","#0000FF","#FF0000","#0000FF","#0000FF","#FF0000","#FF0000","#0000FF","#0000FF","#0000FF","#0000FF","#00FF00","#0000FF","#0000FF","#0000FF","#FF0000","#FF0000","#FF0000","#FF0000","#FFA500","#FF0000"],"fillOpacity":0.5},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#00FF00","#0000FF","#FFA500","#FF0000"],"labels":["HUD Insured","LIHTC","Section 202 or Section 236","Section 8"],"na_color":null,"na_label":"NA","opacity":1,"position":"bottomright","type":"factor","title":"Federal program","extra":null,"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[37.301677,37.513302],"lng":[-77.684255,-77.409995]}},"evals":[],"jsHooks":[]}</script>
-<p></p><figcaption class="figure-caption">Figure&nbsp;3.1: Federally assisted rental properties in Chesterfield County</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.1: Federally assisted rental properties in Chesterfield County</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -379,12 +384,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./plotly.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">plotly</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">plotly</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./mapview.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">mapview</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">mapview</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

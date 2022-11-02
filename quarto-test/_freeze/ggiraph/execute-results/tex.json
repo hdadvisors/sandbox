@@ -1,0 +1,20 @@
+{
+  "hash": "a49957b3f7a36f1177dddf71e6c653e7",
+  "result": {
+    "markdown": "---\noutput: html_document\neditor_options: \n  chunk_output_type: console\n---\n\n\n# ggiraph\n\nThis page is a demonstration of a ggiraph graph rendered in Quarto.\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse)\nlibrary(scales)\nlibrary(ggiraph)\nlibrary(htmlwidgets)\n\noews_pct <- read_rds(\"data/oews_pct.rds\")\n\noews_bars <- ggplot(oews_pct,\n       aes(x = pct_change,\n           y = wage,\n           fill = wage)) +\n  geom_col() +\n  # geom_text(aes(label = label_percent(accuracy = 0.1)(pct_change),\n  #               color = wage), nudge_x = 0.01) +\n  labs(title = \"Percent change in annual wage by wage percentile\",\n       subtitle = \"Richmond, VA MSA | May 2019 to May 2021\",\n       caption = \"Source: U.S. Bureau of Labor Statistics, Occupational Employment and Wage Statistics.\") +\n  scale_x_continuous(labels = label_percent()) +\n  theme(axis.title = element_blank(),\n        axis.ticks = element_blank(),\n        panel.background = element_blank(),\n        panel.grid.major.y = element_blank(),\n        legend.position = \"none\",\n        panel.grid.major.x = element_line(color = \"grey95\",\n                                          size = 0.05)) +\n  geom_col_interactive(aes(data_id = pct_change, tooltip = percent(pct_change)),size = 2)\n\nif (knitr::is_html_output()) {\n  girafe(ggobj = oews_bars) \n} else {\n  oews_bars +\n    geom_text(aes(label = label_percent(accuracy = 0.1)(pct_change),\n                 color = wage), nudge_x = 0.01)\n  }\n```\n\n::: {.cell-output-display}\n![Percent change in annual wage by wage percentile](ggiraph_files/figure-pdf/fig-ggiraph-1.pdf){#fig-ggiraph fig-pos='H'}\n:::\n:::\n",
+    "supporting": [
+      "ggiraph_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {
+      "knitr": [
+        "{\"type\":\"list\",\"attributes\":{},\"value\":[]}"
+      ]
+    },
+    "preserve": null,
+    "postProcess": false
+  }
+}

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Quarto Test - 1&nbsp; ggplot</title>
+<title>Quarto Test - 2&nbsp; ggiraph</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -93,8 +93,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./ggiraph.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./plotly.html" rel="next">
+<link href="./ggplot.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -124,13 +124,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   }
 }</script>
 <script src="site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-<script src="site_libs/plotly-binding-4.10.0/plotly.js"></script>
-<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
-<script src="site_libs/jquery-3.5.1/jquery.min.js"></script>
-<link href="site_libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
-<script src="site_libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
-<link href="site_libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet">
-<script src="site_libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
+<script src="site_libs/d3-bundle-5.16.0/d3-bundle.min.js"></script>
+<script src="site_libs/d3-lasso-0.0.5/d3-lasso.min.js"></script>
+<script src="site_libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script>
+<link href="site_libs/ggiraphjs-0.4.2/ggiraphjs.min.css" rel="stylesheet">
+<script src="site_libs/ggiraphjs-0.4.2/ggiraphjs.min.js"></script>
+<script src="site_libs/girafe-binding-0.8.3/girafe.js"></script>
 
 
 </head>
@@ -141,7 +140,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">ggplot</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">ggiraph</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -182,12 +181,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ggplot.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">ggplot</span></a>
+  <a href="./ggplot.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">ggplot</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ggiraph.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">ggiraph</span></a>
+  <a href="./ggiraph.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">ggiraph</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -229,7 +228,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">ggplot</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">ggiraph</span></h1>
 </div>
 
 
@@ -243,25 +242,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<p>This page is a demonstration of a ggplot graph rendered in Quarto.</p>
+<p>This page is a demonstration of a ggiraph graph rendered in Quarto.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>oews_pct <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"data/oews_pct.rds"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggiraph)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(htmlwidgets)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(oews_pct,</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> pct_change,</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> wage,</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> wage)) <span class="sc">+</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">label_percent</span>(<span class="at">accuracy =</span> <span class="fl">0.1</span>)(pct_change),</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                <span class="at">color =</span> wage),</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">nudge_x =</span> <span class="fl">0.01</span>) <span class="sc">+</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Percent change in annual wage by wage percentile"</span>,</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Richmond, VA MSA | May 2019 to May 2021"</span>,</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Source: U.S. Bureau of Labor Statistics, </span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="st">       Occupational Employment and Wage Statistics."</span>) <span class="sc">+</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>oews_pct <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"data/oews_pct.rds"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>oews_bars <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(oews_pct,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> pct_change,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> wage,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> wage)) <span class="sc">+</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># geom_text(aes(label = label_percent(accuracy = 0.1)(pct_change),</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">#               color = wage), nudge_x = 0.01) +</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Percent change in annual wage by wage percentile"</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Richmond, VA MSA | May 2019 to May 2021"</span>,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Source: U.S. Bureau of Labor Statistics, Occupational Employment and Wage Statistics."</span>) <span class="sc">+</span></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">labels =</span> <span class="fu">label_percent</span>()) <span class="sc">+</span></span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title =</span> <span class="fu">element_blank</span>(),</span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
@@ -269,14 +268,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major.y =</span> <span class="fu">element_blank</span>(),</span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major.x =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"grey95"</span>,</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">size =</span> <span class="fl">0.05</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div id="fig-ggplot" class="quarto-figure quarto-figure-center anchored">
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">size =</span> <span class="fl">0.05</span>)) <span class="sc">+</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col_interactive</span>(<span class="fu">aes</span>(<span class="at">data_id =</span> pct_change, <span class="at">tooltip =</span> <span class="fu">percent</span>(pct_change)),<span class="at">size =</span> <span class="dv">2</span>)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (knitr<span class="sc">::</span><span class="fu">is_html_output</span>()) {</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">girafe</span>(<span class="at">ggobj =</span> oews_bars) </span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  oews_bars <span class="sc">+</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">label_percent</span>(<span class="at">accuracy =</span> <span class="fl">0.1</span>)(pct_change),</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color =</span> wage), <span class="at">nudge_x =</span> <span class="fl">0.01</span>)</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>  }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fig-ggiraph" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="ggplot_files/figure-html/fig-ggplot-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;1.1: Percent change in annual wage by wage percentile</figcaption><p></p>
+<div id="htmlwidget-ee7d3fc0db1e67e6549c" style="width:100%;height:464px;" class="girafe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ee7d3fc0db1e67e6549c">{"x":{"html":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' id='svg_202dd595-da11-4306-b1c3-f995557c64f7' viewBox='0 0 432 360'>\n <defs>\n  <clipPath id='svg_202dd595-da11-4306-b1c3-f995557c64f7_c1'>\n   <rect x='0' y='0' width='432' height='360'/>\n  <\/clipPath>\n  <clipPath id='svg_202dd595-da11-4306-b1c3-f995557c64f7_c2'>\n   <rect x='68.15' y='38.85' width='358.37' height='288.96'/>\n  <\/clipPath>\n <\/defs>\n <g>\n  <g clip-path='url(#svg_202dd595-da11-4306-b1c3-f995557c64f7_c1)'>\n   <rect x='0' y='0' width='432' height='360' fill='#FFFFFF' stroke='#FFFFFF' stroke-width='0.75' stroke-linejoin='round' stroke-linecap='round'/>\n   <rect x='0' y='0' width='432' height='360' fill='#FFFFFF' stroke='#FFFFFF' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='round'/>\n  <\/g>\n  <g clip-path='url(#svg_202dd595-da11-4306-b1c3-f995557c64f7_c2)'>\n   <polyline points='131.05,327.81 131.05,38.85' fill='none' stroke='#FFFFFF' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='224.25,327.81 224.25,38.85' fill='none' stroke='#FFFFFF' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='317.45,327.81 317.45,38.85' fill='none' stroke='#FFFFFF' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='410.66,327.81 410.66,38.85' fill='none' stroke='#FFFFFF' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='84.44,327.81 84.44,38.85' fill='none' stroke='#F2F2F2' stroke-width='0.11' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='177.65,327.81 177.65,38.85' fill='none' stroke='#F2F2F2' stroke-width='0.11' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='270.85,327.81 270.85,38.85' fill='none' stroke='#F2F2F2' stroke-width='0.11' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='364.05,327.81 364.05,38.85' fill='none' stroke='#F2F2F2' stroke-width='0.11' stroke-linejoin='round' stroke-linecap='butt'/>\n   <rect x='84.44' y='269.46' width='325.79' height='50.01' fill='#F8766D' stroke='none'/>\n   <rect x='84.44' y='213.89' width='244.9' height='50.01' fill='#A3A500' stroke='none'/>\n   <rect x='84.44' y='158.32' width='247.53' height='50.01' fill='#00BF7D' stroke='none'/>\n   <rect x='84.44' y='102.76' width='20.5' height='50.01' fill='#00B0F6' stroke='none'/>\n   <rect x='84.44' y='47.19' width='69.69' height='50.01' fill='#E76BF3' stroke='none'/>\n   <rect x='84.44' y='269.46' width='325.79' height='50.01' fill='#F8766D' stroke='none' data-id='0.174772036474164' title='17.48%'/>\n   <rect x='84.44' y='213.89' width='244.9' height='50.01' fill='#A3A500' stroke='none' data-id='0.131378522467631' title='13.14%'/>\n   <rect x='84.44' y='158.32' width='247.53' height='50.01' fill='#00BF7D' stroke='none' data-id='0.132791327913279' title='13.28%'/>\n   <rect x='84.44' y='102.76' width='20.5' height='50.01' fill='#00B0F6' stroke='none' data-id='0.0109993714644877' title='1.10%'/>\n   <rect x='84.44' y='47.19' width='69.69' height='50.01' fill='#E76BF3' stroke='none' data-id='0.0373869755155948' title='3.74%'/>\n  <\/g>\n  <g clip-path='url(#svg_202dd595-da11-4306-b1c3-f995557c64f7_c1)'>\n   <text x='5.48' y='297.62' font-size='6.6pt' font-family='Arial' fill='#4D4D4D'>10th percentile<\/text>\n   <text x='5.48' y='242.05' font-size='6.6pt' font-family='Arial' fill='#4D4D4D'>25th percentile<\/text>\n   <text x='34.36' y='186.48' font-size='6.6pt' font-family='Arial' fill='#4D4D4D'>Median<\/text>\n   <text x='5.48' y='130.91' font-size='6.6pt' font-family='Arial' fill='#4D4D4D'>75th percentile<\/text>\n   <text x='5.48' y='75.34' font-size='6.6pt' font-family='Arial' fill='#4D4D4D'>90th percentile<\/text>\n   <text x='78.08' y='339.04' font-size='6.6pt' font-family='Arial' fill='#4D4D4D'>0%<\/text>\n   <text x='171.29' y='339.04' font-size='6.6pt' font-family='Arial' fill='#4D4D4D'>5%<\/text>\n   <text x='262.04' y='339.04' font-size='6.6pt' font-family='Arial' fill='#4D4D4D'>10%<\/text>\n   <text x='355.25' y='339.04' font-size='6.6pt' font-family='Arial' fill='#4D4D4D'>15%<\/text>\n   <text x='68.15' y='31.05' font-size='8.25pt' font-family='Arial'>Richmond, VA MSA | May 2019 to May 2021<\/text>\n   <text x='68.15' y='14.93' font-size='9.9pt' font-family='Arial'>Percent change in annual wage by wage percentile<\/text>\n   <text x='83.4' y='352.67' font-size='6.6pt' font-family='Arial'>Source: U.S. Bureau of Labor Statistics, Occupational Employment and Wage Statistics.<\/text>\n  <\/g>\n <\/g>\n<\/svg>","js":null,"uid":"svg_202dd595-da11-4306-b1c3-f995557c64f7","ratio":1.2,"settings":{"tooltip":{"css":".tooltip_SVGID_ { padding:5px;background:black;color:white;border-radius:2px 2px 2px 2px;text-align:left; ; position:absolute;pointer-events:none;z-index:999;}","placement":"doc","offx":10,"offy":0,"use_cursor_pos":true,"opacity":0.9,"usefill":false,"usestroke":false,"delay":{"over":200,"out":500}},"hover":{"css":".hover_SVGID_ { fill:orange;stroke:gray; }","reactive":false},"hoverkey":{"css":".hover_key_SVGID_ { stroke:red; }","reactive":false},"hovertheme":{"css":".hover_theme_SVGID_ { fill:green; }","reactive":false},"hoverinv":{"css":""},"zoom":{"min":1,"max":1},"capture":{"css":".selected_SVGID_ { fill:red;stroke:gray; }","type":"multiple","only_shiny":true,"selected":[]},"capturekey":{"css":".selected_key_SVGID_ { stroke:gray; }","type":"single","only_shiny":true,"selected":[]},"capturetheme":{"css":".selected_theme_SVGID_ { stroke:gray; }","type":"single","only_shiny":true,"selected":[]},"toolbar":{"position":"topright","saveaspng":true,"pngname":"diagram"},"sizing":{"rescale":true,"width":1}}},"evals":[],"jsHooks":[]}</script>
+<p></p><figcaption class="figure-caption">Figure&nbsp;2.1: Percent change in annual wage by wage percentile</figcaption><p></p>
 </figure>
-</div>
 </div>
 </div>
 
@@ -383,13 +390,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">About</span>
+      <a href="./ggplot.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">ggplot</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./ggiraph.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">ggiraph</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./plotly.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">plotly</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
