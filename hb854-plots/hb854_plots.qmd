@@ -1,0 +1,328 @@
+---
+title: "hb854_plots"
+format: html
+editor: visual
+---
+
+## Setup
+
+```{r}
+library(tidyverse)
+library(tidycensus)
+library(ggtext)
+library(hdatools)
+library(scales)
+library(patchwork)
+
+places <- c(
+  "Charlottesville city",
+  "Chesterfield County",
+  "Danville city",
+  "Fairfax County",
+  "Portsmouth city",
+  "Prince William County",
+  "Richmond city",
+  "Spotsylvania County"
+)
+
+years <- c(2010:2021)
+```
+
+## Age
+
+```{r}
+
+b01001_vars <- load_variables(2021, "acs5") |> 
+  filter(str_sub(name, end = 7) %in% "B01001_")
+
+b01001_vars_cleaned <- b01001_vars |> 
+  separate(label, into = c("est", "total", "sex", "age"), sep = "!!") |> 
+  select(variable = name, age) |> 
+  drop_na() |> 
+  mutate(group = case_when(
+    age %in% c("20 years", "21 years",
+               "22 to 24 years", "25 to 29 years") ~ "20 to 29 years",
+    age %in% c("30 to 34 years", "35 to 39 years") ~ "30 to 39 years",
+    TRUE ~ "Other"
+  ))
+
+b01001_raw <- map_dfr(years, function(yr){
+  
+  b01001_places <- get_acs(
+    geography = "county",
+    state = "VA",
+    county = places,
+    table = "B01001",
+    year = yr,
+    survey = "acs5",
+    cache_table = TRUE
+  ) |>
+    mutate(year = yr)
+  
+  b01001_va <- get_acs(
+    geography = "state",
+    state = "VA",
+    table = "B01001",
+    year = yr,
+    survey = "acs5",
+    cache_table = TRUE
+  ) |>
+    mutate(year = yr)
+  
+  b01001_pull <- b01001_places |> 
+    bind_rows(b01001_va)
+  
+})
+
+b01001_data <- b01001_raw |> 
+  right_join(b01001_vars_cleaned, by = "variable") |>
+  select(NAME, GEOID, year, group, estimate, moe) |>
+  mutate(NAME = str_remove_all(NAME, ", Virginia")) |>
+  group_by(NAME, year, group) |>
+  summarise(estimate = sum(estimate)) |> 
+  group_by(NAME, year) |> 
+  mutate(pct = estimate/sum(estimate)) |> 
+  filter(group != "Other") |> 
+  ungroup()
+
+
+age_va_plot <- b01001_data |> filter(NAME == "Virginia") |> 
+  ggplot(aes(year, estimate, color = group)) +
+    geom_line(size = 0.75) +
+    facet_wrap(~NAME) +
+    scale_y_continuous(labels = label_comma(),
+                       limits = c(800000, 1190000)) +
+    scale_x_continuous(breaks = c(2010, 2021)) +
+    scale_color_hfv() +
+    labs(
+      title = "Young adults by age group: 2010 to 2021",
+      caption = "**Source:** U.S. Census Bureau, American Community Survey."
+    ) +
+    theme_hfv() +
+    theme(legend.position = "top",
+          legend.margin = margin(t = 10, b = -25))
+
+age_pl_plot <- b01001_data |> filter(!NAME %in% c("Virginia",
+                                                  "Richmond city",
+                                                  "Charlottesville city")) |> 
+  ggplot(aes(year, estimate, color = group)) +
+    geom_line(size = 0.75) +
+    facet_wrap(~NAME, scales = "free_y",
+               nrow = 4, ncol = 2,
+               labeller = labeller(NAME = label_wrap_gen(width = 10))) +
+    scale_y_continuous(labels = label_comma(scale = 0.001,
+                                            suffix = "k")) +
+    scale_color_hfv() +
+    theme_hfv(base_size = 10) +
+    theme(axis.text.x = element_blank())
+
+age_va_plot + age_pl_plot
+
+```
+
+## Rents
+
+```{r}
+
+rents <- read_csv("hb854-plots/costar_rents.csv") |> 
+  select(-rent_adj)
+
+rents_data <- rents |> 
+  pivot_wider(names_from = date,
+              values_from = rent) |> 
+  mutate(pct = (`2022 Q4` - `2011 Q1`)/`2011 Q1`,
+         group = case_when(
+           geography == "Virginia" ~ "State",
+           TRUE ~ "Locality"
+         ))
+
+ggplot(rents_data,
+       aes(pct, reorder(geography, pct),
+           fill = group)) +
+  geom_col() +
+  geom_text(aes(pct - 0.04,
+                label = label_percent(accuracy = 1)(pct)),
+            color = "white") +
+  scale_x_continuous(label = label_percent()) +
+  scale_fill_hfv(direction = -1) +
+  scale_color_hfv(direction = -1) +
+  labs(
+    title = "Percent change in median rent",
+    subtitle = "2011 Q1 to 2022 Q4",
+    caption = "**Source:** CoStar Group, Inc."
+  ) +
+  theme_hfv() +
+  flip_gridlines() +
+  add_zero_line("x")
+```
+
+## Homeownership by age
+
+```{r}
+
+b25007_defns <- load_variables(2021, "acs5") |> 
+  filter(str_sub(name, end = 6) %in% "B25007") |> 
+  filter(str_detect(name, "PR") == FALSE)
+
+b25007_cleaned <- b25007_defns |> 
+  separate(label, into = c("est", "tot", "tenure", "age"), sep = "!!") |> 
+  select(variable = name, tenure, age) |> 
+    mutate(across(.fns = ~replace_na(.x, "All")),
+         across(.fns = ~str_remove_all(.x, ":")))
+
+b25007_raw <- map_dfr(years, function(yr){
+  
+  b25007_places <- get_acs(
+    geography = "county",
+    state = "VA",
+    county = places,
+    table = "B25007",
+    year = yr,
+    survey = "acs5",
+    cache_table = TRUE
+  ) |>
+    mutate(year = yr)
+  
+  b25007_va <- get_acs(
+    geography = "state",
+    state = "VA",
+    table = "B25007",
+    year = yr,
+    survey = "acs5",
+    cache_table = TRUE
+  ) |>
+    mutate(year = yr)
+  
+  b25007_pull <- b25007_places |> 
+    bind_rows(b25007_va)
+  
+})
+
+b25007_data <- b25007_raw |> 
+  right_join(b25007_cleaned, by = "variable") |>
+  select(NAME, GEOID, year, tenure, age, estimate) |>
+  filter(!age %in% c("All", "Householder 15 to 24 years")) |> 
+  mutate(NAME = str_remove_all(NAME, ", Virginia"),
+         age = str_remove_all(age, "Householder | years"),
+         group = case_when(
+           age %in% c("45 to 54", "55 to 59", "60 to 64") ~ "45 to 64",
+           age %in% c("65 to 74", "75 to 84",
+                      "85 and over") ~ "65 and over",
+           TRUE ~ age
+         )) |> 
+  group_by(NAME, year, tenure, group) |> 
+  summarise(estimate = sum(estimate)) |> 
+  group_by(NAME, year, group) |>
+  mutate(pct = estimate/sum(estimate)) |> 
+  filter(tenure == "Owner occupied") |> 
+  ungroup()
+
+ho_va_plot <- b25007_data |> filter(NAME == "Virginia") |> 
+  ggplot(aes(year, pct, color = group)) +
+    geom_line(size = 0.75) +
+    facet_wrap(~NAME) +
+    scale_y_continuous(labels = label_percent()) +
+    scale_x_continuous(breaks = c(2010, 2021)) +
+    scale_color_hfv() +
+    labs(
+      title = "Homeownership rate by age: 2010 to 2021",
+      caption = "**Source:** U.S. Census Bureau, American Community Survey."
+    ) +
+    theme_hfv() +
+    theme(legend.position = "top",
+          legend.margin = margin(t = 10, b = -15))
+
+ho_pl_plot <- b25007_data |> filter(!NAME %in% c("Virginia",
+                                                  "Richmond city",
+                                                  "Charlottesville city")) |> 
+  ggplot(aes(year, pct, color = group)) +
+    geom_line(size = 0.75) +
+    facet_wrap(~NAME, scales = "free_y",
+               nrow = 4, ncol = 2,
+               labeller = labeller(NAME = label_wrap_gen(width = 16))) +
+    scale_y_continuous(labels = label_percent()) +
+    scale_color_hfv() +
+    theme_hfv(base_size = 10) +
+    theme(axis.text.x = element_blank())
+
+ho_va_plot + ho_pl_plot
+
+```
+
+## Home sales
+
+```{r}
+library(readxl)
+library(glue)
+
+downpayment <- 0.05 # 5% downpayment
+closingcosts <- 0.015 # 1.5% closing costs
+taxes <- 250 # Assume $250/month for taxes
+ins_fees <- 150 # Assume $150/month for insurance and fees
+
+price_calc <-  function(x, y) {
+  
+  monthly_cost <- x / 12 * 0.28
+  monthly_pmt <- monthly_cost - (taxes + ins_fees)
+  principal <- monthly_pmt * (((1-1/(1+y)^360))/(y/12))
+  loan_amt <- principal/(1-closingcosts)
+  price <- (loan_amt * -1) / ((downpayment) - 1)
+  
+  price
+  
+}
+
+var_2022Q3 <- "hb854-plots/var_2022-Q3.xlsx"
+
+var_data <- read_excel(path = var_2022Q3,
+             sheet = 1,
+             skip = 4) |> 
+  select(NAME = `City County`, msp = `Median Price`)
+
+mri_raw <- get_acs(
+  geography = "county",
+  state = "VA",
+  variables = "B25119_003",
+  year = 2021
+)
+
+places_caps <- str_to_title(places)
+
+mri_data <- mri_raw |> 
+  mutate(NAME = str_remove_all(NAME, ", Virginia"),
+         NAME = str_replace_all(NAME, "city", "City")) |> 
+  right_join(var_data, "NAME") |> 
+  drop_na() |> 
+  mutate(price = price_calc(estimate, 0.069),
+         afford = if_else(price > msp, TRUE, FALSE)) |> 
+  filter(NAME %in% places_caps) |> 
+  mutate(NAME = str_remove_all(NAME, " County| City")) |> 
+  select(2, 6, 7) |> 
+  pivot_longer(
+    cols = msp:price,
+    names_to = "vars",
+    values_to = "vals"
+  ) |> 
+  mutate(vars = case_when(
+    vars == "msp" ~ "Median sales price",
+    vars == "price" ~ "Max affordable price"
+  ))
+
+ggplot(mri_data,
+       aes(vals, reorder(NAME, vals),
+           fill = vars)) +
+  geom_col(position = "dodge") +
+  scale_x_continuous(label = label_dollar()) +
+  scale_fill_hfv(direction = -1) +
+  scale_color_hfv(direction = -1) +
+  labs(
+    title = "Current median home price vs affordable price for renters",
+    subtitle = "Based on 2021 median renter income and 2022 Q3 sales data",
+    caption = "**Sources:** Virginia REALTORS and American Community Survey.<br>**Note:** Affordable price calculated with 6.90% 30-year fixed rate."
+  ) +
+  theme_hfv() +
+  flip_gridlines() +
+  add_zero_line("x") +
+  theme(legend.position = "bottom")
+
+```

@@ -1,0 +1,19 @@
+geography,date,rent,rent_adj
+Virginia,2011 Q1,1165,1563
+Virginia,2022 Q4,1677,1677
+Portsmouth,2011 Q1,807,1083
+Portsmouth,2022 Q4,1161,1161
+Chesterfield,2011 Q1,933,1252
+Chesterfield,2022 Q4,1561,1561
+Richmond,2011 Q1,930,1248
+Richmond,2022 Q4,1341,1341
+Fairfax,2011 Q1,1522,2041
+Fairfax,2022 Q4,2063,2063
+Prince William,2011 Q1,1211,1624
+Prince William,2022 Q4,1788,1788
+Charlottesville,2011 Q1,1164,1561
+Charlottesville,2022 Q4,1821,1821
+Danville,2011 Q1,581,779
+Danville,2022 Q4,683,683
+Spotsylvania,2011 Q1,1093,1466
+Spotsylvania,2022 Q4,1688,1688
