@@ -1,0 +1,102 @@
+---
+title: "9131 Rutland Road assessment analysis"
+format:
+  html:
+    theme: flatly
+execute: 
+  echo: true
+  warning: false
+  freeze: auto
+code-fold: true
+code-overflow: scroll
+editor: visual
+---
+
+```{r}
+#| label: setup
+#| code-summary: "Setup code"
+
+library(tidyverse)
+library(hdatools)
+library(scales)
+library(ggtext)
+
+setwd("~/repos/sandbox/rutland")
+
+```
+
+Get land and improvement values for parcels from Hanover County [online GIS](https://parcelmap.hanovercounty.gov/).
+
+Parcels included:
+
+-   9131 Rutland Road (focus parcel)
+
+-   9125 Rutland Road (adjoining south)
+
+-   9135 Rutland Road (adjoining north)
+
+-   9143 Rutland Road (adjoins 9135 to north)
+
+```{r}
+#| label: import
+#| code-summary: "Import data"
+
+assessments <- read_csv("assessments.csv") |> 
+  
+  # Add total assessed value column
+  
+  mutate(total = land + improvement) |> 
+
+  # Filter out 2017 and earlier
+  
+  filter(year > 2017) |> 
+  
+  # Rearrange
+  
+  pivot_longer(
+    cols = 4:6,
+    names_to = "type",
+    values_to = "value"
+  )
+
+```
+
+```{r}
+#| label: data
+#| code-summary: "Arrange data"
+
+assessments_pct <- assessments |> 
+  group_by(parcel, type) |> 
+  arrange(year) |> 
+  mutate(chg = value - first(value),
+         pct_chg = chg / first(value)) |> 
+  ungroup() |> 
+  mutate(parcel = fct_reorder(parcel, pct_chg),
+         alpha = case_when(
+           parcel == "9131 Rutland Road" ~ "1",
+           TRUE ~ "0"
+         ))
+
+```
+
+```{r}
+#| label: plot
+#| code-summary: "Plot data"
+
+ggplot(assessments_pct, aes(x = year, y = pct_chg, color = parcel, alpha = alpha)) +
+  geom_line(linewidth = 1.5) +
+  facet_wrap(~type, nrow = 1) +
+  scale_y_continuous(label = label_percent()) +
+  scale_color_hda(direction = -1) +
+  scale_alpha_manual(values = c(0.5, 1), guide = FALSE) +
+  guides(color = guide_legend(reverse = TRUE)) +
+  labs(title = "Percent change in assessed value",
+       subtitle = "2018 through 2023 (proposed)") +
+  theme_hda(base_size = 23) +
+  add_zero_line("y") +
+  theme(
+    legend.position = "top",
+    axis.text.x = element_text(angle = 90)
+  )
+
+```
