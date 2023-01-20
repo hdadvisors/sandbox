@@ -19,7 +19,6 @@ editor: visual
 library(tidyverse)
 library(hdatools)
 library(scales)
-library(ggtext)
 
 setwd("~/repos/sandbox/rutland")
 
@@ -79,9 +78,39 @@ assessments_pct <- assessments |>
 
 ```
 
+## base_size not specified
+
+`hdatools::theme_hda()` default base size is 14.
+
 ```{r}
-#| label: plot
-#| code-summary: "Plot data"
+#| label: plot-1
+#| code-fold: false
+
+ggplot(assessments_pct, aes(x = year, y = pct_chg, color = parcel, alpha = alpha)) +
+  geom_line(linewidth = 1.5) +
+  facet_wrap(~type, nrow = 1) +
+  scale_y_continuous(label = label_percent()) +
+  scale_color_hda(direction = -1) +
+  scale_alpha_manual(values = c(0.5, 1), guide = FALSE) +
+  guides(color = guide_legend(reverse = TRUE)) +
+  labs(title = "Percent change in assessed value",
+       subtitle = "2018 through 2023 (proposed)") +
+  theme_hda() +
+  add_zero_line("y") +
+  theme(
+    legend.position = "top",
+    axis.text.x = element_text(angle = 90)
+  )
+
+```
+
+## base_size adjusted
+
+Need to adjust base size to 23 to scale properly.
+
+```{r}
+#| label: plot-2
+#| code-fold: false
 
 ggplot(assessments_pct, aes(x = year, y = pct_chg, color = parcel, alpha = alpha)) +
   geom_line(linewidth = 1.5) +
@@ -94,6 +123,32 @@ ggplot(assessments_pct, aes(x = year, y = pct_chg, color = parcel, alpha = alpha
        subtitle = "2018 through 2023 (proposed)") +
   theme_hda(base_size = 23) +
   add_zero_line("y") +
+  theme(
+    legend.position = "top",
+    axis.text.x = element_text(angle = 90)
+  )
+
+```
+
+## Without using hdatools functions
+
+Base size similarly incorrect even when `hdatools` functions are not used.
+
+```{r}
+#| label: plot-3
+#| code-fold: false
+
+ggplot(assessments_pct, aes(x = year, y = pct_chg, color = parcel, alpha = alpha)) +
+  geom_line(linewidth = 1.5) +
+  facet_wrap(~type, nrow = 1) +
+  scale_y_continuous(label = label_percent()) +
+#  scale_color_hda(direction = -1) +
+  scale_alpha_manual(values = c(0.5, 1), guide = FALSE) +
+  guides(color = guide_legend(reverse = TRUE)) +
+  labs(title = "Percent change in assessed value",
+       subtitle = "2018 through 2023 (proposed)") +
+#  theme_hda(base_size = 23) +
+#  add_zero_line("y") +
   theme(
     legend.position = "top",
     axis.text.x = element_text(angle = 90)
