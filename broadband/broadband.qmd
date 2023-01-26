@@ -1,0 +1,54 @@
+---
+title: "Virginia broadband availability"
+format: html
+editor: visual
+---
+
+Data from:
+
+[Virginia Locations Unserved by Broadband](https://data.virginia.gov/Government/Virginia-Locations-Unserved-by-Broadband/tu9g-ra7v)
+
+```{r}
+#| warning: false
+#| message: false
+
+library(tidyverse)
+library(sf)
+library(mapview)
+
+setwd("~/repos/sandbox/broadband")
+
+# Load in points of addresses unserved by broadband
+
+broadband <- st_read("VaUnserved_FCC/VaUnserved_FCC.shp", quiet = TRUE)
+
+# Clip to Bedford County only
+
+broadband_bedford <- broadband |> 
+  filter(MUNICIPALI == "Bedford County")
+
+# Make 25x25 base hex grid across points
+
+hex_grid <- st_make_grid(broadband_bedford, n = c(25,25),
+                         what = "polygons", square = FALSE)
+
+# Convert to sf and add grid ID
+
+hex_grid_sf <- st_sf(hex_grid) |> 
+  mutate(grid_id = 1:length(lengths(hex_grid)))
+
+# Count number of addresses in each grid
+
+hex_grid_sf$n_pts <- lengths(st_intersects(hex_grid_sf, broadband_bedford))
+
+# Remove grids with fewer than 5 addresses
+
+hex_count <- filter(hex_grid_sf, n_pts > 4)
+
+# View
+
+mapview(hex_count,
+        zcol = "n_pts",
+        layer.name = "Addresses without broadband",
+        at = c(5, 25, 50, 100, 200, 400 ))
+```
