@@ -1,0 +1,40 @@
+building-permits
+
+Description: 
+Period: 2000-2022
+Geography: Locality
+Source: Census Building Permits Survey
+Link: https://www2.census.gov/econ/bps/County/
+Notes:
+- 2022 values are YTD through December
+- 2022 NOT annualized by Census yet
+
+housing-type
+
+Description: Units in structure (housing type) by tenure
+Period: 2006-2010 through 2017-2021
+Geography: Locality
+Source: American Community Survey, 5-year estimates, Table B25032
+Notes:
+- Margin of error included
+
+homeownership
+
+Description: Number of households, homeowners, and homeownership rate
+Period: 2006-2010 through 2017-2021
+Geography: Locality
+Source: American Community Survey, 5-year estimates, Table B25003
+Notes:
+- Margin of error included
+- Derived homeownership rate and MOE
+
+homeownership-rate
+
+Description: Number of households, homeowners, and homeownership rate by race and ethnicity
+Period: 2006-2010 through 2017-2021
+Geography: Locality
+Source: American Community Survey, 5-year estimates, Tables B25003B et seq.
+Notes:
+- Margin of error included
+- Derived homeownership rate and MOE
+- NA value when household estimate is zero
