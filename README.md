@@ -1,3 +1,3 @@
 # sandbox
 
-Island of misfit projects.
+Collection of various codes and outputs developed by HDA outside of major projects.
