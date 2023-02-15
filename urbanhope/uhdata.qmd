@@ -1,0 +1,35 @@
+
+```{r}
+
+library(tidycensus)
+library(tidyverse)
+
+b25106 <- get_acs(
+  geography = "tract",
+  table = "B25106",
+  state = "VA",
+  year = 2021
+) %>% 
+  filter(str_detect(NAME, "Richmond city")) 
+
+tracts <- c("51760020100", "51760020200", "51760020300", "51760020400", "51760020700", "51760020900")
+
+b25106_uh <- b25106 %>% 
+  subset(GEOID %in% tracts)
+  
+b25106_vars <- load_variables(2021, "acs5") %>% 
+  filter(str_sub(name, end = 6) %in% "B25106") %>% 
+  select(variable = name, label)
+
+b25106_uh <- b25106_uh %>% 
+  left_join(b25106_vars, by = "variable")
+  
+grouped_uh <- b25106_uh %>% 
+  group_by(label) %>% 
+  summarise(estimate = sum(estimate)) %>% 
+  separate(label, into = c("est", "total", "tenure", "income", "cb"), sep = "!!") %>% 
+  drop_na() %>% 
+  group_by(income) %>% 
+  summarise(estimate = sum(estimate))
+
+```
