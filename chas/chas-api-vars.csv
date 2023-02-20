@@ -1,0 +1,136 @@
+variable,description,topic,tenure,ami,detail
+A1,Household Income <= 30% HAMFI (Owner Occupied),Income,Owner,30% or less,30% or less
+A2,Household Income <= 30% HAMFI (Renter Occupied),Income,Renter,30% or less,30% or less
+A3,Household Income <= 30% HAMFI (Total),Income,Total,30% or less,30% or less
+A4,Household Income >30% to <=50% HAMFI (Owner Occupied),Income,Owner,30% to 50%,30% to 50%
+A5,Household Income >30% to <=50% HAMFI (Renter Occupied),Income,Renter,30% to 50%,30% to 50%
+A6,Household Income >30% to <=50% HAMFI (Total),Income,Total,30% to 50%,30% to 50%
+A7,Household Income >50% to <=80% HAMFI (Owner Occupied),Income,Owner,50% to 80%,50% to 80%
+A8,Household Income >50% to <=80% HAMFI (Renter Occupied),Income,Renter,50% to 80%,50% to 80%
+A9,Household Income >50% to <=80% HAMFI (Total),Income,Total,50% to 80%,50% to 80%
+A10,Household Income >80% to <=100% HAMFI (Owner Occupied),Income,Owner,80% to 100%,80% to 100%
+A11,Household Income >80% to <=100% HAMFI (Renter Occupied),Income,Renter,80% to 100%,80% to 100%
+A12,Household Income >80% to <=100% HAMFI (Total),Income,Total,80% to 100%,80% to 100%
+A13,Household Income >100% HAMFI (Owner Occupied),Income,Owner,Greater than 100%,Greater than 100%
+A14,Household Income >100% HAMFI (Renter Occupied),Income,Renter,Greater than 100%,Greater than 100%
+A15,Household Income >100% HAMFI (Total),Income,Total,Greater than 100%,Greater than 100%
+A16,Total Owner Occupied,Income,Owner,Total,Total
+A17,Total Renter Occupied,Income,Renter,Total,Total
+A18,Total Occupied housing units,Income,Total,Total,Total
+B1,Household has at least 1 of 4 Housing Problems (Owner Occupied),Problems,Owner,Total,At least 1 problem
+B2,Household has at least 1 of 4 Housing Problems (Renter Occupied),Problems,Renter,Total,At least 1 problem
+B3,Household has at least 1 of 4 Housing Problems (Total),Problems,Total,Total,At least 1 problem
+B4,Household has none of 4 Housing Problems (Owner Occupied),Problems,Owner,Total,No problems
+B5,Household has none of 4 Housing Problems (Renter Occupied),Problems,Renter,Total,No problems
+B6,Household has none of 4 Housing Problems (Total),Problems,Total,Total,No problems
+B7,"Cost burden not available, no other problems (Owner Occupied)",Problems,Owner,Total,"Cost burden not available, no other problems"
+B8,"Cost burden not available, no other problems (Renter Occupied)",Problems,Renter,Total,"Cost burden not available, no other problems"
+B9,"Cost burden not available, no other problems (Total)",Problems,Total,Total,"Cost burden not available, no other problems"
+C1,Household has at least 1 of 4 Severe Housing Problems (Owner Occupied),Severe problems,Owner,Total,At least 1 severe problem
+C2,Household has at least 1 of 4 Severe Housing Problems (Renter Occupied),Severe problems,Renter,Total,At least 1 severe problem
+C3,Household has at least 1 of 4 Severe Housing Problems (Total),Severe problems,Total,Total,At least 1 severe problem
+C4,Household has none of 4 Severe Housing Problems (Owner Occupied),Severe problems,Owner,Total,No severe problems
+C5,Household has none of 4 Severe Housing Problems (Renter Occupied),Severe problems,Renter,Total,No severe problems
+C6,Household has none of 4 Severe Housing Problems (Total),Severe problems,Total,Total,No severe problems
+D1,Cost Burden <=30% (Owner Occupied),Cost burden,Owner,Total,No cost burden
+D2,Cost Burden <=30% (Renter Occupied),Cost burden,Renter,Total,No cost burden
+D3,Cost Burden <=30% (Total),Cost burden,Total,Total,No cost burden
+D4,Cost Burden >30% to <=50% (Owner Occupied),Cost burden,Owner,Total,30% to 50%
+D5,Cost Burden >30% to <=50% (Renter Occupied),Cost burden,Renter,Total,30% to 50%
+D6,Cost Burden >30% to <=50% (Total),Cost burden,Total,Total,30% to 50%
+D7,Cost Burden >50% (Owner Occupied),Cost burden,Owner,Total,Greater than 50%
+D8,Cost Burden >50% (Renter Occupied),Cost burden,Renter,Total,Greater than 50%
+D9,Cost Burden >50% (Total),Cost burden,Total,Total,Greater than 50%
+D10,Cost Burden not available (Owner Occupied),Cost burden,Owner,Total,Not available
+D11,Cost Burden not available (Renter Occupied),Cost burden,Renter,Total,Not available
+D12,Cost Burden not available (Total),Cost burden,Total,Total,Not available
+E1,Household Income <= 30% HAMFI (Owners and Renters) and Household has at least 1 of 4 Housing Problems,Income and problems,Total,30% or less,At least 1 problem
+E2,Household Income <= 30% HAMFI (Owners and Renters) and Household has none of 4 Housing Problems,Income and problems,Total,30% or less,No problems
+E3,"Household Income <= 30% HAMFI (Owners and Renters) and Cost Burden not available, no other housing problems",Income and problems,Total,30% or less,"Cost burden not available, no other problems"
+E5,Household Income >30% to <=50% HAMFI (Owners and Renters) and Household has at least 1 of 4 Housing Problems,Income and problems,Total,30% to 50%,At least 1 problem
+E6,Household Income >30% to <=50% HAMFI (Owners and Renters) and Household has none of 4 Housing Problems,Income and problems,Total,30% to 50%,No problems
+E7,"Household Income >30% to <=50% HAMFI (Owners and Renters) and Cost Burden not available, no other housing problems",Income and problems,Total,30% to 50%,"Cost burden not available, no other problems"
+E9,Household Income >50% to <=80% HAMFI (Owners and Renters) and Household has at least 1 of 4 Housing Problems,Income and problems,Total,50% to 80%,At least 1 problem
+E10,Household Income >50% to <=80% HAMFI (Owners and Renters) and Household has none of 4 Housing Problems,Income and problems,Total,50% to 80%,No problems
+E11,"Household Income >50% to <=80% HAMFI (Owners and Renters) and Cost Burden not available, no other housing problems",Income and problems,Total,50% to 80%,"Cost burden not available, no other problems"
+E13,Household Income >80% to <=100% HAMFI (Owners and Renters) and Household has at least 1 of 4 Housing Problems,Income and problems,Total,80% to 100%,At least 1 problem
+E14,Household Income >80% to <=100% HAMFI (Owners and Renters) and Household has none of 4 Housing Problems,Income and problems,Total,80% to 100%,No problems
+E15,"Household Income >80% to <=100% HAMFI (Owners and Renters) and Cost Burden not available, no other housing problems",Income and problems,Total,80% to 100%,"Cost burden not available, no other problems"
+E17,Household Income >100% HAMFI (Owners and Renters) and Household has at least 1 of 4 Housing Problems,Income and problems,Total,Greater than 100%,At least 1 problem
+E18,Household Income >100% HAMFI (Owners and Renters) and Household has none of 4 Housing Problems,Income and problems,Total,Greater than 100%,No problems
+E19,"Household Income >100% HAMFI (Owners and Renters) and Cost Burden not available, no other housing problems",Income and problems,Total,Greater than 100%,"Cost burden not available, no other problems"
+E21,Total Household has at least 1 of 4 Housing Problems (Owners and Renters),Income and problems,Total,Total,At least 1 problem
+E22,Total Household has none of 4 Housing Problems (Owners and Renters),Income and problems,Total,Total,No problems
+E23,"Total Cost Burden not available, no other housing problems (Owners and Renters)",Income and problems,Total,Total,"Cost burden not available, no other problems"
+F1,Household Income <= 30% HAMFI (Renters only) and Household has at least 1 of 4 Housing Problems,Income and problems,Renter,30% or less,At least 1 problem
+F2,Household Income <= 30% HAMFI (Renters only) and Household has none of 4 Housing Problems,Income and problems,Renter,30% or less,No problems
+F3,"Household Income <= 30% HAMFI (Renters only) and Cost Burden not available, no other housing problems",Income and problems,Renter,30% or less,"Cost burden not available, no other problems"
+F5,Household Income >30% to <=50% HAMFI (Renters only) and Household has at least 1 of 4 Housing Problems,Income and problems,Renter,30% to 50%,At least 1 problem
+F6,Household Income >30% to <=50% HAMFI (Renters only) and Household has none of 4 Housing Problems,Income and problems,Renter,30% to 50%,No problems
+F7,"Household Income >30% to <=50% HAMFI (Renters only) and Cost Burden not available, no other housing problems",Income and problems,Renter,30% to 50%,"Cost burden not available, no other problems"
+F9,Household Income >50% to <=80% HAMFI (Renters only) and Household has at least 1 of 4 Housing Problems,Income and problems,Renter,50% to 80%,At least 1 problem
+F10,Household Income >50% to <=80% HAMFI (Renters only) and Household has none of 4 Housing Problems,Income and problems,Renter,50% to 80%,No problems
+F11,"Household Income >50% to <=80% HAMFI (Renters only) and Cost Burden not available, no other housing problems",Income and problems,Renter,50% to 80%,"Cost burden not available, no other problems"
+F13,Household Income >80% to <=100% HAMFI (Renters only) and Household has at least 1 of 4 Housing Problems,Income and problems,Renter,80% to 100%,At least 1 problem
+F14,Household Income >80% to <=100% HAMFI (Renters only) and Household has none of 4 Housing Problems,Income and problems,Renter,80% to 100%,No problems
+F15,"Household Income >80% to <=100% HAMFI (Renters only) and Cost Burden not available, no other housing problems",Income and problems,Renter,80% to 100%,"Cost burden not available, no other problems"
+F17,Household Income >100% HAMFI (Renters only) and Household has at least 1 of 4 Housing Problems,Income and problems,Renter,Greater than 100%,At least 1 problem
+F18,Household Income >100% HAMFI (Renters only) and Household has none of 4 Housing Problems,Income and problems,Renter,Greater than 100%,No problems
+F19,"Household Income >100% HAMFI (Renters only) and Cost Burden not available, no other housing problems",Income and problems,Renter,Greater than 100%,"Cost burden not available, no other problems"
+F21,Total Household has at least 1 of 4 Housing Problems (Renters only),Income and problems,Renter,Total,At least 1 problem
+F22,Total Household has none of 4 Housing Problems (Renters only),Income and problems,Renter,Total,No problems
+F23,"Total Cost Burden not available, no other housing problems (Renters only)",Income and problems,Renter,Total,"Cost burden not available, no other problems"
+G1,Household Income <= 30% HAMFI (Owners only) and Household has at least 1 of 4 Housing Problems,Income and problems,Owner,30% or less,At least 1 problem
+G2,Household Income <= 30% HAMFI (Owners only) and Household has none of 4 Housing Problems,Income and problems,Owner,30% or less,No problems
+G3,"Household Income <= 30% HAMFI (Owners only) and Cost Burden not available, no other housing problems",Income and problems,Owner,30% or less,"Cost burden not available, no other problems"
+G5,Household Income >30% to <=50% HAMFI (Owners only) and Household has at least 1 of 4 Housing Problems,Income and problems,Owner,30% to 50%,At least 1 problem
+G6,Household Income >30% to <=50% HAMFI (Owners only) and Household has none of 4 Housing Problems,Income and problems,Owner,30% to 50%,No problems
+G7,"Household Income >30% to <=50% HAMFI (Owners only) and Cost Burden not available, no other housing problems",Income and problems,Owner,30% to 50%,"Cost burden not available, no other problems"
+G9,Household Income >50% to <=80% HAMFI (Owners only) and Household has at least 1 of 4 Housing Problems,Income and problems,Owner,50% to 80%,At least 1 problem
+G10,Household Income >50% to <=80% HAMFI (Owners only) and Household has none of 4 Housing Problems,Income and problems,Owner,50% to 80%,No problems
+G11,"Household Income >50% to <=80% HAMFI (Owners only) and Cost Burden not available, no other housing problems",Income and problems,Owner,50% to 80%,"Cost burden not available, no other problems"
+G13,Household Income >80% to <=100% HAMFI (Owners only) and Household has at least 1 of 4 Housing Problems,Income and problems,Owner,80% to 100%,At least 1 problem
+G14,Household Income >80% to <=100% HAMFI (Owners only) and Household has none of 4 Housing Problems,Income and problems,Owner,80% to 100%,No problems
+G15,"Household Income >80% to <=100% HAMFI (Owners only) and Cost Burden not available, no other housing problems",Income and problems,Owner,80% to 100%,"Cost burden not available, no other problems"
+G17,Household Income >100% HAMFI (Owners only) and Household has at least 1 of 4 Housing Problems,Income and problems,Owner,Greater than 100%,At least 1 problem
+G18,Household Income >100% HAMFI (Owners only) and Household has none of 4 Housing Problems,Income and problems,Owner,Greater than 100%,No problems
+G19,"Household Income >100% HAMFI (Owners only) and Cost Burden not available, no other housing problems",Income and problems,Owner,Greater than 100%,"Cost burden not available, no other problems"
+G21,Total Household has at least 1 of 4 Housing Problems (Owners only),Income and problems,Owner,Total,At least 1 problem
+G22,Total Household has none of 4 Housing Problems (Owners only),Income and problems,Owner,Total,No problems
+G23,"Total Cost Burden not available, no other housing problems (Owners only)",Income and problems,Owner,Total,"Cost burden not available, no other problems"
+H1,Household Income <= 30% HAMFI (Owners and Renters) and Cost burden > 30%,Income and cost burden,Total,30% or less,Cost burdened
+H2,Household Income <= 30% HAMFI (Owners and Renters) and Cost burden > 50%,Income and cost burden,Total,30% or less,Severely cost burdened
+H4,Household Income >30% to <=50% HAMFI (Owners and Renters) and Cost burden > 30%,Income and cost burden,Total,30% to 50%,Cost burdened
+H5,Household Income >30% to <=50% HAMFI (Owners and Renters) and Cost burden > 50%,Income and cost burden,Total,30% to 50%,Severely cost burdened
+H7,Household Income >50% to <=80% HAMFI (Owners and Renters) and Cost burden > 30%,Income and cost burden,Total,50% to 80%,Cost burdened
+H8,Household Income >50% to <=80% HAMFI (Owners and Renters) and Cost burden > 50%,Income and cost burden,Total,50% to 80%,Severely cost burdened
+H10,Household Income >80% to <=100% HAMFI (Owners and Renters) and Cost burden > 30%,Income and cost burden,Total,80% to 100%,Cost burdened
+H11,Household Income >80% to <=100% HAMFI (Owners and Renters) and Cost burden > 50%,Income and cost burden,Total,80% to 100%,Severely cost burdened
+H13,Household Income >100% HAMFI (Owners and Renters) and Cost burden > 30%,Income and cost burden,Total,Greater than 100%,Cost burdened
+H14,Household Income >100% HAMFI (Owners and Renters) and Cost burden > 30%,Income and cost burden,Total,Greater than 100%,Severely cost burdened
+H16,Total (Owners and Renters) and Cost burden > 30%,Income and cost burden,Total,Total,Cost burdened
+H17,Total (Owners and Renters) and Cost burden > 50%,Income and cost burden,Total,Total,Severely cost burdened
+I1,Household Income <= 30% HAMFI (Renters only) and Cost burden > 30%,Income and cost burden,Renter,30% or less,Cost burdened
+I2,Household Income <= 30% HAMFI (Renters only) and Cost burden > 50%,Income and cost burden,Renter,30% or less,Severely cost burdened
+I4,Household Income >30% to <=50% HAMFI (Renters only) and Cost burden > 30%,Income and cost burden,Renter,30% to 50%,Cost burdened
+I5,Household Income >30% to <=50% HAMFI (Renters only) and Cost burden > 50%,Income and cost burden,Renter,30% to 50%,Severely cost burdened
+I7,Household Income >50% to <=80% HAMFI (Renters only) and Cost burden > 30%,Income and cost burden,Renter,50% to 80%,Cost burdened
+I8,Household Income >50% to <=80% HAMFI (Renters only) and Cost burden > 50%,Income and cost burden,Renter,50% to 80%,Severely cost burdened
+I10,Household Income >80% to <=100% HAMFI (Renters only) and Cost burden > 30%,Income and cost burden,Renter,80% to 100%,Cost burdened
+I11,Household Income >80% to <=100% HAMFI (Renters only) and Cost burden > 50%,Income and cost burden,Renter,80% to 100%,Severely cost burdened
+I13,Household Income >100% HAMFI (Renters only) and Cost burden > 30%,Income and cost burden,Renter,Greater than 100%,Cost burdened
+I14,Household Income >100% HAMFI (Renters only) and Cost burden > 30%,Income and cost burden,Renter,Greater than 100%,Severely cost burdened
+I16,Total (Renters only) and Cost burden > 30%,Income and cost burden,Renter,Total,Cost burdened
+I17,Total (Renters only) and Cost burden > 50%,Income and cost burden,Renter,Total,Severely cost burdened
+J1,Household Income <= 30% HAMFI (Owners only) and Cost burden > 30%,Income and cost burden,Owner,30% or less,Cost burdened
+J2,Household Income <= 30% HAMFI (Owners only) and Cost burden > 50%,Income and cost burden,Owner,30% or less,Severely cost burdened
+J4,Household Income >30% to <=50% HAMFI (Owners only) and Cost burden > 30%,Income and cost burden,Owner,30% to 50%,Cost burdened
+J5,Household Income >30% to <=50% HAMFI (Owners only) and Cost burden > 50%,Income and cost burden,Owner,30% to 50%,Severely cost burdened
+J7,Household Income >50% to <=80% HAMFI (Owners only) and Cost burden > 30%,Income and cost burden,Owner,50% to 80%,Cost burdened
+J8,Household Income >50% to <=80% HAMFI (Owners only) and Cost burden > 50%,Income and cost burden,Owner,50% to 80%,Severely cost burdened
+J10,Household Income >80% to <=100% HAMFI (Owners only) and Cost burden > 30%,Income and cost burden,Owner,80% to 100%,Cost burdened
+J11,Household Income >80% to <=100% HAMFI (Owners only) and Cost burden > 50%,Income and cost burden,Owner,80% to 100%,Severely cost burdened
+J13,Household Income >100% HAMFI (Owners only) and Cost burden > 30%,Income and cost burden,Owner,Greater than 100%,Cost burdened
+J14,Household Income >100% HAMFI (Owners only) and Cost burden > 30%,Income and cost burden,Owner,Greater than 100%,Severely cost burdened
+J16,Total (Owners only) and Cost burden > 30%,Income and cost burden,Owner,Total,Cost burdened
+J17,Total (Owners only) and Cost burden > 50%,Income and cost burden,Owner,Total,Severely cost burdened
