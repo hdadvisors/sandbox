@@ -38,3 +38,26 @@ Notes:
 - Margin of error included
 - Derived homeownership rate and MOE
 - NA value when household estimate is zero
+
+home-sales
+
+Description: Quarterly residential real estate market data
+Period: 2014 Q1 to 2022 Q3
+Geography: Locality and MSA
+Source: Virginia REALTORS®
+Notes:
+- Includes all single-family homes and condos/townhomes
+- 'geography' = filter localities or MSAs
+- 'units' = number of closed sales
+- 'med_price' = median sales price
+- 'med_dom' = median days on market
+- 'med_asratio' = median asking price to sale price ratio
+
+tenure-age
+
+Description: Tenure by age of householder
+Period: 2006-2010 through 2017-2021
+Geography: Locality
+Source: American Community Survey, 5-year estimates, Table B25007
+Notes:
+- Margin of error included
