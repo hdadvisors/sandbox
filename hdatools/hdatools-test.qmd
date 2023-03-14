@@ -1,0 +1,80 @@
+---
+title: "hdatools test document"
+date: "`r Sys.Date()`"
+format:
+  #pdf: default
+  html: 
+    self-contained: true
+editor: visual
+execute: 
+  warning: false
+editor_options: 
+  chunk_output_type: console
+
+---
+
+```{r}
+#| code-fold: true
+#| code-summary: "Setup code"
+
+library(tidyverse)
+library(tidycensus)
+library(hdatools)
+library(scales)
+
+```
+
+```{r}
+#| code-fold: true
+#| code-summary: "Load sample data"
+
+# List six localities in Richmond, Virginia area
+
+localities <- c("Richmond city", "Chesterfield County", "Henrico County",
+                "Hanover County", "Goochland County", "Powhatan County")
+
+# Load median household income and median gross rent from 2017-2021 ACS 5-year estimates
+
+data <- get_acs(
+  geography = "county",
+  state = "Virginia",
+  county = localities,
+  variables = c("B19013_001", "B25031_001"),
+  year = 2021
+) |> 
+  mutate(NAME = str_remove(NAME, ", Virginia")) |> 
+  mutate(variable = case_when(
+    variable == "B25031_001" ~ "Median gross rent",
+    variable == "B19013_001" ~ "Median household income"
+  ))
+
+```
+
+## theme_hda()
+
+
+```{r}
+#| column: body-outset
+
+data |>
+  filter(variable == "Median household income") |> 
+  ggplot(aes(x = estimate, y = reorder(NAME, estimate), fill = NAME)) +
+  geom_col() +
+  scale_fill_hda() +
+  scale_x_continuous(labels = label_dollar()) +
+  theme_hda() +
+  flip_gridlines() +
+  add_zero_line("x") +
+  labs(
+    title = "Households in the suburbs have the highest incomes",
+    subtitle = "Median household income (2021 dollars)",
+    label = "label",
+    caption = "**Source:** American Community Survey, 2017-2021 5-year estimates.<br>**Note:** Incomes adjusted to 2021 dollars."
+  ) +
+  theme(
+    axis.text.y = element_text(margin =
+                                 margin(r = -10, unit = "pt"))
+  )
+
+```
+
