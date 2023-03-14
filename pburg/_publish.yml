@@ -1,0 +1,4 @@
+- source: pburg.qmd
+  quarto-pub:
+    - id: 245c7573-ca5c-4ea3-847e-52324207150e
+      url: 'https://quartopub.com/sites/jtknopf/poplar-lawn-maps'
