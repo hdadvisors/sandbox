@@ -1,0 +1,53 @@
+---
+title: "Poplar Lawn maps"
+format:
+  html:
+    theme: flatly
+execute: 
+  echo: true
+  warning: false
+  freeze: auto
+code-fold: true
+code-overflow: scroll
+editor: visual
+---
+
+## Setup
+
+Load libraries and read in parcel shapefile
+
+```{r}
+#| label: setup
+#| code-summary: "Setup code"
+
+library(tidyverse)
+library(sf)
+library(mapview)
+
+# Read in shapefile and drop Z dimension
+pl_shp <- st_read("data/PoplarLawn2023.shp", quiet = TRUE) |>
+  st_zm()
+
+# Export as csv
+# write_csv(pl_shp, "poplar-lawn-shp.csv")
+  
+```
+
+## Show map
+
+Basic map for viewing parcel data
+
+```{r}
+#| label: map
+#| code-summary: "Show map"
+
+# View data
+mapview(
+  pl_shp,
+  layer.name = "Parcels",
+  zcol = "State_Cl_1",
+  col.regions = RColorBrewer::brewer.pal(7, "Set3"),
+  popup = "Street_Nam"
+  )
+
+```
