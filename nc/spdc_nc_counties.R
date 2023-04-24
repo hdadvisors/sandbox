@@ -1,6 +1,7 @@
 library(tidyverse)
 library(tigris)
 library(mapview)
+library(hdatools)
 
 va_counties <- counties(state = "Virginia")
 
@@ -16,4 +17,14 @@ nc <- nc_counties |>
 
 spdc_nc <- spdc |> bind_rows(nc)
 
-mapview(spdc_nc, label = "NAME")
+#mapview(spdc_nc, label = "NAME")
+
+ggplot(spdc_nc, aes(fill = STATEFP, label = NAME)) +
+  geom_sf(color = "white") +
+  geom_sf_label(fill = "white", size = 3) +
+  scale_fill_hfv() +
+  labs(title = "SPDC and relevant North Carolina counties") +
+  theme_hfv() +
+  theme(axis.text = element_blank(),
+        panel.grid.major = element_blank())
+  
