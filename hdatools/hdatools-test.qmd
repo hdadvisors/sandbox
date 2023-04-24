@@ -85,8 +85,6 @@ plot <- data |>
 
 plot
 
-# girafe(ggobj = plot, height_svg = 4)
-
 ```
 
 Test `ggiraph`.
