@@ -1,0 +1,181 @@
+---
+title: "lehd-va"
+format: html
+editor: visual
+---
+
+## Setup
+
+...
+
+```{r}
+
+library(tidyverse)
+library(tigris)
+library(lehdr)
+library(mapview)
+library(sf)
+
+# Get Virginia localities and filter to CVPDC
+
+va_counties <- counties("VA", cb = TRUE) |> 
+  select(locality = NAMELSAD, GEOID)
+
+lb_metro <- va_counties |> 
+  filter(
+    locality %in% c(
+      "Lynchburg city",
+      "Amherst County",
+      "Appomattox County",
+      "Bedford County",
+      "Campbell County"
+      )
+  )
+
+# Get Virginia census blocks and filter to CVPDC
+
+va_blocks <- blocks("VA")
+
+lb_blocks <- va_blocks |> 
+  mutate(
+    GEOID = str_c(STATEFP20, COUNTYFP20),
+    GEOID_block = GEOID20,
+    geometry = geometry,
+    .keep = "none"
+  ) |> 
+  filter(GEOID %in% lb_metro$GEOID)
+
+# mapview(lb_blocks)
+```
+
+...
+
+```{r}
+
+# Get origin-destination jobs data for Virginia counties
+
+va_od_county <- grab_lodes(
+  state = "va",
+  year = 2020,
+  lodes_type = "od", # origin-destination table
+  job_type = "JT00", # all jobs
+  agg_geo = "county",
+  state_part = "main", # workers who reside and work in state
+  use_cache = TRUE
+  )
+
+# Get origin-destination jobs data for Virginia census blocks
+
+va_od_block <- grab_lodes(
+  state = "va",
+  year = 2020,
+  lodes_type = "od", # origin-destination table
+  job_type = "JT00", # all jobs
+  agg_geo = "block",
+  state_part = "main", # workers who reside and work in state
+  use_cache = TRUE
+  )
+
+# Filter to all blocks with job (workplace) or worker home (residence) in CVPDC
+
+lb_od_filter <- va_od_block |> 
+  
+  # Only need S000 column (total number of jobs)
+  
+  select(w_geocode, h_geocode, jobs = S000) |> 
+  
+  # Filter to blocks with origin OR destination in CVPDC
+  
+  filter(
+    w_geocode %in% lb_blocks$GEOID_block | h_geocode %in% lb_blocks$GEOID_block
+    ) |> 
+  
+  # Pull out county FIPS into new columns
+  
+  mutate(
+    across(.cols = 1:2,
+           .fns = ~ str_sub(.x, end = 5L),
+           .names = "{.col}_co"
+           )
+        )
+
+# Add locality names
+
+lb_od_name <- lb_od_filter |> 
+  
+  # Add column for locality name where job is located
+  
+  left_join(
+    st_drop_geometry(va_counties),
+    by = join_by(w_geocode_co == GEOID)
+    ) |> 
+  rename(w_name = locality) |> 
+  
+  # Add column for locality name where residence is located
+  
+  left_join(
+    st_drop_geometry(va_counties),
+    by = join_by(h_geocode_co == GEOID)
+    ) |> 
+  rename(h_name = locality) |> 
+  
+  # Rename and rearrange
+
+  select(
+    w_name,
+    h_name,
+    w_fips = w_geocode_co,
+    h_fips = h_geocode_co,
+    w_block = w_geocode,
+    h_block = h_geocode,
+    jobs
+    )
+
+```
+
+...
+
+```{r}
+
+# Top 10 localities where Bedford County residents work
+
+lb_od_block |> 
+  filter(h_name == "Bedford County") |> 
+  summarise(jobs = sum(jobs), .by = w_name) |> 
+  slice_max(jobs, n = 10) |> 
+  ggplot(aes(x = jobs, y = reorder(w_name, jobs))) +
+  geom_col()
+
+# Top 10 localities where Bedford County workers live
+
+lb_od_block |> 
+  filter(w_name == "Bedford County") |> 
+  summarise(jobs = sum(jobs), .by = h_name) |> 
+  slice_max(jobs, n = 10) |> 
+  ggplot(aes(x = jobs, y = reorder(h_name, jobs))) +
+  geom_col()
+
+```
+
+...
+
+```{r}
+
+# Add block geometry
+
+lb_od_work <- va_blocks |> 
+  merge(lb_od_block, by.x = "GEOID20", by.y = "w_block", all.x = FALSE) |> 
+  select(16:22)
+
+# Blocks with jobs held by workers who live in Bedford
+
+lb_od_work |> 
+  filter(h_name == "Bedford County") |> 
+  mapview(zcol = "jobs")
+
+# WHY IS LYNCHBURG NOT THERE
+
+
+
+
+```
