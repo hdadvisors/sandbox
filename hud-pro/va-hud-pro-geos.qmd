@@ -165,10 +165,11 @@ HUD assigned priority status to 249 geographies in Virginia. These are located a
 pdc_pal <- colorFactor(rainbow(23), unique(geos_priority$pdc))
 
 geos_priority$popup <- paste0(
-  paste(geos_priority$pdc, "PDC"),
+  paste0("<b>", geos_priority$pdc, " PDC</b>"),
   "<br/>",
   geos_priority$geography
-)
+  ) |> 
+  lapply(htmltools::HTML)
 
 # Calculate minimum and maximum x and y values for each feature
 geos_priority$min_x <- sapply(st_geometry(geos_priority), function(geom) {
@@ -210,8 +211,7 @@ server <- function(input, output) {
         fillOpacity = 0.5,
         color = ~pdc_pal(pdc),
         weight = 2,
-        #data = subset(geos_priority, pdc == input$filter),
-        popup = ~popup
+        label = ~popup
       ) |>  
       fitBounds(~min(min_x), ~min(min_y), ~max(max_x), ~max(max_y))
   })
@@ -232,7 +232,7 @@ server <- function(input, output) {
         fillOpacity = 0.5,
         color = ~pdc_pal(pdc),
         weight = 2,
-        popup = ~popup
+        label = ~popup
       ) |>   
       fitBounds(~min(min_x), ~min(min_y), ~max(max_x), ~max(max_y))
   })
