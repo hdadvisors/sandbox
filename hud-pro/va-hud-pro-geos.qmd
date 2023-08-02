@@ -1,103 +1,37 @@
 ---
 title: "HUD PRO Housing Priority Geographies in Virginia"
-date: today
 format:
   html:
-    toc: false
-    number-sections: false
     theme: flatly
     author: "Jonathan Knopf (jonathan@hdadvisors.net)"
 execute: 
-  echo: true
+  echo: false
   warning: false
   freeze: auto
-code-fold: true
-code-overflow: scroll
+server: shiny
 ---
 
 ```{r}
+#| context: setup
+#| output: false
 
 library(tidyverse)
-library(tigris)
-library(sf)
-library(mapview)
 library(leaflet)
 library(htmlwidgets)
 library(htmltools)
 library(shiny)
-library(hdatools)
+library(DT)
 
-# Download shapefile of localities (cities and counties)
-localities <- counties("VA", cb = TRUE) |> 
-  select(GEOID, NAMELSAD, LSAD)
+getwd()
 
-# Download shapefile of places (towns and CDPs), filter out cities
-places <- places("VA", cb = TRUE, year = 2019) |> 
-  select(GEOID, NAMELSAD = NAME, LSAD) |> 
-  filter(LSAD != 25) |> 
-  mutate(
-    NAMELSAD =
-      case_when(
-        GEOID == "5168880" ~ "Rose Hill CDP (Fairfax County)",
-        LSAD == 43 ~ paste(NAMELSAD, "town"),
-        LSAD == 57 ~ paste(NAMELSAD, "CDP"),
-        .default = NAMELSAD
-      )
-    )
+geos_priority <- read_rds("geos_priority.rds")
 
-# Load locality-PDC crosswalk
-pdc <- read_csv("va-pdc-locality.csv") |> 
-  filter(type != "town") |> 
-  select(1, 3)
-
-# Combine localities and places
-geos <- bind_rows(localities, places)
-
-# Dissolve localities into PDC polygons
-pdc_geo <- localities |> 
-  left_join(pdc, by = join_by("NAMELSAD" == "county")) |> 
-  group_by(pdc) |> 
-  summarise()
-
-# Join geography centroids to PDC polygons
-geos_pdc <- st_centroid(geos) |> 
-  st_join(pdc_geo) |> 
-  st_drop_geometry() |> 
-  select(1, 4) |> 
-  right_join(geos, by = "GEOID") |> 
-  st_as_sf()
-
-# Load HUD PRO Housing priority geographies
-hud_pro <- read_csv("hud-pro-priority-geos.csv") |> 
-  filter(
-    state == "Virginia",
-    priority == "Yes"
-    ) |> 
-  group_by(jurisdiction) |> 
-  summarise()
-
-# Filter geographies to priority only
-geos_priority <- geos_pdc |> 
-  filter(NAMELSAD %in% hud_pro$jurisdiction) |> 
-  select(2, geography = 3, type = 4) |> 
-  mutate(
-    type = case_match(
-      type,
-      "06" ~ "County",
-      "25" ~ "City",
-      "43" ~ "Town",
-      "57" ~ "CDP"
-    )
-  ) |> 
-  st_transform(4326)
+pdc_pal <- colorFactor(rainbow(23), unique(geos_priority$pdc))
 
 ```
 
-
-## HUD PRO Housing grant info
-
-[PRO Housing grant information](https://www.hud.gov/program_offices/comm_planning/pro_housing) (HUD website)
-[PRO Housing Quick Summary](https://www.hud.gov/sites/dfiles/CPD/documents/PRO-Housing-Quick-Summary-7.26.23.pdf) (PDF)
+[PRO Housing grant information](https://www.hud.gov/program_offices/comm_planning/pro_housing) (HUD website)  
+[PRO Housing Quick Summary](https://www.hud.gov/sites/dfiles/CPD/documents/PRO-Housing-Quick-Summary-7.26.23.pdf) (PDF)  
 [PRO Housing FAQ](https://www.hud.gov/sites/dfiles/CPD/documents/PRO-Housing-FAQs-07262023.pdf) (PDF)
 
 ## Priority geographies
@@ -113,44 +47,6 @@ Geography types include:
 * Towns
 * Census Designated Places (CDPs)
 
-Important information on priority geographies from the FAQ are quoted below.
-
-### Scoring benefits
-
-Applications that include these geographies will be awarded higher points.
-
-::: {.callout-note collapse="true"}
-
-### What is a priority geography?
-
-Under the Need rating factor, applicants will be awarded ten (10) points if their application primarily serves a ‘priority geography’. Priority geography means a geography that has an affordable housing need greater than a threshold calculation for one of three measures. The threshold calculation is determined by the need of the 90th-percentile jurisdiction (top 10%) for each factor as computed comparing only jurisdictions with greater than 50,000 population. Threshold calculations are done at the county and place level and applied respectively to county and place applicants. An application can also quality as a priority geography if it serves a geography that scores in the top 5% of its State for the same three measures. The measures are as follows:
-
-* Affordable housing not keeping pace, measured as (change in population 2019-2009 divided by 2009 population) – (change in number of units affordable and available to households at 80% HUD Area Median Family Income (HAMFI) 2019-2009 divided by units affordable and available at 80% HAMFI 2009).
-* Insufficient affordable housing, measured as number of households at 80% HAMFI divided by number of affordable and available units for households at 80% HAMFI.
-* Widespread housing cost burden or substandard housing, measured as number of households with housing problems at 100% HAMFI divided by number of households at 100% HAMFI. Housing problems is defined as: cost burden of at least 50%, overcrowding, or substandard housing.
-
-:::
-
-###
-
-::: {.callout-note collapse="true"}
-
-### What if I’m not a priority geography?
-
-Applicants who are not listed as priority geographies are still invited to apply.
-
-The Need rating factor offers an additional five (5) points for providing compelling information about your affordable housing needs. This information should demonstrate acute demand for affordable housing in your jurisdiction(s) to households with incomes below 100 percent of the area median income. In your narrative, you are encouraged to provide local knowledge that is not already captured by the above measures. Topics that may indicate acute demand for affordable housing include displacement pressures, housing stock condition, age of housing stock, homelessness, ratio of median home price to area median income, and more.
-
-:::
-
-::: {.callout-note collapse="true"}
-
-### I’m applying as an MPO or multijurisdictional entity. How do I determine if I’m a priority geography?
-
-MPOs and multijurisdictional entities may qualify as a priority geography if the proposed activities primarily serve least one county or place that is a priority geography. The geographical scope of the activity should be clearly identified in the application.
-
-:::
-
 ### Priority geographies in Virginia
 
 HUD assigned priority status to 249 geographies in Virginia. These are located across all 21 of Virginia's Planning District Commissions (PDCs) and include:
@@ -162,86 +58,104 @@ HUD assigned priority status to 249 geographies in Virginia. These are located a
 
 ```{r}
 
-pdc_pal <- colorFactor(rainbow(23), unique(geos_priority$pdc))
-
-geos_priority$popup <- paste0(
-  paste0("<b>", geos_priority$pdc, " PDC</b>"),
-  "<br/>",
-  geos_priority$geography
-  ) |> 
-  lapply(htmltools::HTML)
-
-# Calculate minimum and maximum x and y values for each feature
-geos_priority$min_x <- sapply(st_geometry(geos_priority), function(geom) {
-  st_bbox(geom)[1]
-})
-geos_priority$max_x <- sapply(st_geometry(geos_priority), function(geom) {
-  st_bbox(geom)[3]
-})
-geos_priority$min_y <- sapply(st_geometry(geos_priority), function(geom) {
-  st_bbox(geom)[2]
-})
-geos_priority$max_y <- sapply(st_geometry(geos_priority), function(geom) {
-  st_bbox(geom)[4]
-})
-
-
-```
-
-```{r}
-
-# Define UI
-ui <- fluidPage(
-  leafletOutput("map"),
-  selectInput(
+selectInput(
     inputId = "filter",
     label = "Select PDC:",
     choices = c("All", geos_priority$pdc)
     )
+
+mainPanel(
+  tabsetPanel(
+    type = "tabs",
+    tabPanel("Map", leafletOutput("map")),
+    tabPanel("Table", dataTableOutput("table"))
+    )
 )
-
-# Define server
-server <- function(input, output) {
-  
-  output$map <- renderLeaflet({
-    leaflet(geos_priority) |> 
-      addProviderTiles(providers$CartoDB.Positron) |> 
-      addPolygons(
-        fillColor = ~pdc_pal(pdc),
-        fillOpacity = 0.5,
-        color = ~pdc_pal(pdc),
-        weight = 2,
-        label = ~popup
-      ) |>  
-      fitBounds(~min(min_x), ~min(min_y), ~max(max_x), ~max(max_y))
-  })
-  
-  filtered_data <- reactive({
-    if (input$filter == "All") {
-      geos_priority
-    } else {
-      subset(geos_priority, pdc == input$filter)
-    }
-  })
-  
-  observe({
-    leafletProxy("map", data = filtered_data()) |> 
-      clearShapes() |> 
-      addPolygons(
-        fillColor = ~pdc_pal(pdc),
-        fillOpacity = 0.5,
-        color = ~pdc_pal(pdc),
-        weight = 2,
-        label = ~popup
-      ) |>   
-      fitBounds(~min(min_x), ~min(min_y), ~max(max_x), ~max(max_y))
-  })
-  
-}
-
-# Run the app
-shinyApp(ui = ui, server = server)
 
 ```
 
+
+```{r}
+#| context: server
+
+filtered_data <- reactive({
+  if (input$filter == "All") {
+    geos_priority
+  } else {
+    subset(geos_priority, pdc == input$filter)
+  }
+})
+
+output$map <- renderLeaflet({
+  leaflet(geos_priority) |> 
+    addProviderTiles(providers$CartoDB.Positron) |> 
+    addPolygons(
+      fillColor = ~pdc_pal(pdc),
+      fillOpacity = 0.5,
+      color = ~pdc_pal(pdc),
+      weight = 2,
+      label = ~popup
+    ) |>  
+    fitBounds(~min(min_x), ~min(min_y), ~max(max_x), ~max(max_y))
+})
+
+observe({
+  leafletProxy("map", data = filtered_data()) |> 
+    clearShapes() |> 
+    addPolygons(
+      fillColor = ~pdc_pal(pdc),
+      fillOpacity = 0.5,
+      color = ~pdc_pal(pdc),
+      weight = 2,
+      label = ~popup
+    ) |>   
+    fitBounds(~min(min_x), ~min(min_y), ~max(max_x), ~max(max_y))
+})
+
+output$table <- renderDT({
+  DT::datatable(
+    filtered_data()[1],
+    options = list(
+      
+    )
+  )
+})
+
+
+```
+
+
+## Priority geography FAQ
+
+Important information on priority geographies from the FAQ are quoted below. Click each question to expand.
+
+::: {.callout-note}
+
+### What is a priority geography?
+
+Under the Need rating factor, applicants will be awarded ten (10) points if their application primarily serves a ‘priority geography’. Priority geography means a geography that has an affordable housing need greater than a threshold calculation for one of three measures. The threshold calculation is determined by the need of the 90th-percentile jurisdiction (top 10%) for each factor as computed comparing only jurisdictions with greater than 50,000 population. Threshold calculations are done at the county and place level and applied respectively to county and place applicants. An application can also quality as a priority geography if it serves a geography that scores in the top 5% of its State for the same three measures. The measures are as follows:
+
+* Affordable housing not keeping pace, measured as (change in population 2019-2009 divided by 2009 population) – (change in number of units affordable and available to households at 80% HUD Area Median Family Income (HAMFI) 2019-2009 divided by units affordable and available at 80% HAMFI 2009).
+* Insufficient affordable housing, measured as number of households at 80% HAMFI divided by number of affordable and available units for households at 80% HAMFI.
+* Widespread housing cost burden or substandard housing, measured as number of households with housing problems at 100% HAMFI divided by number of households at 100% HAMFI. Housing problems is defined as: cost burden of at least 50%, overcrowding, or substandard housing.
+
+:::
+
+::: {.callout-note}
+
+### What if I’m not a priority geography?
+
+Applicants who are not listed as priority geographies are still invited to apply.
+
+The Need rating factor offers an additional five (5) points for providing compelling information about your affordable housing needs. This information should demonstrate acute demand for affordable housing in your jurisdiction(s) to households with incomes below 100 percent of the area median income. In your narrative, you are encouraged to provide local knowledge that is not already captured by the above measures. Topics that may indicate acute demand for affordable housing include displacement pressures, housing stock condition, age of housing stock, homelessness, ratio of median home price to area median income, and more.
+
+:::
+
+::: {.callout-note}
+
+### I’m applying as an MPO or multijurisdictional entity. How do I determine if I’m a priority geography?
+
+MPOs and multijurisdictional entities may qualify as a priority geography if the proposed activities primarily serve least one county or place that is a priority geography. The geographical scope of the activity should be clearly identified in the application.
+
+:::
 
