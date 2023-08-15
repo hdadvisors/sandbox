@@ -1,0 +1,13 @@
+code,ratio,limit,value
+§ 15.2-2305: All affordable units,Density bonus,Min,0
+§ 15.2-2305: All affordable units,Affordable units,Min,0
+§ 15.2-2305.1: Low-income units,Density bonus,Min,0.2
+§ 15.2-2305.1: Low-income units,Affordable units,Min,0.1
+§ 15.2-2305.1: Very-low-income units,Density bonus,Min,0.2
+§ 15.2-2305.1: Very-low-income units,Affordable units,Min,0.05
+§ 15.2-2305: All affordable units,Density bonus,Max,0.3
+§ 15.2-2305: All affordable units,Affordable units,Max,0.17
+§ 15.2-2305.1: Low-income units,Density bonus,Max,0.575
+§ 15.2-2305.1: Low-income units,Affordable units,Max,0.35
+§ 15.2-2305.1: Very-low-income units,Density bonus,Max,0.95
+§ 15.2-2305.1: Very-low-income units,Affordable units,Max,0.35
