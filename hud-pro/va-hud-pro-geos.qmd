@@ -21,8 +21,9 @@ library(htmlwidgets)
 library(htmltools)
 library(shiny)
 library(DT)
+library(hdatools)
 
-getwd()
+setwd("C:/Users/Jonathan/Documents/repos/sandbox/hud-pro/")
 
 geos_priority <- read_rds("geos_priority.rds")
 
@@ -121,6 +122,14 @@ output$table <- renderDT({
   )
 })
 
+
+```
+
+```{r}
+
+geos_priority |> 
+  summarise(n = n(), .by = "pdc") |> 
+  arrange(-n)
 
 ```
 
