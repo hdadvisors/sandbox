@@ -1,0 +1,12 @@
+name: va-hud-pro-geos
+title: va-hud-pro-geos
+username: jtknopf
+account: jtknopf
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 9654153
+bundleId: 7597254
+url: https://jtknopf.shinyapps.io/va-hud-pro-geos/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE

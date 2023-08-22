@@ -8,7 +8,7 @@ execute:
   echo: false
   warning: false
   freeze: auto
-server: shiny
+#server: shiny
 ---
 
 ```{r}
@@ -16,18 +16,12 @@ server: shiny
 #| output: false
 
 library(tidyverse)
-library(leaflet)
-library(htmlwidgets)
-library(htmltools)
-library(shiny)
-library(DT)
-library(hdatools)
+library(kableExtra)
+library(sf)
 
 setwd("C:/Users/Jonathan/Documents/repos/sandbox/hud-pro/")
 
 geos_priority <- read_rds("geos_priority.rds")
-
-pdc_pal <- colorFactor(rainbow(23), unique(geos_priority$pdc))
 
 ```
 
@@ -37,7 +31,7 @@ pdc_pal <- colorFactor(rainbow(23), unique(geos_priority$pdc))
 
 ## Priority geographies
 
-HUD has identified specific local geographies with high needs that will be prioritized for the program. A spreadsheet of these areas is published on the grant web page, and linked below.
+HUD identified specific local geographies with high needs that will be prioritized for the program. A spreadsheet of these areas is published on the grant web page, and linked below.
 
 [FY 23 PRO Housing List of Priority Geographies](https://www.hud.gov/sites/dfiles/CPD/documents/Acute-Demand-for-Housing-priority-geographies.xlsx) (.xlsx)
 
@@ -48,7 +42,7 @@ Geography types include:
 * Towns
 * Census Designated Places (CDPs)
 
-### Priority geographies in Virginia
+## Priority geographies in Virginia
 
 HUD assigned priority status to 249 geographies in Virginia. These are located across all 21 of Virginia's Planning District Commissions (PDCs) and include:
 
@@ -57,82 +51,44 @@ HUD assigned priority status to 249 geographies in Virginia. These are located a
 * 71 towns
 * 138 CDPs
 
-```{r}
+::: {.callout-warning title="Geographies in two PDCs"}
 
-selectInput(
-    inputId = "filter",
-    label = "Select PDC:",
-    choices = c("All", geos_priority$pdc)
-    )
+Five geographies are represented by both the Roanoke Valley-Alleghany Regional Commission and the West Piedmont PDC: the Town of Boones Mill, North Shore CDP, Penhook CDP, Union Hall CDP, and Westlake Corner CDP. All are located in Franklin County.  
 
-mainPanel(
-  tabsetPanel(
-    type = "tabs",
-    tabPanel("Map", leafletOutput("map")),
-    tabPanel("Table", dataTableOutput("table"))
-    )
-)
+:::
 
+## Geographies by PDC region
+
+The filter below will update the map and table to display geographies only within the selected PDC.
+
+```{=html}
+ <iframe src="https://jtknopf.shinyapps.io/va-hud-pro-geos/" width="1100px" height="1050px"></iframe>
 ```
 
+## Number of geographies in each PDC
 
-```{r}
-#| context: server
-
-filtered_data <- reactive({
-  if (input$filter == "All") {
-    geos_priority
-  } else {
-    subset(geos_priority, pdc == input$filter)
-  }
-})
-
-output$map <- renderLeaflet({
-  leaflet(geos_priority) |> 
-    addProviderTiles(providers$CartoDB.Positron) |> 
-    addPolygons(
-      fillColor = ~pdc_pal(pdc),
-      fillOpacity = 0.5,
-      color = ~pdc_pal(pdc),
-      weight = 2,
-      label = ~popup
-    ) |>  
-    fitBounds(~min(min_x), ~min(min_y), ~max(max_x), ~max(max_y))
-})
-
-observe({
-  leafletProxy("map", data = filtered_data()) |> 
-    clearShapes() |> 
-    addPolygons(
-      fillColor = ~pdc_pal(pdc),
-      fillOpacity = 0.5,
-      color = ~pdc_pal(pdc),
-      weight = 2,
-      label = ~popup
-    ) |>   
-    fitBounds(~min(min_x), ~min(min_y), ~max(max_x), ~max(max_y))
-})
-
-output$table <- renderDT({
-  DT::datatable(
-    filtered_data()[1],
-    options = list(
-      
-    )
-  )
-})
-
-
-```
+The table below shows the number of priority counties, cities, towns, and CDPs within each PDC. The Northern Virginia Regional Commission has the most at 87, although most of those are CDPs.
 
 ```{r}
 
 geos_priority |> 
-  summarise(n = n(), .by = "pdc") |> 
-  arrange(-n)
+  st_drop_geometry() |> 
+  summarise(n = n(), .by = c(pdc, type)) |> 
+  pivot_wider(
+    names_from = type,
+    values_from = n,
+    values_fill = 0
+  ) |> 
+  mutate(Total = rowSums(across(c(2:5)))) |> 
+  arrange(-Total) |> 
+  kable(
+    col.names = c("PDC", "Counties", "Cities", "Towns", "CDPs", "Total")
+  ) |> 
+  kable_styling(
+    bootstrap_options = c("striped", "condensed")
+  )
 
 ```
-
 
 ## Priority geography FAQ
 

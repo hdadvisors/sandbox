@@ -1,0 +1,4 @@
+- source: va-hud-pro-geos.qmd
+  quarto-pub:
+    - id: 256ea143-cfc9-4d28-8864-a0fb353892fc
+      url: 'https://jtknopf.quarto.pub/hud-pro-housing-priority-geographies-in-virginia'
