@@ -124,13 +124,15 @@ age_va_plot + age_pl_plot
 
 ```{r}
 
+setwd("C:/Users/ericv/Desktop/github/sandbox")
+
 rents <- read_csv("hb854-plots/costar_rents.csv") |> 
   select(-rent_adj)
 
 rents_data <- rents |> 
   pivot_wider(names_from = date,
               values_from = rent) |> 
-  mutate(pct = (`2022 Q4` - `2011 Q1`)/`2011 Q1`,
+  mutate(pct = (`2023 Q2` - `2011 Q1`)/`2011 Q1`,
          group = case_when(
            geography == "Virginia" ~ "State",
            TRUE ~ "Locality"
@@ -148,7 +150,7 @@ ggplot(rents_data,
   scale_color_hfv(direction = -1) +
   labs(
     title = "Percent change in median rent",
-    subtitle = "2011 Q1 to 2022 Q4",
+    subtitle = "2011 Q1 to 2023 Q2",
     caption = "**Source:** CoStar Group, Inc."
   ) +
   theme_hfv() +
