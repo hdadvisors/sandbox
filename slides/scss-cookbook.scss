@@ -1,0 +1,71 @@
+// sources
+
+// https://quarto.org/docs/output-formats/html-themes.html#sass-variables
+// https://emilhvitfeldt.com/blog.html#category=slidecraft%20101
+// https://thomasmock.quarto.pub/reports-presentations/#/title-slide
+// https://meghan.rbind.io/blog/quarto-slides/
+
+// import fonts
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+/*-- scss:defaults --*/
+
+// custom colors
+
+$theme-hfvshadow: #011E41;
+$theme-hfvsky: #40C0C0;
+
+// global colors
+
+$body-bg: #ffffff;
+$body-color: #383c3d;
+$link-color: #ffc72c;
+
+// presentation colors
+
+$presentation-heading-color: #011E41;
+
+// global fonts
+
+$font-family-sans-serif: 'Open Sans', sans-serif;
+
+// presentation fonts
+
+$presentation-heading-font: 'Poppins', serif;
+
+// font sizes
+
+$presentation-font-size-root: 40px;
+
+/*-- scss:rules --*/
+
+// custom text class
+// use to [style text]{.custom}
+
+.custom {
+  color: $theme-hfvsky;
+  font-weight: bold;
+}
+
+// presentation footer
+
+.reveal .footer {
+  font-size: 0.35em !important;
+  text-align: right !important;
+}
+
+// presentation section header
+
+.sectionhead {
+  font-size: 1em;
+  text-align: center;
+  color: $presentation-heading-color;
+  font-family: $presentation-heading-font;
+  background-color: $body-bg;
+  margin: 1px;
+  padding: 2px 2px 2px 2px;
+  width: 120px;
+  border-left: 10px solid;
+}
