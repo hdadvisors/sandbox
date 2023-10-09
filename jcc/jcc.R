@@ -99,7 +99,7 @@ ggplot(adu_1,
 
 ## Plot 2 -------------------
 
-ggplot(adu_2,
+ggplot(adu,
        aes(
          x = affordable,
          y = density,

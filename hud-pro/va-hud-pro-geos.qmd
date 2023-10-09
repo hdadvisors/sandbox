@@ -16,12 +16,16 @@ execute:
 #| output: false
 
 library(tidyverse)
+library(tidycensus)
 library(kableExtra)
+library(formattable)
 library(sf)
 
 setwd("C:/Users/Jonathan/Documents/repos/sandbox/hud-pro/")
 
 geos_priority <- read_rds("geos_priority.rds")
+
+pdc_pop <- read_rds("pdc_pop.rds")
 
 ```
 
@@ -89,6 +93,51 @@ geos_priority |>
   )
 
 ```
+
+## Population in priority geographies by PDC
+
+The tables below show the top five PDCs for priority geography populations, both as a total and as a share of the entire PDC. Population data are from the American Community Survey 2017-2021 5-year estimates. CDPs and towns that overlap localities are excluded to prevent double-counting populations. 
+
+```{r}
+
+pdc_pop |> 
+  select(-2) |> 
+  slice_max(pop, n = 5) |>
+  rowid_to_column() |> 
+  mutate(
+    pop = comma(pop, 0),
+    pct = percent(pct, 0)
+  ) |> 
+  kable(
+    col.names = c("", "Top 5 PDCs by population in priority geographies", "Population", "Percent")
+  ) |> 
+  column_spec(3, bold = T, color = "#445ca9") |> 
+  kable_styling(
+    bootstrap_options = c("striped", "condensed")
+  )
+
+```
+
+```{r}
+
+pdc_pop |> 
+  select(-2) |> 
+  slice_max(pct, n = 5) |>
+  rowid_to_column() |> 
+  mutate(
+    pop = comma(pop, 0),
+    pct = percent(pct, 0)
+  ) |> 
+  kable(
+    col.names = c("", "Top 5 PDCs by percent of population in priority geographies", "Population", "Percent")
+  ) |> 
+  column_spec(4, bold = T, color = "#e76f52") |> 
+  kable_styling(
+    bootstrap_options = c("striped", "condensed")
+  )
+
+```
+
 
 ## Priority geography FAQ
 

@@ -21,7 +21,7 @@ spdc_nc <- spdc |> bind_rows(nc)
 
 ggplot(spdc_nc, aes(fill = STATEFP, label = NAME)) +
   geom_sf(color = "white") +
-  geom_sf_label(fill = "white", size = 3) +
+  geom_sf_text(color = "white", size = 5) +
   scale_fill_hfv() +
   labs(title = "SPDC and relevant North Carolina counties") +
   theme_hfv() +

@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jonathan Knopf (jonathan@hdadvisors.net)">
+
+<title>HUD PRO Housing Priority Geographies in Virginia</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="va-hud-pro-geos_files/libs/clipboard/clipboard.min.js"></script>
+<script src="va-hud-pro-geos_files/libs/quarto-html/quarto.js"></script>
+<script src="va-hud-pro-geos_files/libs/quarto-html/popper.min.js"></script>
+<script src="va-hud-pro-geos_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="va-hud-pro-geos_files/libs/quarto-html/anchor.min.js"></script>
+<link href="va-hud-pro-geos_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="va-hud-pro-geos_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="va-hud-pro-geos_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="va-hud-pro-geos_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="va-hud-pro-geos_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+<script src="va-hud-pro-geos_files/libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="va-hud-pro-geos_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">HUD PRO Housing Priority Geographies in Virginia</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Jonathan Knopf (jonathan@hdadvisors.net) </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p><a href="https://www.hud.gov/program_offices/comm_planning/pro_housing">PRO Housing grant information</a> (HUD website)<br>
+<a href="https://www.hud.gov/sites/dfiles/CPD/documents/PRO-Housing-Quick-Summary-7.26.23.pdf">PRO Housing Quick Summary</a> (PDF)<br>
+<a href="https://www.hud.gov/sites/dfiles/CPD/documents/PRO-Housing-FAQs-07262023.pdf">PRO Housing FAQ</a> (PDF)</p>
+<section id="priority-geographies" class="level2">
+<h2 class="anchored" data-anchor-id="priority-geographies">Priority geographies</h2>
+<p>HUD identified specific local geographies with high needs that will be prioritized for the program. A spreadsheet of these areas is published on the grant web page, and linked below.</p>
+<p><a href="https://www.hud.gov/sites/dfiles/CPD/documents/Acute-Demand-for-Housing-priority-geographies.xlsx">FY 23 PRO Housing List of Priority Geographies</a> (.xlsx)</p>
+<p>Geography types include:</p>
+<ul>
+<li>Counties</li>
+<li>Cities</li>
+<li>Towns</li>
+<li>Census Designated Places (CDPs)</li>
+</ul>
+</section>
+<section id="priority-geographies-in-virginia" class="level2">
+<h2 class="anchored" data-anchor-id="priority-geographies-in-virginia">Priority geographies in Virginia</h2>
+<p>HUD assigned priority status to 249 geographies in Virginia. These are located across all 21 of Virginia’s Planning District Commissions (PDCs) and include:</p>
+<ul>
+<li>31 counties</li>
+<li>9 cities</li>
+<li>71 towns</li>
+<li>138 CDPs</li>
+</ul>
+<div class="callout callout-style-default callout-warning callout-titled" title="Geographies in two PDCs">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Geographies in two PDCs
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Five geographies are represented by both the Roanoke Valley-Alleghany Regional Commission and the West Piedmont PDC: the Town of Boones Mill, North Shore CDP, Penhook CDP, Union Hall CDP, and Westlake Corner CDP. All are located in Franklin County.</p>
+</div>
+</div>
+</section>
+<section id="geographies-by-pdc-region" class="level2">
+<h2 class="anchored" data-anchor-id="geographies-by-pdc-region">Geographies by PDC region</h2>
+<p>The filter below will update the map and table to display geographies only within the selected PDC.</p>
+ <iframe src="https://jtknopf.shinyapps.io/va-hud-pro-geos/" width="1100px" height="1050px"></iframe>
+</section>
+<section id="number-of-geographies-in-each-pdc" class="level2">
+<h2 class="anchored" data-anchor-id="number-of-geographies-in-each-pdc">Number of geographies in each PDC</h2>
+<p>The table below shows the number of priority counties, cities, towns, and CDPs within each PDC. The Northern Virginia Regional Commission has the most at 87, although most of those are CDPs.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-striped table-condensed table-sm small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">PDC</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Counties</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Cities</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Towns</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">CDPs</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Northern Virginia</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">72</td>
+<td style="text-align: right;">87</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">New River Valley</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">17</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Central Shenandoah</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">13</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hampton Roads</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">12</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Mount Rogers</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">12</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Accomack-Northampton</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">12</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Rappahannock-Rapidan</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Northern Shenandoah</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Commonwealth Regional Council</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Southside</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Cumberland Plateau</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Middle Peninsula</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">PlanRVA</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Thomas Jefferson</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">West Piedmont</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Lenowisco</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">George Washington</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Roanoke Valley-Alleghany/West Piedmont</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Northern Neck</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Roanoke Valley-Alleghany</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Central Virginia</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Crater</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</section>
+<section id="population-in-priority-geographies-by-pdc" class="level2">
+<h2 class="anchored" data-anchor-id="population-in-priority-geographies-by-pdc">Population in priority geographies by PDC</h2>
+<p>The tables below show the top five PDCs for priority geography populations, both as a total and as a share of the entire PDC. Population data are from the American Community Survey 2017-2021 5-year estimates. CDPs and towns that overlap localities are excluded to prevent double-counting populations.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-striped table-condensed table-sm small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Top 5 PDCs by population in priority geographies</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Population</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Percent</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Northern Virginia</td>
+<td style="text-align: right; font-weight: bold; color: #445ca9 !important;">2,512,642</td>
+<td style="text-align: right;">99%</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">New River Valley</td>
+<td style="text-align: right; font-weight: bold; color: #445ca9 !important;">166,766</td>
+<td style="text-align: right;">92%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Rappahannock-Rapidan</td>
+<td style="text-align: right; font-weight: bold; color: #445ca9 !important;">121,844</td>
+<td style="text-align: right;">67%</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">PlanRVA</td>
+<td style="text-align: right; font-weight: bold; color: #445ca9 !important;">99,906</td>
+<td style="text-align: right;">9%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">Hampton Roads</td>
+<td style="text-align: right; font-weight: bold; color: #445ca9 !important;">90,561</td>
+<td style="text-align: right;">5%</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-striped table-condensed table-sm small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Top 5 PDCs by percent of population in priority geographies</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Population</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Percent</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Northern Virginia</td>
+<td style="text-align: right;">2,512,642</td>
+<td style="text-align: right; font-weight: bold; color: #e76f52 !important;">99%</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">New River Valley</td>
+<td style="text-align: right;">166,766</td>
+<td style="text-align: right; font-weight: bold; color: #e76f52 !important;">92%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Southside</td>
+<td style="text-align: right;">65,110</td>
+<td style="text-align: right; font-weight: bold; color: #e76f52 !important;">81%</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">Rappahannock-Rapidan</td>
+<td style="text-align: right;">121,844</td>
+<td style="text-align: right; font-weight: bold; color: #e76f52 !important;">67%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">Middle Peninsula</td>
+<td style="text-align: right;">29,288</td>
+<td style="text-align: right; font-weight: bold; color: #e76f52 !important;">54%</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</section>
+<section id="priority-geography-faq" class="level2">
+<h2 class="anchored" data-anchor-id="priority-geography-faq">Priority geography FAQ</h2>
+<p>Important information on priority geographies from the FAQ are quoted below. Click each question to expand.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+What is a priority geography?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Under the Need rating factor, applicants will be awarded ten (10) points if their application primarily serves a ‘priority geography’. Priority geography means a geography that has an affordable housing need greater than a threshold calculation for one of three measures. The threshold calculation is determined by the need of the 90th-percentile jurisdiction (top 10%) for each factor as computed comparing only jurisdictions with greater than 50,000 population. Threshold calculations are done at the county and place level and applied respectively to county and place applicants. An application can also quality as a priority geography if it serves a geography that scores in the top 5% of its State for the same three measures. The measures are as follows:</p>
+<ul>
+<li>Affordable housing not keeping pace, measured as (change in population 2019-2009 divided by 2009 population) – (change in number of units affordable and available to households at 80% HUD Area Median Family Income (HAMFI) 2019-2009 divided by units affordable and available at 80% HAMFI 2009).</li>
+<li>Insufficient affordable housing, measured as number of households at 80% HAMFI divided by number of affordable and available units for households at 80% HAMFI.</li>
+<li>Widespread housing cost burden or substandard housing, measured as number of households with housing problems at 100% HAMFI divided by number of households at 100% HAMFI. Housing problems is defined as: cost burden of at least 50%, overcrowding, or substandard housing.</li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+What if I’m not a priority geography?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Applicants who are not listed as priority geographies are still invited to apply.</p>
+<p>The Need rating factor offers an additional five (5) points for providing compelling information about your affordable housing needs. This information should demonstrate acute demand for affordable housing in your jurisdiction(s) to households with incomes below 100 percent of the area median income. In your narrative, you are encouraged to provide local knowledge that is not already captured by the above measures. Topics that may indicate acute demand for affordable housing include displacement pressures, housing stock condition, age of housing stock, homelessness, ratio of median home price to area median income, and more.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+I’m applying as an MPO or multijurisdictional entity. How do I determine if I’m a priority geography?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>MPOs and multijurisdictional entities may qualify as a priority geography if the proposed activities primarily serve least one county or place that is a priority geography. The geographical scope of the activity should be clearly identified in the application.</p>
+</div>
+</div>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
