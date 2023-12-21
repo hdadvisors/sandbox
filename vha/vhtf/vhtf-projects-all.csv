@@ -1,0 +1,208 @@
+year,program,funding_sources,project_name,project_address,type,units_affordable,units_rehab,units_psh,units_below30,units_below50,units_below60,units_below80,units_marketrate,amt_vhtf,amt_home,amt_nhtf,amt_psh,amt_hiee,amt_other,tenure
+2013-2014,CLP,VHTF,Commerce Village,"181 Commerce Drive, Harrisonburg, VA 22802-4721",Chronic Homeless,56,0,56,0,0,0,0,0,750000,0,0,0,0,2000000,Rental
+2013-2014,CLP,VHTF,Stonebriar Apartments,"16600 Broad Street, St. Paul, VA 24283-0000","Senior, Disability",24,0,0,0,0,0,24,0,200000,0,0,0,0,2349426,Rental
+2013-2014,CLP,VHTF,Studios II,"5409 Hull Street Road, Richmond, VA 23224-2411","Homeless, Veterans",39,0,39,0,0,0,0,0,750000,0,0,0,0,5104676,Rental
+2013-2014,CLP,VHTF,Crescent Square,"1333 Diamond Springs Road, Virginia Beach, VA 23455-3629",Homeless,80,0,80,0,0,0,0,0,750000,0,0,0,0,10341100,Rental
+2013-2014,CLP,VHTF,Upper Street Apartments,"608 Upper St, Danville, VA 24541 ","Veterans, Disability, General",13,0,13,0,0,0,0,0,700000,0,0,0,0,1406000,Rental
+2013-2014,CLP,VHTF,New Phoenix Village,"327 Charles Street, Newport News, VA 23608-1054","Senior, Disability",45,0,0,0,45,0,0,0,750000,0,0,0,0,5147181,Rental
+2013-2014,CLP,VHTF,CR Independent Permanent Supportive Housing Program,"14160 Newbrook Drive, Chantilly VA, 20151","ID/DD, SMI, Homeless",5,0,5,0,0,0,0,0,743108,0,0,0,0,240892,Rental
+2013-2014,CLP,VHTF,Langston Park Apartments,"1007 Langston Park Drive, Hopewell, VA 23860-5117",General,56,0,0,0,56,0,0,0,673000,0,0,0,0,8609654,Rental
+2015-2016,CLP,VHTF,Ada Park ,"674 Summer Day Court, Newport News, VA 23601-2837",General,42,0,0,0,21,21,0,0,289304,0,0,0,0,7521985,Rental
+2015-2016,CLP,VHTF,Brookland Park ,"1221 E. Brookland Park Plaza, Richmond, VA 23222-3112",Senior,77,77,77,0,77,0,0,0,500000,0,0,0,0,10793685,Rental
+2015-2016,VCI,VHTF,Church Hill North 1B,"1611 N 31st Street, Richmond, VA 23223-5404",Senior,45,0,45,0,45,0,0,0,750000,0,0,0,0,7356571,Rental
+2015-2016,CLP,VHTF,Columbia Hills ,"1000 S Frederick Street, Arlington, VA 22204-3225",General,97,0,0,0,49,48,0,0,750000,0,0,0,0,38609363,Rental
+2015-2016,CLP,VHTF,CR Independent,"14160 Newbrook Drive, Chantilly, VA 20151-2297",I/DD,7,7,7,2,3,0,0,0,456288,0,0,0,0,602712,Rental
+2015-2016,CLP,"HOME, VHTF",Cypress Landing ,"40 Knells Ridge Boulevard, Chesapeake, VA 23320-0000",Chronic Homeless/Disability,50,0,50,0,50,0,0,0,600000,650000,0,0,0,8366336,Rental
+2015-2016,CLP,VHTF,Lewinsville Senior,"1609 Great Falls Street, McLean, VA 22101-5025",Senior ,82,0,82,9,73,0,0,0,644576,0,0,0,0,21203344,Rental
+2015-2016,CLP,"HOME, VHTF",New Clay ,"1125 W. Clay Street, Richmond, VA 23220-3100",Chronic Homeless/Disability,80,47,80,0,80,0,0,0,750000,685820,0,0,0,13410066,Rental
+2015-2016,CLP,VHTF,Old Forest ,"2516 Old Forest Road, Lynchburg, VA 24501-2406",Disability,28,0,28,0,14,14,0,0,428903,0,0,0,0,5001578,Rental
+2015-2016,VCI,VHTF,Old Prices Fork,"4237 Prices Fork Road, Blacksburg, VA 24060-1895",General,16,0,0,0,2,8,0,6,1265250,0,0,0,0,3654667,Rental
+2015-2016,CLP,VHTF,Pathways,"10201 Fairfax Blvd, Fairfax, VA 22030-2209",Chronic Homeless,4,4,4,4,0,0,0,0,600000,0,0,0,0,400000,Rental
+2015-2016,CLP,VHTF,Powell Valley ,"195 Powell Valley Village Street, Jonesville, VA 24263-7986",General,34,34,0,0,0,34,0,0,235000,0,0,0,0,3005067,Rental
+2016-2017,CLP,VHTF,Gilliam Place,"3507 Columbia Pike, Arlington, VA 22204-4213",General,83,0,0,0,41,42,0,0,700000,0,0,0,0,32770916,Rental
+2016-2017,CLP,VHTF,HOPE MRCSB,"135 Deerfield Lane, Wytheville, VA 24382-2211",I/DD,2,0,0,2,0,0,0,0,371975,0,0,0,0,340000,Rental
+2016-2017,CLP,VHTF,Keswick ,"8800 Lake Anna Parkway, Spotsylvania, VA 22551-2516",General,120,0,0,0,60,60,0,0,700000,0,0,0,0,18860558,Rental
+2016-2017,CLP,VHTF,Culpepper Garden I ,"4435 N. Pershing Dr., Arlington, VA 22203-2748",Senior,210,210,21,0,110,100,0,0,700000,0,0,0,0,48657264,Rental
+2016-2017,CLP,VHTF,Tranquility at the Lakes,"5827 Burton Station Road, Virginia Beach, VA 23455-3605",Senior,40,0,40,0,40,0,0,0,500000,0,0,0,0,7120312,Rental
+2016-2017,CLP,VHTF,Baker School ,"100 W Baker Street, Richmond, VA 23220-2502",Senior,51,51,51,0,5,46,0,0,527627,0,0,0,0,11500956,Rental
+2016-2017,CLP,VHTF,Lindsay Hill ,"8915 Pink Carnation Court, Lorton, VA 22079-5699",Senior,55,55,55,0,28,27,0,0,512398,0,0,0,0,14717692,Rental
+2016-2017,CLP,VHTF,Jackson Ward,"105 East Duval Street, Richmond, VA 23219-1360",Senior,121,0,72,8,64,49,0,73,700000,0,0,0,0,36636644,Rental
+2017-2018,CLP,VHTF,Pennington Gap ,"161 Terrace Road, Pennington Gap, VA 24277-2880",NA,40,40,0,0,3,37,0,,340000,0,0,0,0,4300502,Rental
+2017-2018,CLP,VHTF,Glenwood Ridge ,"3801 Glenwood Ave, Richmond, VA 23223-0000",I/DD,82,0,9,0,42,40,0,0,600000,0,0,0,0,16514649,Rental
+2017-2018,CLP,"NHTF, VHTF",Carpenter Shelter,"930 North Henry Street, Alexandria, VA 22314-1621",Homeless ,97,0,10,10,39,48,0,0,800000,0,800000,0,0,39168561,Rental
+2017-2018,CLP,"NHTF, VHTF",The Villas at Reid Landing,"2283 William Reid Drive, Suffolk, VA 23434-8368",Senior,51,0,51,0,26,25,0,0,500000,0,700000,0,0,9094626,Rental
+2018-2019,CLP,"NHTF, VHTF",The Spire,"2280 N. Beauregard Street, Alexandria, VA 22201-6617",NA,113,0,0,0,57,56,0,0,620000,0,800000,0,0,43659034,Rental
+2018-2019,CLP,VHTF,Queens Court ,"1615 18th Street N, Arlington, VA 22209-1301",NA,90,0,0,0,45,45,0,0,700000,0,0,0,0,39974418,Rental
+2018-2019,CLP,VHTF,Huntington Village,"12770 Nettles Dr., Newport News, VA 23606-0000",NA,96,0,0,10,48,38,0,0,500000,0,0,0,0,18765623,Rental
+2018-2019,CLP,"HOME, NHTF, VHTF",Residences at North Hill 47,"7201 Richmond Highway, Alexandria, VA 22306-9998",I/DD,47,0,2,3,10,34,0,0,200000,800000,700000,0,0,19764662,Rental
+2018-2019,CLP,"HOME, NHTF, VHTF",Residences at North Hill 94,"7201 Richmond Highway, Alexandria, VA 22306-9998",1/DD,94,0,2,7,15,72,0,0,500000,800000,700000,0,0,35534250,Rental
+2018-2019,CLP,VHTF,Brookland Park Apartments,"1224 East Brookland Park Boulevard, Richmond, VA 23222-3113",I/DD,66,0,7,0,7,59,0,0,700000,0,0,0,0,11785605,Rental
+2018-2019,CLP,"NHTF, VHTF",Churchhill North Phase 2A Family,"1611 North 31st Street, Richmond, VA 23223-5404",I/DD,70,0,7,17,25,28,0,0,700000,0,700000,0,0,17443742,Rental
+2018-2019,CLP,VHTF,American Legion,"3445 Washington Boulevard, Arlington, VA 22201-4507",PSH (Veteran),80,0,8,0,20,50,10,0,700000,0,0,0,0,35359944,Rental
+2018-2019,CLP,VHTF,The Arden - Building A,"2317 Huntington Ave., Alexandria, VA 22303-1545",I/DD,79,0,8,0,40,39,0,0,700000,0,0,0,0,35563635,Rental
+2018-2019,CLP,VHTF,Crescent Halls,"500 S. First Street, Charlottesville, VA 22901-5651",NA,105,105,11,21,32,52,0,0,800000,0,0,0,0,16474592,Rental
+2018-2019,CLP,VHTF,Keswick II,"7700 Keswick Dr., Spotsylvania, VA 22551-2516",10 (I/DD); 12 (Disabled),116,0,22,0,59,57,0,0,700000,0,0,0,0,22182157,Rental
+2018-2019,CLP,VHTF,Daffodil Gardens 2,"6000 Fiddlers Green Rd, Gloucester, VA 23061 ",Senior,40,0,40,0,20,20,0,0,325000,0,0,0,0,6647959,Rental
+2018-2019,CLP,VHTF,New Lake Anne House,"11444 North Shore Drive, Reston, VA 20190-4250",Senior,240,0,240,0,0,240,0,0,700000,0,0,0,0,83027884,Rental
+2019-2020,CLP,VHTF,Keswick Senior Apartments,"8900 Lake Anna Parkway, Spotsylvania, VA 22551-2516",NA,100,0,0,0,50,28,22,0,700000,0,0,0,0,16081672,Rental
+2019-2020,CLP,VHTF,Church Hill North Phase 2B,"3201 South Rabza Blvd., Richmond, VA 23223-5404",NA,45,0,0,0,27,18,0,0,700000,0,0,0,0,9264214,Rental
+2019-2020,CLP,VHTF,Cameo Street Apartments,"14 W. Jackson Street, Richmond, VA 23220-0000",NA,67,0,0,0,34,33,0,0,800000,0,0,0,0,14459937,Rental
+2019-2020,CLP,VHTF,Northway ,"128 Wilson Ave., Galax, VA 24333-3127",NA,72,72,0,0,36,36,0,0,500000,0,0,0,0,7892022,Rental
+2019-2020,CLP,VHTF,CLT Scattered Site Homeownership,"203 N. Robinson Street, Richmond, VA 23220-4018",NA,11,0,0,0,0,0,11,0,440000,0,0,0,0,1953990,Homebuyer
+2019-2020,CLP,VHTF,Brady Square 9%,"2200 Brady Street, Richmond, VA 23234-0000",NA,66,0,0,3,30,33,0,0,700000,0,0,0,0,13573059,Rental
+2019-2020,CLP,"NHTF, VHTF",The Arden - Building B,"2317 Huntington Avenue, Alexandria, VA 22303-1545",NA,47,0,0,4,,42,0,1,800000,0,800000,0,0,19756269,Rental
+2019-2020,CLP,VHTF,Mt. Sterling Senior 4%,"Bartholomew Fair Drive, Sterling, VA 20164-0000",Disabled; Seniors,50,0,5,0,5,40,0,0,700000,0,0,0,0,15573483,Rental
+2019-2020,CLP,"NHTF, VHTF",South First Street Phase One,"1000 S. 1st Street, Charlottesville, VA 22902-6059",Disabled,62,0,7,13,18,31,0,0,400000,0,400000,0,0,17123790,Rental
+2019-2020,CLP,"NHTF, VHTF",Senseny Place,"1527 Senseny Road, Winchester, VA 22602-6423",ID/DD and SMI ,63,0,7,6,26,0,31,0,800000,0,800000,0,0,13222092,Rental
+2019-2020,CLP,VHTF,King William Manor ,"141 Pinecrest Lane, Aylett, VA 23009-4182",DD,40,0,7,0,20,20,0,0,700000,0,0,0,0,7442036,Rental
+2019-2020,CLP,VHTF,The Waypoint,"3846 King Street, Alexandria, VA 22302-1906",ID/DD and SMI ,81,0,9,9,35,37,0,0,700000,0,0,0,0,36227948,Rental
+2019-2020,CLP,VHTF,The Cadence,"4333 Arlington Boulevard, Arlington, VA 22203-2904",NA,97,0,10,0,46,11,40,0,700000,0,0,0,0,46449100,Rental
+2019-2020,CLP,"HOME, VHTF, NHTF",Friendship Court Apartments Phase I,"418 Garret Street, Charlottesville, VA 22902-5664",Disabled ,106,0,12,11,44,21,30,0,700000,700000,600000,0,0,35045361,Rental
+2019-2020,CLP,"HOME, NHTF, VHTF",Cool Lane Apartments,"1900 Cool Lane, Richmond, VA 23223-3912",Homeless ,86,86,43,0,86,0,0,0,700000,650000,650000,0,0,16083137,Rental
+2020-2021,CLP,VHTF,Aaron Mills Apartments,"201 Aaron Street, Martinsville, VA 24112",NA,52,0,0,0,26,26,0,0,700000,0,0,0,0,7245912,Rental
+2020-2021,CLP,"VHTF, HIEE",APAH Braddock Four Senior,"9901 Braddock Road, Fairfax, VA 22032",NA,44,0,0,0,8,36,0,0,700000,0,0,0,655000,13258298,Rental
+2020-2021,CLP,"VHTF, HIEE",APAH Braddock Nine Senior,"9901 Braddock Road, Fairfax, VA 22032",NA,36,0,0,4,32,0,0,0,700000,0,0,0,555000,11648991,Rental
+2020-2021,CLP,"VHTF, HIEE",Bickerstaff Crossing,"38 Green Tree Circle, Bristol, VA 24201",ID/DD,60,0,6,6,24,30,0,0,637052,0,0,0,590835,14816603,Rental
+2020-2021,CLP,"HIEE, HOME, NHTF, VHTF",Brook Villas,"8000 Villa Park Drive, Henrico, VA 23228",NA,84,0,0,0,42,42,0,0,175000,175000,175000,0,175000,17028314,Rental
+2020-2021,CLP,"HIEE, VHTF",CRHA Crescent Halls,"500 S First Street, Charlottesville, VA 22901-5651",Disabled,105,105,22,21,32,52,0,0,100000,0,0,0,735000,24859330,Rental
+2020-2021,CLP,"VHTF, HIEE, NHTF",CRHA South First Phase One,"1000 S First Street, Charlottesville, VA 22902",Disabled,62,0,14,13,18,31,0,0,250000,0,250000,0,434000,17291100,Rental
+2020-2021,CLP,"HIEE, NHTF, VHTF",Friendship Court Phase I: PSH/HIEE,"418 Garrett Street, Charlottesville, VA 22902-5664",NA,106,0,0,0,46,30,30,0,200000,0,200000,0,1500000,39009544,Rental
+2020-2021,CLP,VHTF,Goose Creek Crossing,"841 Jefferson Highway, Staunton, VA 24401",Disabled,116,0,12,12,47,22,35,0,700000,0,0,0,0,22097058,Rental
+2020-2021,CLP,VHTF,Holly Court,"201 Wiggins Ave, Kilmarnock, VA 22482",NA,40,40,0,0,40,0,0,0,700000,0,0,0,0,3390815,Rental
+2020-2021,CLP,VHTF,Lambert Landing II,"11501 Jefferson Davis Highway, Chester, VA 23831",NA,48,0,0,0,14,13,21,0,700000,0,0,0,0,9762178,Rental
+2020-2021,CLP,VHTF,Magnolia Place Apartments,"701 Church Street, Blackstone, VA 23824",ID/DD,56,56,6,6,22,28,0,0,700000,0,0,0,0,5028719,Rental
+2020-2021,CLP,VHTF,MWCLT's Dupuy Road,"2901 Dupuy Road, South Chesterfield, VA 23803",NA,10,0,0,0,0,10,0,0,700000,0,0,0,0,2168995,Homebuyer
+2020-2021,CLP,VHTF,New Home - Oak Street - Aging In Place,"7811 Oak Street, Manassas, VA 20111-2210",ID/DD,6,0,6,6,0,0,0,0,400000,0,0,0,0,775000,Rental
+2020-2021,CLP,VHTF,Oak Terrace,"1140 Portsmouth Blvd, Suffolk, VA 23434",Disabled,120,0,12,12,48,6,54,0,700000,0,0,0,0,23104059,Rental
+2020-2021,CLP,"VHTF, NHTF",Powhatan Terrace Townhomes,"1676 Jamestown Road, Williamsburg, VA 23185-2941","ID/DD, Disabled",36,0,5,4,14,18,0,0,700000,0,500000,0,0,8670744,Rental
+2020-2021,CLP,"VHTF, HIEE",Premier Circle PSH,"405 Premier Circle, Charlottesville, VA 22901",Homeless,80,0,80,0,80,0,0,0,900000,0,0,0,560000,17095318,Rental
+2020-2021,CLP,VHTF,Quarry Station,"8750 Quarry Road, Manassas, VA 20110","ID/DD, SMI",80,80,8,8,47,25,0,0,700000,0,0,0,0,14102013,Rental
+2020-2021,CLP,VHTF,Southwood Affordable Homeownership,"387 Hickory St., Charlottesville, VA 22902",NA,26,0,0,0,14,9,3,0,1400000,0,0,0,0,5133798,Homebuyer
+2020-2021,CLP,VHTF,THC Newport Gardens,"927 Hull Stret, Richmond, VA 23224",NA,50,0,0,0,4,46,0,0,850000,0,0,0,0,9292029,Rental
+2020-2021,CLP,VHTF,Arlington View Terrace East,"2230 N Fairfax Drive, Arlington, VA 22201","ID/DD, Disabled",77,0,8,8,69,0,0,0,900000,0,0,0,0,38257671,Rental
+2020-2021,CLP,"VHTF, NHTF",Carrier Point I ,"2800 Jefferson Avenue, Newport News, VA 23607",NA,43,0,0,2,17,18,0,6,700000,0,700000,0,0,12837043,Rental
+2020-2021,CLP,"VHTF, NHTF",Carrier Point II,"2700 Jefferson Avenue, Newport News, VA 23607",NA,38,0,0,2,19,4,9,4,700000,0,700000,0,0,10457749,Rental
+2020-2021,CLP,VHTF,Central United Methodist Church Ballston Station,"4318 N Carlin Springs Road, Arlington, VA 22203","ID/DD, SMI, Homeless",144,0,6,0,75,66,3,0,900000,0,0,0,0,63447023,Rental
+2020-2021,CLP,VHTF,City Line Apartments,"155 Mytilene Drive, Newport News, VA 23605","ID/DD, SMI",200,200,20,100,100,0,0,0,900000,0,0,0,0,32783000,Rental
+2020-2021,CLP,VHTF,Cool Lane Apartments,"1900 Cool Lane, Richmond, VA 23223",Homeless,86,86,43,0,86,0,0,0,300000,0,0,0,0,17783137,Rental
+2020-2021,CLP,VHTF,Daffodil Gardens Phase 2 ,"5962 Fiddlers Green Road, Gloucester, VA 23061-4175",ID/DD,40,0,5,0,20,20,0,0,260000,0,0,0,0,7472720,Rental
+2020-2021,CLP,"HOME, VHTF",Fairview Town Homes,"745 Fairview Road, Wytheville, VA 24382","ID/DD, SMI, Homeless, Disabled",12,0,4,0,6,0,0,6,150000,650000,0,0,0,1363658,Rental
+2020-2021,CLP,"HOME, VHTF, NHTF",Florida Terrace,"2117 Florida Avenue, Lynchburg, VA 24503","ID/DD, Homeless, Disabled",31,0,16,8,7,16,0,0,700000,900000,450000,0,0,5114868,Rental
+2020-2021,CLP,VHTF,Kilmarnock Village,"89 School Street, Kilmarnock, VA 22482 ",ID/DD,24,24,5,3,9,12,0,0,240000,0,0,0,0,2978288,Rental
+2020-2021,CLP,VHTF,Northway ,"128 Wilson Avenue, Galax, VA 24333",NA,72,72,0,0,36,36,0,0,500000,0,0,0,0,9460182,Rental
+2020-2021,CLP,VHTF,Oakwood North Four,"5907 S Van Dorn Street, Alexandria, VA 22310","ID/DD, SMI, Homeless",79,0,4,2,28,49,0,0,900000,0,0,0,0,21426319,Rental
+2020-2021,CLP,VHTF,Omni Park Place Senior Apartments,"101 Omni Road, Ashland, VA 23005-2481",Disabled,61,61,7,0,11,50,0,0,400000,0,0,0,0,8077776,Rental
+2020-2021,CLP,"VHTF, NHTF, HOME",Ovation at Arrowbrook,"2296 Centereville Road, Herndon, VA 20171",ID/DD,126,0,6,13,51,62,0,0,900000,600000,900000,0,0,47394131,Rental
+2020-2021,CLP,"HOME, VHTF",Renaissance Ridge Phase I ,"4149 Rockfish Valley Highway, Nellysford, VA 22958",NA,20,0,0,0,0,0,20,0,200000,400000,0,0,0,4366200,Homebuyer
+2020-2021,CLP,"VHTF, HOME",Richmond Senior,"1611 Fourth Avenue, Richmond, VA 23222","Homeless, Disabled",349,349,65,35,314,0,0,0,900000,900000,0,0,0,62221814,Rental
+2020-2021,CLP,VHTF,Sweetbriar II Apartments,"19274 Elementary Drive, Abingdon, VA 24210","ID/DD, SMI",22,0,5,0,11,11,0,0,600000,0,0,0,0,4763253,Rental
+2020-2021,CLP,"VHTF, NHTF",The Coile,"80 29th Street, Newport News, VA 23607",ID/DD,62,0,7,7,31,0,24,0,700000,0,700000,0,0,16094748,Rental
+2020-2021,CLP,"HOME, VHTF",Winchester Forest 9%,"2701 Drewrys Bluff Road, Chesterfield, VA 23237",Disabled,72,0,11,0,36,36,0,0,700000,700000,0,0,0,16229842,Rental
+2020-2021,CLP,"HOME, VHTF",Woods at Yorktown NC,"4915 Radford Avenue, Richmond, VA 23230",NA,60,0,0,0,32,15,13,0,500000,300000,0,0,0,15038883,Rental
+2021-2022,CLP,VHTF,1203 East Brookland Park Blvd.,"1203 E Brookland Park Blvd, Richmond, VA 23222",,43,,,,,,,,900000,,,,,,Rental
+2021-2022,CLP,VHTF,925 Apartments I,"925 S Military Hwy, Virginia Beach, VA 23464",,128,,,,,,,,700000,,,,,,Rental
+2021-2022,CLP,VHTF,ASPIRE,"645 Church St, Norfolk, VA 23510",,85,,,,,,,,900000,,,,,,Rental
+2021-2022,CLP,VHTF,Arbors at Birchwood,"3808 Virginia Beach Blvd, Virginia Beach, VA 23452",,105,,,,,,,,100000,,,,,,Rental
+2021-2022,CLP,VHTF,Arna Marbella,"1301 N Queen St, Arlington, VA 22209",,163,,,,,,,,700000,,,,,,Rental
+2021-2022,CLP,VHTF,Ashlake Crossing,"7440 Ashlake Pkwy, Chesterfield, VA 23832",,67,,,,,,,,700000,,,,,,Rental
+2021-2022,CLP,VHTF,Ashlake Trails,"14500 Ashbrook Pkwy, Chesterfield, VA 23832",,67,,,,,,,,700000,,,,,,Rental
+2021-2022,CLP,VHTF,Autumn Willow 4,"13090 Autumn Willow Dr, Fairfax, VA 22030",,75,,,,,,,,900000,,,,,,Rental
+2021-2022,CLP,VHTF,Autumn Willow 9,"13090 Autumn Willow Dr, Fairfax, VA 22030",,75,,,,,,,,900000,,,,,,Rental
+2021-2022,CLP,VHTF,Bellwood Crossing,"8075 Jefferson Davis Hwy, Richmond, VA 23237",,102,,,,,,,,700000,,,,,,Rental
+2021-2022,CLP,VHTF,Blaine Landing,"7581 Richmond Rd, Williamsburg, VA 23188",,59,,,,,,,,700000,,,,,,Rental
+2021-2022,CLP,VHTF,Brinshore Blocks 17 & 18,"420 St Pauls Blvd, Norfolk, VA 23510",,97,,,,,,,,700000,,,,,,Rental
+2021-2022,CLP,VHTF,Choice Neighborhood III,"2900 Jefferson Ave, Newport News, VA 23607",,58,,,,,,,,700000,,,,,,Rental
+2021-2022,CLP,VHTF,Choice Neighborhood IV,"2998 Jefferson Ave, Newport News, VA 23607",,69,,,,,,,,700000,,,,,,Rental
+2021-2022,CLP,VHTF,Colbrook,"2500 Colbrook Hls St, Chester, VA 23831",,47,,,,,,,,700000,,,,,,Rental
+2021-2022,CLP,VHTF,Creighton Phase A,"3070 Nine Mile Rd, Richmond, VA 23223",,63,,,,,,,,700000,,,,,,Rental
+2021-2022,CLP,VHTF,Creighton Phase B,"3242 Nine Mile Rd, Richmond, VA 23223",,72,,,,,,,,700000,,,,,,Rental
+2021-2022,CLP,VHTF,Fairfax Hall,"1115 Reservoir St, Waynesboro, VA 22980",,54,,,,,,,,773543,,,,,,Rental
+2021-2022,CLP,VHTF,Grande Oak,"6300 Old Mooretown Rd, Williamsburg, VA 23188",,49,,,,,,,,700000,,,,,,Rental
+2021-2022,CLP,VHTF,Grande Oak III,"6284 Old Mooretown Rd, Williamsburg, VA 23188",,49,,,,,,,,375062,,,,,,Rental
+2021-2022,CLP,VHTF,Grayson Manor,"224 Nichols Dr, Independence, VA 24348",,32,,,,,,,,900000,,,,,,Rental
+2021-2022,CLP,VHTF,JCOC 3H Housing,"1053 Virginia Beach Blvd, Virginia Beach, VA 23451",,38,,,,,,,,900000,,,,,,Rental
+2021-2022,CLP,VHTF,Legacy on Main,"100 Country Club Dr SE, Blacksburg, VA 24060",,56,,,,,,,,900000,,,,,,Rental
+2021-2022,CLP,VHTF,Lexington Senior Apartments,"1 Lexington Dr, Portsmouth, VA 23704 ",,106,,,,,,,,900000,,,,,,Rental
+2021-2022,CLP,VHTF,Lineweaver Annex Renovation,"29 W Rock St, Harrisonburg, VA 22802",,60,,,,,,,,1090000,,,,,,Rental
+2021-2022,CLP,VHTF,Mecklenburg Manor,"719 E Ferrell St, South Hill, VA 23970 ",,51,,,,,,,,700000,,,,,,Rental
+2021-2022,CLP,VHTF,Middlebrook Trace,"914 Middlebrook Ave, Staunton, VA 24401",,82,,,,,,,,900000,,,,,,Rental
+2021-2022,CLP,VHTF,Mt. Sterling Senior 9%,"21394 Mount Sterling Ter, Sterling, VA 20164",,48,,,,,,,,900000,,,,,,Rental
+2021-2022,CLP,VHTF,Old Hundred Trace,"2140 Old Hundred Rd, Midlothian, VA 23114",,54,,,,,,,,900000,,,,,,Rental
+2021-2022,CLP,VHTF,One University Family,"6552 University Dr, Fairfax, VA 22030",,120,,,,,,,,700000,,,,,,Rental
+2021-2022,CLP,VHTF,One University Senior,"4512 University Dr, Fairfax, VA 22030",,120,,,,,,,,700000,,,,,,Rental
+2021-2022,CLP,VHTF,Parkside Apartments,"250 Gardner St, Culpeper, VA 22701",,37,,,,,,,,900000,,,,,,Rental
+2021-2022,CLP,VHTF,"Richmond Family Housing 1, Fulton-Afton-Bainbridge","1201 Admiral Gravely Blvd, Richmond, VA 23231",,122,,,,,,,,700000,,,,,,Rental
+2021-2022,CLP,VHTF,"Richmond Family Housing 2, Randolph-Stovall","1921 Idlewood Ave, Richmond, VA 23220 ",,82,,,,,,,,700000,,,,,,Rental
+2021-2022,CLP,VHTF,Saint Elizabeth Apartments,"1031 Fourqurean Ln, Richmond, VA 23222",,56,,,,,,,,800000,,,,,,Rental
+2021-2022,CLP,VHTF,Saratoga Place,"401 S Saratoga St, Suffolk, VA 23434",,76,,,,,,,,700000,,,,,,Rental
+2021-2022,CLP,VHTF,Senior Townsquare at Dumfries,"3930 Townsquare Ct, Triangle, VA 22172 ",,40,,,,,,,,700000,,,,,,Rental
+2021-2022,CLP,VHTF,Southwood Apartments A,"387 Hickory St, Charlottesville, VA 22902",,70,,,,,,,,900000,,,,,,Rental
+2021-2022,CLP,VHTF,Southwood Apartments B,"505 Hickory St, Charlottesville, VA 22902",,51,,,,,,,,900000,,,,,,Rental
+2021-2022,CLP,VHTF,The Heights at Brady Square Phase III,"2351 Krouse St, Richmond, VA 23234",,66,,,,,,,,700000,,,,,,Rental
+2021-2022,CLP,VHTF,The Heights at Brady Square Phase IV,"2301 Krouse St, Richmond, VA 23234",,66,,,,,,,,700000,,,,,,Rental
+2021-2022,CLP,VHTF,The Villas on Main,"1550 E Main St, Lebanon, VA 24266",,21,,,,,,,,450000,,,,,,Rental
+2021-2022,CLP,VHTF,Tidewater Gardens A,"500 Fenchurch St, Norfolk, VA 23504",,128,,,,,,,,700000,,,,,,Rental
+2021-2022,CLP,VHTF,Townhomes at Liberty Place,"2701 E Belt Blvd, Richmond, VA 23234",,39,,,,,,,,700000,,,,,,Rental
+2021-2022,CLP,VHTF,Watermark Gardens,"6050 Hendry Ave, Ampthill, VA 23234",,80,,,,,,,,600925,,,,,,Rental
+2021-2022,CLP,VHTF,Waxpool Apartments,"43815 Oystercatcher Ter, Ashburn, VA 20147",,52,,,,,,,,700000,,,,,,Rental
+2021-2022,CLP,VHTF,Wellesley,"51 Wellesley Dr, Newport News, VA 23606 ",,40,,,,,,,,900000,,,,,,Rental
+2021-2022,CLP,VHTF,Winchester Forest 4,"2701 Drewry's Bluff Rd, North Chesterfield, VA 23237",,88,,,,,,,,350000,,,,,,Rental
+2022-2023,CLP,VHTF,1025-A Park Street,"1025 Park St, Charlottesville, VA 22901",,30,,,,,,,,900000,,,,,,Rental
+2022-2023,CLP,VHTF,1025-B Park Street,"1023 Park St, Charlottesville, VA 22901",,36,,,,,,,,900000,,,,,,Rental
+2022-2023,CLP,VHTF,2100 Bainbridge Rental,"2100 Bainbridge St, Richmond, VA 23225",,84,,,,,,,,700000,,,,,,Rental
+2022-2023,CLP,VHTF,700 West 44  - 4%,"700 W 44th St, Richmond, VA 23225",,72,,,,,,,,700000,,,,,,Rental
+2022-2023,CLP,VHTF,700 West 44 - 9%,"750 W 44th St, Richmond, VA 23225",,72,,,,,,,,700000,,,,,,Rental
+2022-2023,CLP,VHTF,7000 Carnation,"7000 Carnation St, Richmond, VA 23225",,218,,,,,,,,700000,,,,,,Rental
+2022-2023,CLP,VHTF,712 High Street,"712 High St, Petersburg, VA 23803",,12,,,,,,,,382000,,,,,,Rental
+2022-2023,CLP,VHTF,Blaine Landing Phase II,"7581 Richmond Rd, Williamsburg, VA 23188",,60,,,,,,,,400000,,,,,,Rental
+2022-2023,CLP,VHTF,Broad Creek Resyndication Phase 1,"1420 Merrimac Ave, Norfolk, VA 23504 ",,88,,,,,,,,700000,,,,,,Rental
+2022-2023,CLP,VHTF,Carter Woods III,"4000 Nine Mile Rd, Richmond, VA 23223",,53,,,,,,,,700000,,,,,,Rental
+2022-2023,CLP,VHTF,Carter Woods IV,"301 Dabbs House Rd, Richmond, VA 23223",,53,,,,,,,,700000,,,,,,Rental
+2022-2023,CLP,VHTF,Claremont School Apartments,"800 Ridge Ave, Pulaski, VA 24301",,50,,,,,,,,700000,,,,,,Rental
+2022-2023,CLP,VHTF,Colbrook 2,"8598 Colbrook Hls St, Chester, VA 23831",,47,,,,,,,,700000,,,,,,Rental
+2022-2023,CLP,VHTF,Dominion North Four,"1592 Spring Hill Rd, Tysons, VA 22182",,265,,,,,,,,700000,,,,,,Rental
+2022-2023,CLP,VHTF,Dominion South Four,"1586 Spring Hill Rd, Tysons, VA 22182",,251,,,,,,,,700000,,,,,,Rental
+2022-2023,CLP,VHTF,Emporia Rail Depot Townhomes,"400 Halifax St, Emporia, VA 23847",,52,,,,,,,,700000,,,,,,Rental
+2022-2023,CLP,VHTF,First Christian Church of Falls Church,"6165 Leesburg Pike Falls Church, VA 22044",,95,,,,,,,,700000,,,,,,Rental
+2022-2023,CLP,VHTF,Friendship Court Apartments Phase II,"404 Garrett St, Charlottesville, VA 22902",,100,,,,,,,,800000,,,,,,Rental
+2022-2023,CLP,VHTF,Goodson Hills,"120 Hope Ln, Bristol, VA 24201",,36,,,,,,,,700000,,,,,,Rental
+2022-2023,CLP,VHTF,Goose Creek,"1307 Montgomery Ave, Staunton, VA 24401",,42,,,,,,,,700000,,,,,,Rental
+2022-2023,CLP,VHTF,Gosnold II Apartments,"2425 Gosnold Ave, Norfolk, VA 23517",,100,,,,,,,,900000,,,,,,Rental
+2022-2023,CLP,VHTF,Grande Oak II,"6286 Old Mooretown Rd, Williamsburg, VA 23188",,49,,,,,,,,184006,,,,,,Rental
+2022-2023,CLP,VHTF,Lafayette Gardens,"2219 Ruffin Rd, Richmond, VA 23234 ",,115,,,,,,,,700000,,,,,,Rental
+2022-2023,CLP,VHTF,Legacy Phase II - Rental,"3272 Frederick Douglass Rd, Exmore, VA 23350",,6,,,,,,,,700000,,,,,,Rental
+2022-2023,CLP,VHTF,Legacy Plaza Rental,"3254 Thurgood Marshall Rd, Exmore, VA 23350",,35,,,,,,,,700000,,,,,,Rental
+2022-2023,CLP,VHTF,Lightfoot Apartments,"100 Bickers St, Culpeper, VA 22701",,60,,,,,,,,700000,,,,,,Rental
+2022-2023,CLP,VHTF,Madison Road Apartments,"120 Dogwood Ln, Orange, VA 22960",,21,,,,,,,,900000,,,,,,Rental
+2022-2023,CLP,VHTF,Marbella North Nine,"1320 N Pierce St, Arlington, VA 22209",,96,,,,,,,,900000,,,,,,Rental
+2022-2023,CLP,VHTF,Marbella South Four,"1300 N Pierce St, Arlington, VA 22209",,138,,,,,,,,900000,,,,,,Rental
+2022-2023,CLP,VHTF,Market Heights Apartments 4%,"651 May Ave, Norfolk, VA 23504",,84,,,,,,,,700000,,,,,,Rental
+2022-2023,CLP,VHTF,Market Heights Apartments 9%,"601 May Ave, Norfolk, VA 23504",,80,,,,,,,,700000,,,,,,Rental
+2022-2023,CLP,VHTF,Middlebrook Trace II,"601 Moore St, Staunton, VA 24401",,48,,,,,,,,900000,,,,,,Rental
+2022-2023,CLP,VHTF,Miller's Rest Apartments,"6125 Old Mill Rd, Lynchburg, VA 24502",,80,,,,,,,,700000,,,,,,Rental
+2022-2023,CLP,VHTF,Miller's Rest Apartments III,"6100 Old Mill Rd, Lynchburg, VA 24502",,80,,,,,,,,700000,,,,,,Rental
+2022-2023,CLP,VHTF,Monroe North Housing,"810 W Monroe St, Wytheville, VA 24382",,30,,,,,,,,900000,,,,,,Rental
+2022-2023,CLP,VHTF,Mountain Laurel Manor III,"85 Bobby's Way, Staunton, VA 24401",,48,,,,,,,,552000,,,,,,Rental
+2022-2023,CLP,VHTF,Northeast 11th Street Housing,"402 11th St NE, Charlottesville, VA 22902",,40,,,,,,,,900000,,,,,,Rental
+2022-2023,CLP,VHTF,Orcutt Townhomes 1,"900 36th St, Newport News, VA 23607",,40,,,,,,,,700000,,,,,,Rental
+2022-2023,CLP,VHTF,Pecan Acres Estates Phase II,"633 Pecan St, Petersburg, VA 23803",,84,,,,,,,,700000,,,,,,Rental
+2022-2023,CLP,VHTF,Piper Square Apartments,"1529 Piper Square Dr, Hopewell, VA 23860",,104,,,,,,,,700000,,,,,,Rental
+2022-2023,CLP,VHTF,Princedale Apartments,"13362 Princedale Dr, Woodbridge, VA 22193",,280,,,,,,,,700000,,,,,,Rental
+2022-2023,CLP,VHTF,Seeland Valley Apartments,"299 Future Seeland Rd, Danville, VA 24541",,52,,,,,,,,700000,,,,,,Rental
+2022-2023,CLP,VHTF,Sixth Street Phase One,"725 6th St SE, Charlottesville, VA 22902",,47,,,,,,,,700000,,,,,,Rental
+2022-2023,CLP,VHTF,Smith Ridge Commons,"5000 Cove Rd, Roanoke, VA 24019",,216,,,,,,,,700000,,,,,,Rental
+2022-2023,CLP,VHTF,South First Street Phase Two,"1052 1st St S, Charlottesville, VA 22902",,113,,,,,,,,700000,,,,,,Rental
+2022-2023,CLP,VHTF,The Arbors at 29 North,"6087 Seminole Trail, Barboursville, VA 22923",,120,,,,,,,,700000,,,,,,Rental
+2022-2023,CLP,VHTF,The Lamb Center,"3160 Campbell Dr, Fairfax, VA 22031",,54,,,,,,,,900000,,,,,,Rental
+2022-2023,CLP,VHTF,The Rendezvous,"801 Cedar St, Hopewell, VA 23860",,64,,,,,,,,700000,,,,,,Rental
+2022-2023,CLP,VHTF,The View at Belle Isle,"812 Hull Street, Richmond, VA 23224",,116,,,,,,,,700000,,,,,,Rental
+2022-2023,CLP,VHTF,Tidewater Gardens B1,"828 Mariner St, Norfolk, VA 23504",,53,,,,,,,,700000,,,,,,Rental
+2022-2023,CLP,VHTF,Tidewater Gardens B2,"312 Chapel St, Norfolk, VA 23504",,70,,,,,,,,700000,,,,,,Rental
+2022-2023,CLP,VHTF,Tranquility at the Lakes II,"5827 Burton Station Rd, Virginia Beach, VA 23455",,38,,,,,,,,700000,,,,,,Rental
+2022-2023,CLP,VHTF,Twin Pines Senior Apartments,"3993 Twin Pines Rd, Portsmouth, VA 23703",,82,,,,,,,,700000,,,,,,Rental
+2022-2023,CLP,VHTF,Tysons North Four,"1590 Spring Hill Rd, Tysons, VA 22182",,265,,,,,,,,700000,,,,,,Rental
+2022-2023,CLP,VHTF,Tysons South Four,"1580 Spring Hill Rd, Tysons, VA 22182",,251,,,,,,,,700000,,,,,,Rental
+2022-2023,CLP,VHTF,Urban Hope Renewal Project,"1111 N 25th St, Richmond, VA 23223",,14,,,,,,,,600000,,,,,,Rental
+2022-2023,CLP,VHTF,Waters at James Crossing,"844 Greenfield Dr, Lynchburg, VA 24501",,288,,,,,,,,700000,,,,,,Rental
+2022-2023,CLP,VHTF,Wesley Apartments,"1201 Long Meadows Dr, Lynchburg, VA 24502",,150,,,,,,,,700000,,,,,,Rental
+2022-2023,CLP,VHTF,Whites Mill Point II Apartments,"15739 Whites Mill Rd, Abingdon, VA 24210",,32,,,,,,,,700000,,,,,,Rental

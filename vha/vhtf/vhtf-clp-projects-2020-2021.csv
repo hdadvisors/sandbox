@@ -1,0 +1,46 @@
+year,funding_sources,project_name,project_address,type,units_affordable,units_rehab,units_psh,units_below30,units_below50,units_below60,units_below80,units_marketrate,amt_vhtf,amt_home,amt_nhtf,amt_psh,amt_other,tenure,dist_cong,dist_house,dist_senate,lat,long,amt_hiee
+2020-2021,VHTF,Aaron Mills Apartments,"201 Aaron Street, Martinsville, VA 24112",NA,52,0,0,0,26,26,0,0,700000,,,,7245912,Rental,9,16,20,,,
+2020-2021,"VHTF, HIEE",APAH Braddock Four Senior,"9901 Braddock Road, Fairfax, VA 22032",NA,44,0,0,0,8,36,0,0,700000,,,,13258298,Rental,11,41,34,,,655000
+2020-2021,"VHTF, HIEE",APAH Braddock Nine Senior,"9901 Braddock Road, Fairfax, VA 22032",NA,36,0,0,4,32,0,0,0,700000,,,,11648991,Rental,11,41,34,,,555000
+2020-2021,"VHTF, HIEE",Bickerstaff Crossing,"38 Green Tree Circle, Bristol, VA 24201",ID/DD,60,0,6,6,24,30,0,0,637052,,,,14816603,Rental,9,5,40,,,590835
+2020-2021,"HIEE, HOME, NHTF, VHTF",Brook Villas,"8000 Villa Park Drive, Henrico, VA 23228",NA,84,0,0,0,42,42,0,0,175000,175000,175000,,17028314,Rental,7,74,12,,,175000
+2020-2021,"HIEE, VHTF",CRHA Crescent Halls,"500 S. First Street, Charlottesville, VA 22901-5651",Disabled,105,105,22,21,32,52,0,0,100000,,,,24859330,Rental,5,57,25,,,735000
+2020-2021,"VHTF, HIEE, NHTF",CRHA South First Phase One,"1000 S First Street, Charlottesville, VA 22902",Disabled,62,0,14,13,18,31,0,0,250000,,250000,,17291100,Rental,5,57,25,,,434000
+2020-2021,"HIEE, NHTF, VHTF",Friendship Court Phase I: PSH/HIEE,"418 Garret Street, Charlottesville, VA 22902-5664",NA,106,0,0,,,,,,200000,,200000,,39009544,Rental,5,57,25,,,1500000
+2020-2021,VHTF,Goose Creek Crossing,"841 Jefferson Highway, Staunton, VA 24401",Disabled,116,0,12,12,47,22,35,0,700000,,,,22097058,Rental,6,25,24,,,
+2020-2021,VHTF,Holly Court,"201 Wiggins Ave, Kilmarnock, VA 22482",Na,40,40,0,0,40,0,0,0,700000,,,,3390815,Rental,1,99,4,,,
+2020-2021,VHTF,Lambert Landing II,"11501 Jefferson Davis Highway, Chester, VA 23831",NA,48,0,0,0,14,13,21,0,700000,,,,9762178,Rental,4,62,11,,,
+2020-2021,VHTF,Magnolia Place Apartments,"701 Church Street, Blackstone, VA 23824",ID/DD,56,56,6,6,22,28,0,0,700000,,,,5028719,Rental,7,61,15,,,
+2020-2021,VHTF,MWCLT's Dupuy Road,"2901 Dupuy Road, South Chesterfield, VA 23803",NA,10,0,0,0,0,10,0,0,700000,,,,2168995,Homebuyer,4,66,16,,,
+2020-2021,VHTF,New Home - Oak Street - Aging In Place,"7811 Oak Street, Manassas, VA 20111-2210",ID/DD,6,0,6,6,0,0,0,0,400000,,,,775000,Rental,10,13,29,,,
+2020-2021,VHTF,Oak Terrace,"1140 Portsmouth Blvd, Suffolk, VA 23434",Disabled,120,0,12,12,48,6,54,0,700000,,,,23104059,Rental,3,76,18,,,
+2020-2021,"VHTF, NHTF",Powhatan Terrace Townhomes,"1676 Jamestown Road, Williamsburg, VA 23185-2941",ID/DD and Disabled,36,0,5,4,14,18,0,0,700000,,500000,,8670744,Rental,2,96,3,,,
+2020-2021,"VHTF, HIEE",Premier Circle PSH,"405 Premier Circle, Charlottesville, VA 22901",homeless,80,0,80,0,80,0,0,0,900000,,,,17095318,Rental,5,57,17,,,560000
+2020-2021,VHTF,Quarry Station,"8750 Quarry Road, Manassas, Virginia, 20110",SMI/ID/DD,80,80,8,8,47,25,0,0,700000,,,,14102013,Rental,10,50,29,,,
+2020-2021,VHTF,Southwood Affordable Homeownership,"387 Hickory St., Charlottesville, VA 22902",NA,26,0,0,0,14,9,3,0,1400000,,,,5133798,Homebuyer,5,57,25,,,
+2020-2021,VHTF,THC Newport Gardens,"927 Hull Stret, Richmond, VA 23224",NA,50,0,0,0,4,46,0,0,850000,,,,9292029,Rental,4,71,16,,,
+2020-2021,VHTF,Arlington View Terrace East,"2230 N Fairfax Drive, suite 100, Arlington, VA 22201",ID/DD Disabled,77,0,8,8,69,0,0,0,900000,,,,38257671,Rental,8,47,31,,,
+2020-2021,HOME,Blue Ridge Habitat for Humanity Affordable Housing 2020 ,"402 Chase Street, Winchester, VA 22601",NA,5,0,0,0,2,3,0,0,,400000,,,578163,Homebuyer,10,29,27,,,
+2020-2021,"VHTF, NHTF",Carrier Point I ,"2800 Jefferson Avenue, Newport News, VA,  23607",NA,43,0,0,2,17,18,0,6,700000,,700000,,12837043,Rental,3,95,2,,,
+2020-2021,"VHTF, NHTF",Carrier Point II,"2700 Jefferson Avenue, Newport News, Va, 23607",NA,38,0,0,2,19,4,9,4,700000,,700000,,10457749,Rental,3,95,2,,,
+2020-2021,VHTF,Central United Methodist Church Ballston Station,"4318 N Carlin Springs Road, Arlington, VA 22203","ID/DD. SMI, Homeless",144,0,6,0,75,66,3,0,900000,,,,63447023,Rental,8,47,31,,,
+2020-2021,HOME,Charles City and Forest Heights Homebuyer,"133 Forest Heights Road, Williamsburg, VA 23188",Homeless ,6,0,1,0,2,1,3,,,300000,,,762850,Homebuyer,1,96,1,,,
+2020-2021,VHTF,City Line Apartments,"155 Mytilene Drive, Newport News, VA 23605","ID/DD, SMI",200,200,20,100,100,0,0,0,900000,,,,32783000,Rental,3,95,2,,,
+2020-2021,VHTF,Cool Lane Apartments,"1900 Coll Lane, Richmond, VA 23223",Homeless,86,86,43,0,86,0,0,0,300000,,,,17783137,Rental,4,74,9,,,
+2020-2021,VHTF,Daffodil Gardens Phase 2 ,"5962 Fiddlers Green Road, Gloucester, VA 23061-4175",ID/DD,40,0,5,0,20,20,0,0,260000,,,,7472720,Rental,1,98,3,,,
+2020-2021,"HOME, VHTF",Fairview Town Homes,"745 Fairview Road, Wytheville, VA 24382","ID/DD, SMI, Homeless, Disabled",12,0,4,0,6,0,0,6,150000,650000,,,1363658,Rental,9,6,40,,,
+2020-2021,"HOME, VHTF, NHTF",Florida Terrace,"2117 Florida Avenue, Lynchburg, VA 24503","ID/DD, Homeless, Disabled",31,0,16,8,7,16,0,0,700000,900000,450000,,5114868,Rental,6,22,22,,,
+2020-2021,HOME,Habitat for Humanity Roanoke Valley Affordable Homes 2020,"1313 Stewart SE, Roanoke, VA 24013",NA,10,3,0,1,4,5,0,0,,806868,,,1013961,Homebuyer,6,,,,,
+2020-2021,VHTF,Kilmarnock Village,"89 School Street, Kilmarnock, VA 22482 ",ID/DD,24,24,5,3,9,12,0,0,240000,,,,2978288,Rental,1,99,4,,,
+2020-2021,VHTF,Northway ,"128 Wilson Avenue, Galax, Va 24333",NA,72,72,0,0,36,36,0,0,500000,,,,9460182,Rental,9,5,20,,,
+2020-2021,VHTF,Oakwood North Four,"5907 S Van Dorn Street, Alexandria, VA 22310","Id, DD, SMI, Homeless",79,0,4,2,28,49,0,0,900000,,,,21426319,Rental,8,43,39,,,
+2020-2021,VHTF,Omni Park Place Senior Apartments,"101 Omni Road, Ashland, VA 23005-2481",Disabled,61,61,7,0,11,50,0,0,400000,,,,8077776,Rental,1,55,9,,,
+2020-2021,"VHTF, NHTF, HOME",Ovation at Arrowbrook,"2296 Centereville Road, Herndon, Va 20171",ID/DD,126,0,6,13,51,62,0,0,900000,600000,900000,,47394131,Rental,11,86,33,,,
+2020-2021,"HOME, VHTF",Renaissance Ridge Phase I ,"4149 Rockfish Valley Highway, Nellysford, VA 22958",N/A,20,0,0,0,0,0,20,0,200000,400000,,,4366200,Homebuyer,5,20,25,,,
+2020-2021,"VHTF, HOME",Richmond Senior,"1611 Fourth Avenue, Richmond, VA 23222","Homeless, Disabled",349,349,65,35,314,0,0,0,900000,900000,,,62221814,Rental,4,71,9,,,
+2020-2021,HOME,Southside Lofts,"200 Blairs Middle School Circle, Blairs, VA 24527",DD,55,55,6,0,33,22,0,0,,615000,,,10959074,Rental,5,16,15,,,
+2020-2021,VHTF,Sweetbriar II Apartments,"19274 Elementary Drive, Abingdon, VA 24210","ID/DD, SMI",22,0,5,0,11,11,0,0,600000,,,,4763253,Rental,9,4,40,,,
+2020-2021,HOME,The Avenue to Family Housing,"650 Virginia Avenue, Harrisonburg, VA 22801",NA,5,0,0,,4,1,,,,450000,,,257220,Homebuyer,6,26,26,,,
+2020-2021,"VHTF, NHTF",The Coile,"80 29th Street, Newport News, Va, 23607",ID/DD,62,0,7,7,31,0,24,0,700000,,700000,,16094748,Rental,3,95,1,,,
+2020-2021,"HOME, VHTF",Winchester Forest 9%,"2701 Drewrys Bluff Road, Chesterfield, VA 23237",Disabled,72,0,11,0,36,36,0,0,700000,700000,,,16229842,Rental,7,70,16,,,
+2020-2021,"HOME, VHTF",Woods at Yorktown NC,"4915 Radford Avenue, Richmond, VA 23230",NA,60,0,0,0,32,15,13,0,500000,300000,,,15038883,Rental,7,73,12,,,

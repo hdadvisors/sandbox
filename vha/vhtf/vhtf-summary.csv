@@ -1,0 +1,193 @@
+year,type,code,name,data,value
+FY2014,Loans,clp,Competitive Loan Pool,funding,5400000
+FY2014,Loans,clp,Competitive Loan Pool,applicants,29
+FY2014,Loans,clp,Competitive Loan Pool,request,15088069
+FY2014,Loans,clp,Competitive Loan Pool,awardees,9
+FY2014,Loans,clp,Competitive Loan Pool,awarded,5316108
+FY2014,Loans,clp,Competitive Loan Pool,leverage,34323537
+FY2014,Loans,clp,Competitive Loan Pool,units,300
+FY2014,Loans,fc_rehab,Foreclosure Rehabilitation,funding,1000000
+FY2014,Loans,fc_rehab,Foreclosure Rehabilitation,applicants,7
+FY2014,Loans,fc_rehab,Foreclosure Rehabilitation,request,
+FY2014,Loans,fc_rehab,Foreclosure Rehabilitation,awardees,5
+FY2014,Loans,fc_rehab,Foreclosure Rehabilitation,awarded,1000000
+FY2014,Loans,fc_rehab,Foreclosure Rehabilitation,leverage,3500000
+FY2014,Loans,fc_rehab,Foreclosure Rehabilitation,units,34
+FY2014,Grants,hrg,Homelessness Reduction,funding,930000
+FY2014,Grants,hrg,Homelessness Reduction,applicants,58
+FY2014,Grants,hrg,Homelessness Reduction,request,4806634
+FY2014,Grants,hrg,Homelessness Reduction,awardees,10
+FY2014,Grants,hrg,Homelessness Reduction,awarded,920779
+FY2014,Grants,hrg,Homelessness Reduction,leverage,1124778
+FY2014,Grants,hrg,Homelessness Reduction,hh,250
+FY2014,Grants,fc_counsel,Foreclosure Counseling,funding,500000
+FY2014,Grants,fc_counsel,Foreclosure Counseling,applicants,31
+FY2014,Grants,fc_counsel,Foreclosure Counseling,request,827603
+FY2014,Grants,fc_counsel,Foreclosure Counseling,awardees,21
+FY2014,Grants,fc_counsel,Foreclosure Counseling,awarded,240000
+FY2014,Grants,fc_counsel,Foreclosure Counseling,leverage,240000
+FY2014,Grants,fc_counsel,Foreclosure Counseling,hh,5300
+FY2014,Admin,admin,Admin,funding,170000
+FY2016,Loans,clp,Competitive Loan Pool,funding,5523892
+FY2016,Loans,clp,Competitive Loan Pool,applicants,31
+FY2016,Loans,clp,Competitive Loan Pool,request,17500000
+FY2016,Loans,clp,Competitive Loan Pool,awardees,11
+FY2016,Loans,clp,Competitive Loan Pool,awarded,5700000
+FY2016,Loans,clp,Competitive Loan Pool,leverage,
+FY2016,Loans,clp,Competitive Loan Pool,units,542
+FY2016,Loans,vci,Vibrant Community Initiative,funding,1500000
+FY2016,Loans,vci,Vibrant Community Initiative,applicants,8
+FY2016,Loans,vci,Vibrant Community Initiative,request,19000000
+FY2016,Loans,vci,Vibrant Community Initiative,awardees,
+FY2016,Loans,vci,Vibrant Community Initiative,awarded,1500000
+FY2016,Loans,vci,Vibrant Community Initiative,leverage,5200000
+FY2016,Grants,hrg,Homelessness Reduction,funding,1000000
+FY2016,Grants,hrg,Homelessness Reduction,applicants,18
+FY2016,Grants,hrg,Homelessness Reduction,request,1500000
+FY2016,Grants,hrg,Homelessness Reduction,awardees,12
+FY2016,Grants,hrg,Homelessness Reduction,awarded,1000000
+FY2016,Grants,hrg,Homelessness Reduction,leverage,
+FY2016,Grants,hrg,Homelessness Reduction,hh,250
+FY2016,Admin,admin,Admin,funding,160000
+FY2017,Loans,clp,Competitive Loan Pool,funding,3312000
+FY2017,Loans,clp,Competitive Loan Pool,applicants,25
+FY2017,Loans,clp,Competitive Loan Pool,request,13500000
+FY2017,Loans,clp,Competitive Loan Pool,awardees,6
+FY2017,Loans,clp,Competitive Loan Pool,awarded,3312000
+FY2017,Loans,clp,Competitive Loan Pool,leverage,123000000
+FY2017,Loans,clp,Competitive Loan Pool,units,359
+FY2017,Loans,vci,Vibrant Community Initiative,funding,1000000
+FY2017,Loans,vci,Vibrant Community Initiative,applicants,
+FY2017,Loans,vci,Vibrant Community Initiative,request,
+FY2017,Loans,vci,Vibrant Community Initiative,awardees,
+FY2017,Loans,vci,Vibrant Community Initiative,awarded,1000000
+FY2017,Loans,vci,Vibrant Community Initiative,leverage,1250000
+FY2017,Grants,hrg,Homelessness Reduction,funding,950000
+FY2017,Grants,hrg,Homelessness Reduction,applicants,33
+FY2017,Grants,hrg,Homelessness Reduction,request,3000000
+FY2017,Grants,hrg,Homelessness Reduction,awardees,12
+FY2017,Grants,hrg,Homelessness Reduction,awarded,
+FY2017,Grants,hrg,Homelessness Reduction,leverage,
+FY2017,Grants,hrg,Homelessness Reduction,hh,200
+FY2017,Grants,fhs,Family Housing Stabilization,funding,150000
+FY2017,Admin,admin,Admin,funding,88000
+FY2018,Loans,clp,Competitive Loan Pool,funding,3290000
+FY2018,Loans,clp,Competitive Loan Pool,applicants,23
+FY2018,Loans,clp,Competitive Loan Pool,request,12000000
+FY2018,Loans,clp,Competitive Loan Pool,awardees,5
+FY2018,Loans,clp,Competitive Loan Pool,awarded,3290000
+FY2018,Loans,clp,Competitive Loan Pool,leverage,
+FY2018,Loans,clp,Competitive Loan Pool,units,330
+FY2018,Loans,vci,Vibrant Community Initiative,funding,1000000
+FY2018,Loans,vci,Vibrant Community Initiative,applicants,
+FY2018,Loans,vci,Vibrant Community Initiative,request,
+FY2018,Loans,vci,Vibrant Community Initiative,awardees,
+FY2018,Loans,vci,Vibrant Community Initiative,awarded,
+FY2018,Loans,vci,Vibrant Community Initiative,leverage,
+FY2018,Grants,hrg,Homelessness Reduction,funding,1100000
+FY2018,Grants,hrg,Homelessness Reduction,applicants,30
+FY2018,Grants,hrg,Homelessness Reduction,request,2500000
+FY2018,Grants,hrg,Homelessness Reduction,awardees,12
+FY2018,Grants,hrg,Homelessness Reduction,awarded,1100000
+FY2018,Grants,hrg,Homelessness Reduction,leverage,
+FY2018,Grants,hrg,Homelessness Reduction,hh,200
+FY2018,Admin,admin,Admin,funding,110000
+FY2019,Loans,clp,Competitive Loan Pool,funding,7580000
+FY2019,Loans,clp,Competitive Loan Pool,applicants,29
+FY2019,Loans,clp,Competitive Loan Pool,request,17000000
+FY2019,Loans,clp,Competitive Loan Pool,awardees,13
+FY2019,Loans,clp,Competitive Loan Pool,awarded,7580000
+FY2019,Loans,clp,Competitive Loan Pool,leverage,
+FY2019,Loans,clp,Competitive Loan Pool,units,1226
+FY2019,Loans,vci,Vibrant Community Initiative,funding,1000000
+FY2019,Loans,vci,Vibrant Community Initiative,applicants,
+FY2019,Loans,vci,Vibrant Community Initiative,request,
+FY2019,Loans,vci,Vibrant Community Initiative,awardees,
+FY2019,Loans,vci,Vibrant Community Initiative,awarded,1000000
+FY2019,Loans,vci,Vibrant Community Initiative,leverage,
+FY2019,Grants,hrg,Homelessness Reduction,funding,2200000
+FY2019,Grants,hrg,Homelessness Reduction,applicants,29
+FY2019,Grants,hrg,Homelessness Reduction,request,2000000
+FY2019,Grants,hrg,Homelessness Reduction,awardees,28
+FY2019,Grants,hrg,Homelessness Reduction,awarded,
+FY2019,Grants,hrg,Homelessness Reduction,leverage,
+FY2019,Grants,hrg,Homelessness Reduction,hh,200
+FY2019,Admin,admin,Admin,funding,220000
+FY2020,Loans,clp,Competitive Loan Pool,funding,11200000
+FY2020,Loans,clp,Competitive Loan Pool,applicants,37
+FY2020,Loans,clp,Competitive Loan Pool,request,27660000
+FY2020,Loans,clp,Competitive Loan Pool,awardees,16
+FY2020,Loans,clp,Competitive Loan Pool,awarded,
+FY2020,Loans,clp,Competitive Loan Pool,leverage,297000000
+FY2020,Loans,clp,Competitive Loan Pool,units,1308
+FY2020,Grants,hrg,Homelessness Reduction,funding,2520000
+FY2020,Grants,hrg,Homelessness Reduction,applicants,37
+FY2020,Grants,hrg,Homelessness Reduction,request,3100000
+FY2020,Grants,hrg,Homelessness Reduction,awardees,28
+FY2020,Grants,hrg,Homelessness Reduction,awarded,
+FY2020,Grants,hrg,Homelessness Reduction,leverage,
+FY2020,Grants,hrg,Homelessness Reduction,hh,988
+FY2020,Admin,admin,Admin,funding,280000
+FY2021,Loans,clp,Competitive Loan Pool,funding,23803200
+FY2021,Loans,clp,Competitive Loan Pool,applicants,66
+FY2021,Loans,clp,Competitive Loan Pool,request,42230000
+FY2021,Loans,clp,Competitive Loan Pool,awardees,40
+FY2021,Loans,clp,Competitive Loan Pool,awarded,24600000
+FY2021,Loans,clp,Competitive Loan Pool,leverage,648900000
+FY2021,Loans,clp,Competitive Loan Pool,units,2835
+FY2021,Grants,hrg,Homelessness Reduction,funding,15368800
+FY2021,Grants,hrg,Homelessness Reduction,applicants,38
+FY2021,Grants,hrg,Homelessness Reduction,request,10800000
+FY2021,Grants,hrg,Homelessness Reduction,awardees,38
+FY2021,Grants,hrg,Homelessness Reduction,awarded,10800000
+FY2021,Grants,hrg,Homelessness Reduction,leverage,
+FY2021,Grants,hrg,Homelessness Reduction,hh,859
+FY2021,Grants,rmrp,Rent and Mortgage Relief Program,funding,28200000
+FY2021,Grants,psh,PSH Predevelopment,funding,500000
+FY2021,Admin,admin,Admin,funding,2828000
+FY2022,Loans,clp,Competitive Loan Pool,funding,44000000
+FY2022,Loans,clp,Competitive Loan Pool,applicants,93
+FY2022,Loans,clp,Competitive Loan Pool,request,65100000
+FY2022,Loans,clp,Competitive Loan Pool,awardees,63
+FY2022,Loans,clp,Competitive Loan Pool,awarded,44000000
+FY2022,Loans,clp,Competitive Loan Pool,leverage,1100000000
+FY2022,Loans,clp,Competitive Loan Pool,units,3874
+FY2022,Grants,hrg,Homelessness Reduction,funding,8300000
+FY2022,Grants,hrg,Homelessness Reduction,applicants,46
+FY2022,Grants,hrg,Homelessness Reduction,request,8300000
+FY2022,Grants,hrg,Homelessness Reduction,awardees,46
+FY2022,Grants,hrg,Homelessness Reduction,awarded,8300000
+FY2022,Grants,hrg,Homelessness Reduction,leverage,
+FY2022,Grants,hrg,Homelessness Reduction,hh,1886
+FY2022,Grants,psh,PSH Predevelopment,funding,500000
+FY2022,Admin,admin,Admin,funding,2200000
+FY2023,Loans,clp,Competitive Loan Pool,funding,60000000
+FY2023,Loans,clp,Competitive Loan Pool,applicants,88
+FY2023,Loans,clp,Competitive Loan Pool,request,59500000
+FY2023,Loans,clp,Competitive Loan Pool,awardees,80
+FY2023,Loans,clp,Competitive Loan Pool,awarded,59500000
+FY2023,Loans,clp,Competitive Loan Pool,leverage,2300000000
+FY2023,Loans,clp,Competitive Loan Pool,units,5780
+FY2023,Grants,hrg,Homelessness Reduction,funding,12900000
+FY2023,Grants,hrg,Homelessness Reduction,applicants,86
+FY2023,Grants,hrg,Homelessness Reduction,request,16800000
+FY2023,Grants,hrg,Homelessness Reduction,awardees,68
+FY2023,Grants,hrg,Homelessness Reduction,awarded,
+FY2023,Grants,hrg,Homelessness Reduction,leverage,
+FY2023,Grants,hrg,Homelessness Reduction,hh,
+FY2023,Admin,admin,Admin,funding,2100000
+FY2024,Loans,clp,Competitive Loan Pool,funding,60000000
+FY2024,Loans,clp,Competitive Loan Pool,applicants,
+FY2024,Loans,clp,Competitive Loan Pool,request,
+FY2024,Loans,clp,Competitive Loan Pool,awardees,
+FY2024,Loans,clp,Competitive Loan Pool,awarded,
+FY2024,Loans,clp,Competitive Loan Pool,leverage,
+FY2024,Loans,clp,Competitive Loan Pool,units,
+FY2024,Grants,hrg,Homelessness Reduction,funding,12900000
+FY2024,Grants,hrg,Homelessness Reduction,applicants,
+FY2024,Grants,hrg,Homelessness Reduction,request,
+FY2024,Grants,hrg,Homelessness Reduction,awardees,
+FY2024,Grants,hrg,Homelessness Reduction,awarded,
+FY2024,Grants,hrg,Homelessness Reduction,leverage,
+FY2024,Grants,hrg,Homelessness Reduction,hh,
+FY2024,Admin,admin,Admin,funding,2100000
