@@ -29,6 +29,47 @@ vhtf_sum <- read_csv("vhtf-summary.csv") |>
 Some text
 
 ```{r}
+#| label: districts
+#| eval: false
+
+senate <- st_read("va_senate_2021.geojson", quiet = TRUE) |> 
+  st_transform(4326)
+
+senate$chamber <- "Senate"
+senate$DISTRICT <- paste("SD", senate$DISTRICT)
+
+house <- st_read("va_house_2021.geojson", quiet = TRUE) |> 
+  st_transform(4326)
+
+house$chamber <- "House"
+house$DISTRICT <- paste("HD", house$DISTRICT)
+
+districts <- bind_rows(senate, house) |> 
+  select(chamber, district = DISTRICT, n = DISTRICTN) |> 
+  arrange(chamber, n)
+
+# Calculate minimum and maximum x and y values for each feature
+districts$min_x <- sapply(st_geometry(districts), function(geom) {
+  st_bbox(geom)[1]
+})
+districts$max_x <- sapply(st_geometry(districts), function(geom) {
+  st_bbox(geom)[3]
+})
+districts$min_y <- sapply(st_geometry(districts), function(geom) {
+  st_bbox(geom)[2]
+})
+districts$max_y <- sapply(st_geometry(districts), function(geom) {
+  st_bbox(geom)[4]
+})
+
+write_rds(districts, "districts.rds")
+
+```
+
+
+Some text
+
+```{r}
 #| label: geocode
 #| eval: false
 
@@ -45,11 +86,11 @@ vhtf_geocode <- vhtf_raw |>
   
   st_as_sf(coords = c("long", "lat"),
            remove = FALSE,
-           crs = 4326) |> 
+           crs = 4326) 
   
   # Project into Virginia State Plane South
   
-  st_transform(4502)
+  #st_transform(4502)
 
 vhtf_geocode$popup <- paste(
   sep = "<br/>",
@@ -58,33 +99,16 @@ vhtf_geocode$popup <- paste(
   paste("Affordable units:", vhtf_geocode$units_affordable)
 )
 
-write_rds(vhtf_geocode, "vhtf-geocode.rds")
+vhtf_districts <- vhtf_geocode |> 
+  st_join(filter(select(districts, 1:2, 4), chamber == "House")) |> 
+  st_join(filter(select(districts, 1:2, 4), chamber == "Senate")) |> 
+  select(1:25, house = 27, senate = 29)
+
+write_rds(vhtf_districts, "vhtf-districts.rds")
 
 ```
 
-```{r}
-#| label: districts
-#| eval: false
 
-senate <- st_read("va_senate_2021.geojson", quiet = TRUE) |> 
-  st_transform(4502)
-
-senate$chamber <- "Senate"
-senate$DISTRICT <- paste("SD", senate$DISTRICT)
-
-house <- st_read("va_house_2021.geojson", quiet = TRUE) |> 
-  st_transform(4502)
-
-house$chamber <- "House"
-house$DISTRICT <- paste("HD", house$DISTRICT)
-
-districts <- bind_rows(senate, house) |> 
-  select(chamber, district = DISTRICT, n = DISTRICTN) |> 
-  arrange(chamber, n)
-
-write_rds(districts, "districts.rds")
-
-```
 
 
 
