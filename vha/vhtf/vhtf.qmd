@@ -17,7 +17,7 @@ execute:
 
 source("vhtf.R")
 
-#setwd("C:/Users/Jonathan/Documents/repos/sandbox/vha/vchr/")
+#setwd("C:/Users/Jonathan/Documents/repos/sandbox/vha/vhtf")
 
 vhtf_raw <- read_csv("vhtf-projects-all.csv")
 
@@ -27,6 +27,66 @@ vhtf_sum <- read_csv("vhtf-summary.csv") |>
 ```
 
 Some text
+
+```{r}
+#| label: geocode
+#| eval: false
+
+library(tidygeocoder)
+
+vhtf_geocode <- vhtf_raw |> 
+  
+  geocode(
+    address = project_address,
+    method = 'geocodio'
+  ) |> 
+  
+  # Specify WGS 1984 coordinate system for lat/long data
+  
+  st_as_sf(coords = c("long", "lat"),
+           remove = FALSE,
+           crs = 4326) |> 
+  
+  # Project into Virginia State Plane South
+  
+  st_transform(4502)
+
+vhtf_geocode$popup <- paste(
+  sep = "<br/>",
+  vhtf_geocode$project_name,
+  vhtf_geocode$year,
+  paste("Affordable units:", vhtf_geocode$units_affordable)
+)
+
+write_rds(vhtf_geocode, "vhtf-geocode.rds")
+
+```
+
+```{r}
+#| label: districts
+#| eval: false
+
+senate <- st_read("va_senate_2021.geojson", quiet = TRUE) |> 
+  st_transform(4502)
+
+senate$chamber <- "Senate"
+senate$DISTRICT <- paste("SD", senate$DISTRICT)
+
+house <- st_read("va_house_2021.geojson", quiet = TRUE) |> 
+  st_transform(4502)
+
+house$chamber <- "House"
+house$DISTRICT <- paste("HD", house$DISTRICT)
+
+districts <- bind_rows(senate, house) |> 
+  select(chamber, district = DISTRICT, n = DISTRICTN) |> 
+  arrange(chamber, n)
+
+write_rds(districts, "districts.rds")
+
+```
+
+
 
 ```{r}
 #| label: allocations
