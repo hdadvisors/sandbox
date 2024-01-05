@@ -70,6 +70,18 @@ write_rds(districts, "districts.rds")
 
 ```
 
+```{r}
+
+library(tigris)
+
+counties <- counties("va")
+
+vaco <- counties |> 
+  select(locality = NAMELSAD)
+
+```
+
+
 Geocode VHTF projects
 
 ```{r}
@@ -90,21 +102,19 @@ vhtf_geocode <- vhtf_raw |>
   st_as_sf(coords = c("long", "lat"),
            remove = FALSE,
            crs = 4326) 
-  
-  # Project into Virginia State Plane South
-  
-  #st_transform(4502)
 
 vhtf_geocode$popup <- paste(
   sep = "<br/>",
-  vhtf_geocode$project_name,
-  vhtf_geocode$year,
-  paste("Affordable units:", vhtf_geocode$units_affordable)
+  paste0("<b>", vhtf_geocode$project_name, "</b>"),
+  paste0("Award year: ", vhtf_geocode$year),
+  paste0("Affordable units: ", vhtf_geocode$units_affordable),
+  paste0("VHTF award: ", "$", formatC(as.numeric(vhtf_geocode$amt_vhtf), format = "f", digits = 0, big.mark = ","))
 )
 
 vhtf_districts <- vhtf_geocode |> 
   st_join(filter(select(districts, 1:2, 4), chamber == "House")) |> 
   st_join(filter(select(districts, 1:2, 4), chamber == "Senate")) |> 
+  st_join(vaco) |> 
   select(1:25, house = 27, senate = 29)
 
 write_rds(vhtf_districts, "vhtf-districts.rds")
