@@ -22,6 +22,12 @@ ui <- fixedPage(
     tags$link(rel = "stylesheet", type = "text/css", href = "style.css")
   ),
   
+  # FontAwesome
+  tags$script(src = "https://kit.fontawesome.com/563b97fef8.js"),
+  #tags$div(
+  #  tags$i(class = "fa-brands fa-github")
+  #),
+  
   # App title
   titlePanel("Virginia Housing Trust Fund project dashboard"),
   
@@ -76,9 +82,10 @@ ui <- fixedPage(
     br(),
     wellPanel(
       markdown(
-        "**Source:** Virginia Department of Housing and Community Development. Data includes all projects awarded funds from the Competitive Loan Pool of the Virginia Housing Trust Fund, from FY2014 to FY2023.<br>
-      **Last updated:** January 5, 2024.")
-    )
+        "**Source:** Virginia Department of Housing and Community Development. Data includes all projects awarded funds from the Competitive Loan Pool of the Virginia Housing Trust Fund, from FY2014 to FY2023."),
+      HTML(
+        "<b>Last updated:</b> January 5, 2024. <a href='https://github.com/hdadvisors/sandbox/tree/main/vha/vhtf/vhtf_dashboard'>View code on Github <i class='fa-brands fa-github'></i></a>")
+      )
   )
   
 )

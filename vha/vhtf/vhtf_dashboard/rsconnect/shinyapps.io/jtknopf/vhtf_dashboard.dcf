@@ -5,7 +5,7 @@ account: jtknopf
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 10873412
-bundleId: 8113524
+bundleId: 8113585
 url: https://jtknopf.shinyapps.io/vhtf_dashboard/
 version: 1
 asMultiple: FALSE
