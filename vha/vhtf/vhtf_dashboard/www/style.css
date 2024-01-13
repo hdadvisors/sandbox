@@ -9,3 +9,7 @@ h2 {
 body {
   font-family: 'Montserrat', sans-serif;
 }
+
+.btn {
+  width: 100% !important;
+}

@@ -3,6 +3,8 @@
 #setwd("~/repos/sandbox/vha/vhtf")
 
 source("setup.R")
+library(capture)
+library(shinyBS)
 
 ## Load data ----------------
 
@@ -24,10 +26,7 @@ ui <- fixedPage(
   
   # FontAwesome
   tags$script(src = "https://kit.fontawesome.com/563b97fef8.js"),
-  #tags$div(
-  #  tags$i(class = "fa-brands fa-github")
-  #),
-  
+
   # App title
   titlePanel("Virginia Housing Trust Fund project dashboard"),
   
@@ -37,9 +36,9 @@ ui <- fixedPage(
   wellPanel(
   
     fluidRow(
-      column(7,
-        markdown("**Competitive Loan Pool projects** (FY2014 - FY2023)"),
-        markdown("Use these controls to view projects by individual House of Delegates or State Senate district. You can also filter projects by clicking on a district in the map. Click the \"Reset selection\" button to reload all data.")
+      column(6,
+        markdown("#### **Competitive Loan Pool projects** (FY2014 - FY2023)"),
+        HTML("<p style='margin-bottom: 0px;'>Use these controls to view projects by individual House of Delegates or State Senate district. You can also filter projects by clicking on a district in the map. Click the \"Reset selection\" button to reload all data.</p>")
       ),
       column(2,
         # Chamber filter
@@ -48,45 +47,94 @@ ui <- fixedPage(
           label = "Select chamber:",
           choices = unique(districts$chamber),
           selected = districts$chamber[1]
+          #inline = TRUE
         )
+        #style = "margin-right: -10px; margin-bottom: -20px;"
       ),
-      column(3,
+      column(2,
         # District selection
         selectInput(
           "filter_district",
           "Select district:",
           choices = NULL
-        ),
+        )
+      ),
+      column(2,
         # Reset selection button
-        actionButton("reset", "Reset selection")
+        actionButton("reset", "Reset selection", class = "btn-primary", width = "100%"),
+        div(style="margin-bottom:5px"),
+        # Save image
+        capture(
+          selector = "body",
+          filename = "vhtf-png",
+          icon("image"), "Save image",
+          button_class = "btn btn-default btn-block"
+        )
+        #div(style="margin-bottom:10px"),
+      ),
+    ),
+    
+    style = "padding: 12px;"
+    
+  ),
+  
+  #capture_pdf(
+  #  selector = "body",
+  #  filename = "vhtf-pdf",
+  #  icon("file-pdf"), "Save as PDF",
+  #  loading = loading(
+  #    text = "Generating PDF, please wait...",
+  #    type = "dots",
+  #    color = "#246abe",
+  #    background = "rgba(0,0,0,0.8)",
+  #    size = "80px"
+  #  )
+  #),
+
+  leafletOutput("map", width = "100%"),
+  
+  DTOutput("summary"),
+  
+  br(),
+  
+  bsCollapse(
+    id = "collapse",
+    bsCollapsePanel("⯈ Show list of projects", dataTableOutput("list"))
+  ),
+
+  wellPanel(
+    
+    fluidRow(
+      
+      column(
+        
+        9,
+        
+        markdown(
+          "**Source:** Virginia Department of Housing and Community Development. Data includes all projects awarded funds from the Competitive Loan Pool of the Virginia Housing Trust Fund, from FY2014 to FY2023."),
+        
+        HTML(
+          "<b>Last updated:</b> January 8, 2024. <a href='https://github.com/hdadvisors/sandbox/tree/main/vha/vhtf/vhtf_dashboard'>View code on Github <i class='fa-brands fa-github'></i></a>"
+          ),
+        
+        style = "padding-right: 25px;"
+        
+        ),
+      
+      column(
+        3,
+        
+        HTML(
+          "<a href='https://www.housingforwardva.org'><img src='hfv_logo.png' alt='housingforwardva.org' height='70px' style='opacity: 0.8; float: right; padding-right: 10px;'></a>"
+        )
+      
       )
+      
+    ),
+    
+    style = "padding: 12px;"
+    
     )
-  
-  ),
-  
-  fluidRow(
-    # Map
-    leafletOutput("map"),
-    br()
-  ),
-  
-  fluidRow(
-    # Tables
-    tabsetPanel(
-      tabPanel("Summary", dataTableOutput("summary")),
-      tabPanel("List of projects", dataTableOutput("list"))
-    )
-  ),
-  
-  fluidRow(
-    br(),
-    wellPanel(
-      markdown(
-        "**Source:** Virginia Department of Housing and Community Development. Data includes all projects awarded funds from the Competitive Loan Pool of the Virginia Housing Trust Fund, from FY2014 to FY2023."),
-      HTML(
-        "<b>Last updated:</b> January 5, 2024. <a href='https://github.com/hdadvisors/sandbox/tree/main/vha/vhtf/vhtf_dashboard'>View code on Github <i class='fa-brands fa-github'></i></a>")
-      )
-  )
   
 )
 
@@ -178,7 +226,7 @@ server <- function(input, output, session){
         ), 
       options = list(
         dom = "t",
-        columnDefs = list(list(className = "dt-center", targets = "_all"))
+        columnDefs = list(list(className = "dt-center", targets = "_all", orderable = FALSE))
       ),
       rownames = FALSE,
       colnames = c("Projects awarded", "Affordable units produced", "Amount awarded"),
@@ -203,9 +251,10 @@ server <- function(input, output, session){
         as.data.frame() %>% 
         select(26, 27, 1, 4, 7, 15),
       options = list(
-        dom = "tp",
+        dom = "ltp",
         order = list(3, 'asc'),
-        pageLength = 5
+        pageLength = 5,
+        lengthMenu = list(c(5, 10, -1), c('5', '10', 'All'))
       ),
       rownames = FALSE,
       colnames = c("HD", "SD", "Award year", "Project", "Affordable units", "VHTF award"),
@@ -275,6 +324,18 @@ server <- function(input, output, session){
   observeEvent(input$reset, {
     updateSelectInput(session, "filter_district", selected = "All districts")
   })
+  
+  observeEvent(input$screenshot, {
+    screenshot()
+  })
+  
+  observeEvent(input$showtable, ({
+    updateCollapse(session, "collapse", open = "")
+  }))
+  
+  observeEvent(input$hidetable, ({
+    updateCollapse(session, "collapse", close = "")
+  }))
   
 }
 
