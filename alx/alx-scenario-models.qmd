@@ -1,0 +1,269 @@
+---
+title: "Alexandria LRSP Scenario Models"
+format:
+  html:
+    theme: flatly
+    author: "Jonathan Knopf (jonathan@hdadvisors.net)"
+execute: 
+  echo: false
+  warning: false
+  freeze: auto
+---
+
+```{r}
+#| label: setup
+
+library(tidyverse)
+library(tidycensus)
+library(janitor)
+library(hdatools)
+
+```
+
+```{r}
+#| label: hud-ami
+
+# FY 2023 MTSP Income Limits for Washington-Arlington-Alexandria, DC-VA-MD HUD Metro FMR Area
+
+hud_ami <- tibble(
+  AMI = c("80% AMI", "70% AMI", "60% AMI", "50% AMI", "40% AMI", "30% AMI", "20% AMI"),
+  person1 = c(84400, 73850, 63300, 52750, 42200, 31650, 21100),
+  person2 = c(96480, 84240, 72660, 60300, 48240, 36180, 24120),
+  person3 = c(108560, 94990, 81420, 67850, 54280, 40710, 27140),
+  person4 = c(120560, 105490, 90240, 75350, 60280, 45210, 30140),
+  person5 = c(130240, 113960, 97460, 81400, 65210, 48840, 32460),
+  person6 = c(139920, 122430, 104940, 87450, 69960, 52470, 34980),
+  person7 = c(149520, 130830, 112140, 93450, 74760, 56070, 37380),
+  person8 = c(159200, 139300, 119400, 99500, 79600, 59700, 39800)
+) |> 
+  pivot_longer(
+    2:9,
+    names_to = "hh_size",
+    values_to = "income"
+  )
+
+# https://www.huduser.gov/portal/datasets/il/il2023/2023sum_mtsp.odn?inputname=METRO47900M47900*Washington-Arlington-Alexandria%2C+DC-VA-MD+HUD+Metro+FMR+Area&area_choice=hmfa&year=2023#top
+
+```
+
+```{r}
+#| label: fmrs
+
+# ARHA Proposed Payment Standard 2023
+
+fmrs <- tibble(
+  ZIP = c("22301", "22302", "22304", "22305", "22311", "22312", "22313", "22314"),
+  bedroom0 = c(2013, 1980, 1914, 1859, 1936, 1848, 1782, 2563),
+  bedroom1 = c(2046, 2013, 1947, 1892, 1969, 1870, 1815, 2607),
+  bedroom2 = c(2332, 2288, 2211, 2156, 2244, 2134, 2068, 2970),
+  bedroom3 = c(2915, 2860, 2761, 2695, 2805, 2673, 2585, 3718),
+  bedroom4 = c(3476, 3410, 3300, 3212, 3344, 3179, 3080, 4433)
+) |> 
+  pivot_longer(
+    2:6,
+    names_to = "bedrooms",
+    values_to = "FMR"
+  ) |> 
+  pivot_wider(
+    names_from = ZIP,
+    values_from = FMR
+  ) |> 
+  mutate(
+    FMR = rowMeans(across(2:9))
+    ) |> 
+  select(bedrooms, FMR)
+ 
+```
+
+```{r}
+
+alx_pums <- get_pums(
+  variables = c(NP = "NP", HINCP = "HINCP", BDSP = "BDSP"),
+  state = "VA",
+  puma = "51255",
+  year = 2021,
+  survey = "acs1"
+)
+
+alx_hh_br <- alx_pums |>
+  count(BDSP, NP, wt = WGTP) |> 
+  mutate(
+    pct = n/sum(n),
+    .by = BDSP
+  )
+
+
+```
+
+AHRA FY23 HCVP Administration budget: 1602251
+Total voucher holders: 1511
+HUD HCVP CY 2023 Administrative Fee Rate for ARHA: $133.85
+
+Alexandria Local
+
+## Scenario 1
+
+Focus: Reduce housing cost burden
+
+Question: How many households could be served by an annual allocation of $500k? A range is fine.
+
+Assumptions for model: 
+
+* Include overhead plus “housing” case management
+* Assume subsidy could cover difference between a 60% AMI and 40% AMI rent for households with incomes between 30% and 50% AMI
+* Assume ¼ studios, ¼ one bedroom, ¼ two bedroom, and ¼ three bedroom units
+* Assume at entry that ¼ are at 30%, ½ at 40%, and ¼ at 50% AMI
+
+Studio = 100% 1-person
+1-bedroom = 50% 1-person, 50% 2-person
+2-bedroom = 30% 2-person, 40% 3-person, 30% 4-person
+3-bedroom = 30% 3-person, 40% 4-person, 30% 5-person
+
+Standard overhead = 10%
+Additional housing case management overhead = 5%
+Total overhead = 15%
+
+https://www.alexandriava.gov/budgetmemosfy24/fy-24-budget-qa-039-what-authority-does-the-city-have-to-create-a-housing-voucher
+
+```{r}
+#| label: scenario-1
+
+# Budget allocation
+s1_budget <- 500000
+
+# Overhead percentage
+s1_overhead <- 0.15
+
+# Bedroom distribution (25% for 0, 1, 2, and 3 bedroom units each)
+s1_pb <- 0.25
+
+# 110% payment standard
+s1_ps <- 1.1
+
+s1_rents <- hud_ami |> 
+  filter(
+    AMI %in% c("30% AMI", "40% AMI", "50% AMI", "60% AMI"),
+    str_detect(hh_size, "[12345]")
+    ) |> 
+  mutate(
+    aff_rent = income/12 * 0.3
+  ) |> 
+  select(-3)
+
+s1_rents_map <- s1_rents |> 
+  mutate(
+    AMI_new = case_when(
+      AMI == "30% AMI" ~ "40% AMI",
+      AMI == "40% AMI" ~ "50% AMI",
+      AMI == "50% AMI" ~ "60% AMI",
+      .default = NULL
+    )
+  ) |> 
+  drop_na()
+
+s1_rents_new <- s1_rents_map |> 
+  left_join(s1_rents, by = c("AMI_new" = "AMI", "hh_size")) |> 
+  select(AMI, hh_size, "aff_rent" = aff_rent.x, "sub_rent" = aff_rent.y) |> 
+  mutate(
+    subsidy = sub_rent - aff_rent
+  )
+
+
+s1_distribution <- function(total_households) {
+  
+  # AMI distribution
+  ami_distribution <- c(`30% AMI` = 0.25, `40% AMI` = 0.50, `50% AMI` = 0.25)
+
+  # Bedroom distribution
+  bedroom_distribution <- c(
+    `bedroom0` = 0.25, `bedroom1` = 0.25,
+    `bedroom2` = 0.25, `bedroom3` = 0.25
+    )
+
+  # Persons per household distribution for each bedroom category
+  persons_distribution <- list(
+    `bedroom0` = c(`person1` = 1),
+    `bedroom1` = c(`person1` = 0.5, `person2` = 0.5),
+    `bedroom2` = c(`person2` = 0.3, `person3` = 0.4, `person4` = 0.3),
+    `bedroom3` = c(`person3` = 0.3, `person4` = 0.4, `person5` = 0.3)
+  )
+
+  # Calculate distribution
+  distribution <- expand.grid(
+    AMI = names(ami_distribution),
+    bedrooms = names(bedroom_distribution)
+  ) |>
+    mutate(households = total_households * ami_distribution[AMI] * bedroom_distribution[bedrooms])
+
+  # Initialize an empty data frame for the final distribution
+  final_distribution <- data.frame()
+
+  # Loop through each bedroom category to calculate the persons distribution
+  for (bedroom in names(persons_distribution)) {
+    
+    # Filter the distribution for the current bedroom category
+    current_dist <- subset(distribution, bedrooms == bedroom)
+
+    # Calculate the number of households for each person count
+    for (person_count in names(persons_distribution[[bedroom]])) {
+      current_dist$hh_size <- as.character(person_count)
+
+      current_dist$pct <- current_dist$households * persons_distribution[[bedroom]][person_count] / 100
+
+      # Round to the nearest whole number
+      #current_dist$n <- round(current_dist$n)
+
+      # Bind to the final distribution data frame
+      final_distribution <- rbind(
+        final_distribution,
+        current_dist[, c("AMI", "bedrooms", "hh_size", "pct")]
+      )
+    }
+  }
+
+  # Return the final distribution
+  return(final_distribution)
+}
+
+s1_hh_dist <- s1_distribution(100) |>
+  left_join(fmrs) |> 
+  left_join(s1_rents_new, by = c("AMI", "hh_size"))
+
+write_csv(s1_hh_dist, "alx/hcv_s1.csv")
+
+
+
+```
+
+## Scenario 2
+
+Focus: Stabilize unhoused population
+
+Question: What is the annual cost to serve households (subsidy, overhead, plus “housing” case management) with rental assistance? A range is fine.
+
+Assumptions for model: 
+
+* 150 households (2/3 single; 1/3 households with children)
+* Assume subsidy will cover difference between a 60% AMI rent and 30% of household’s income
+* Assume 2/3 would live in studios and 1/3 in two bedroom units
+* Assume ½ have SSI income and ½ have $1,500/month
+
+
+```{r}
+#| label: scenario-2
+
+
+
+```
+
+## Scenario 3
+
+Focus: Lower severe housing cost burden for lower-income working families
+
+```{r}
+#| label: scenario-3
+
+
+```
+
+
