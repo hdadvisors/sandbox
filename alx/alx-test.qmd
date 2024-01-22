@@ -1,0 +1,63 @@
+---
+title: "Alexandria LRSP Scenario Models"
+format:
+  pdf:
+    keep-tex: true
+execute:
+  echo: false
+  warning: false
+  #freeze: auto
+---
+
+```{r}
+#| label: setup
+
+library(tidyverse)
+library(kableExtra)
+library(formattable)
+
+```
+
+```{r}
+#| label: hud-ami
+
+# FY 2023 MTSP Income Limits for Washington-Arlington-Alexandria, DC-VA-MD HUD Metro FMR Area
+
+hud_ami <- tibble(
+  AMI = c("80% AMI", "70% AMI", "60% AMI", "50% AMI", "40% AMI", "30% AMI", "20% AMI"),
+  person1 = c(84400, 73850, 63300, 52750, 42200, 31650, 21100),
+  person2 = c(96480, 84240, 72660, 60300, 48240, 36180, 24120),
+  person3 = c(108560, 94990, 81420, 67850, 54280, 40710, 27140),
+  person4 = c(120560, 105490, 90240, 75350, 60280, 45210, 30140),
+  person5 = c(130240, 113960, 97460, 81400, 65210, 48840, 32460),
+  person6 = c(139920, 122430, 104940, 87450, 69960, 52470, 34980),
+  person7 = c(149520, 130830, 112140, 93450, 74760, 56070, 37380),
+  person8 = c(159200, 139300, 119400, 99500, 79600, 59700, 39800)
+) |> 
+  pivot_longer(
+    2:9,
+    names_to = "hh_size",
+    values_to = "income"
+  )
+
+```
+
+```{r}
+#| label: tbl-hud-ami
+#| tbl-cap: "FY 2023 MTSP Income Limits for Washington-Arlington-Alexandria, DC-VA-MD HUD Metro FMR Area"
+
+hud_ami |> 
+  arrange(AMI) |> 
+  filter(str_detect(hh_size, "[12345]")) |> 
+  mutate(
+    hh_size = str_replace(hh_size, "(\\D+)(\\d+)", "\\2 \\1"),
+    income = formattable::currency(income, digits = 0)
+    ) |> 
+  pivot_wider(
+    names_from = hh_size,
+    values_from = income
+  ) |> 
+  kbl(booktabs = T, linesep = "", format = "latex") |> 
+  kable_styling(full_width = T)
+
+```
