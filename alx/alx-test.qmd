@@ -1,8 +1,25 @@
 ---
 title: "Alexandria LRSP Scenario Models"
 format:
+  html:
+    theme: flatly
+    author: "Jonathan Knopf (jonathan@hdadvisors.net)"
+    number-sections: true
+    number-offset: [1,6]
+    number-depth: 2
   pdf:
-    keep-tex: true
+    documentclass: scrreprt
+    number-sections: true
+    number-offset: 7
+    number-depth: 1
+    mainfont: "Open Sans"
+    fontsize: 10pt
+    colorlinks: true
+    reference-location: section
+    include-in-header: 
+      - text: |
+          \renewcommand{\thepage}{A7-\arabic{page}}
+          \renewcommand{\thesection}{A7.\arabic{section}}
 execute:
   echo: false
   warning: false
@@ -13,10 +30,24 @@ execute:
 #| label: setup
 
 library(tidyverse)
+library(tidycensus)
+library(scales)
 library(kableExtra)
 library(formattable)
+library(gt)
+library(ggtext)
+library(janitor)
+library(hdatools)
 
 ```
+
+## Standard parameters
+
+### Income limits
+
+The models use HUD's FY 2023 Multifamily Tax Subsidy Projects (MTSP) Income Limits for Washington-Arlington-Alexandria, DC-VA-MD HUD Metro FMR Area.[^1] These are the official income limits used to determine eligibility for LIHTC projects and other affordable multifamily properties financed by tax-exempt bonds.
+
+While the MTSP limits differ slightly from the standard income limits used for Housing Choice Vouchers, public housing, and other HUD-supported assistance programs, they are used here because they publish limits for a greater range of AMI levels, including 40% AMI and 60% AMI. The City of Alexandria generally uses MTSP limits for its housing programs.
 
 ```{r}
 #| label: hud-ami
@@ -45,19 +76,297 @@ hud_ami <- tibble(
 ```{r}
 #| label: tbl-hud-ami
 #| tbl-cap: "FY 2023 MTSP Income Limits for Washington-Arlington-Alexandria, DC-VA-MD HUD Metro FMR Area"
+#| tbl-pos: H
 
-hud_ami |> 
-  arrange(AMI) |> 
-  filter(str_detect(hh_size, "[12345]")) |> 
-  mutate(
-    hh_size = str_replace(hh_size, "(\\D+)(\\d+)", "\\2 \\1"),
-    income = formattable::currency(income, digits = 0)
+if (knitr::is_html_output()) {
+  
+  hud_ami |>
+    arrange(AMI) |>
+    filter(str_detect(hh_size, "[12345]")) |>
+    mutate(
+      hh_size = str_replace(hh_size, "(\\D+)(\\d+)", "\\2 \\1")
+    ) |>
+    pivot_wider(
+      names_from = hh_size,
+      values_from = income
+    ) |>
+    gt(
+      rowname_col = "AMI"
+    ) |>
+    cols_width(
+      everything() ~ px(90)
+    ) |>
+    cols_align(
+      align = "center",
+      columns = 2:6
+    ) |>
+    cols_align(
+      align = "left",
+      columns = 1
+    ) |>
+    fmt_currency(columns = 2:6, currency = "USD", decimals = 0) |>
+    tab_source_note(
+      source_note = md("**Note:** Income limits for households with 6 or more persons not shown.")
+    ) |>
+    tab_style(
+      style = cell_text(weight = "bold"),
+      locations = cells_column_labels()
+    )
+  
+} else {
+  
+  hud_ami |>
+    arrange(AMI) |>
+    filter(str_detect(hh_size, "[12345]")) |>
+    mutate(
+      hh_size = str_replace(hh_size, "(\\D+)(\\d+)", "\\2 \\1"),
+      income = formattable::currency(income, digits = 0)
+    ) |>
+    pivot_wider(
+      names_from = hh_size,
+      values_from = income
+    ) |>
+    kbl(booktabs = T, align = "lccccc", linesep = "") |> 
+    row_spec(0, bold = T) |> 
+    kable_styling(full_width = T, latex_options = "hold_position")
+  
+}
+
+```
+
+```{r}
+#| label: hud-plot
+#| eval: false
+#| echo: false
+
+hud_plot <- hud_ami |> 
+  filter(
+    !AMI %in% c("80% AMI", "70% AMI", "20% AMI"),
+    str_detect(hh_size, "[1234]")
     ) |> 
-  pivot_wider(
-    names_from = hh_size,
-    values_from = income
+  mutate(
+    hh_size = case_match(
+      hh_size,
+      "person1" ~ "1 person",
+      "person2" ~ "2 person",
+      "person3" ~ "3 person",
+      "person4" ~ "4 person",
+    ),
+    hh_size = fct_inorder(hh_size)
+  )
+
+ggplot(hud_plot, aes(x = income, y = fct_rev(hh_size), label = label_currency(accuracy = 1)(income))) +
+  facet_wrap(~AMI, scales = "free_y") +
+  geom_col(aes(fill = AMI)) +
+  scale_fill_hda(-1) +
+  #geom_col(fill = "#445ca9") +
+  geom_text(
+    size = 9, color = "white", nudge_x = -9000
+    ) +
+  scale_x_continuous(labels = label_currency(), expand = c(0, 0)) +
+  theme_hda(base_size = 26) +
+  labs(
+    title = "HUD FY 2023 Multifamily Tax Subsidy Projects income limits",
+    subtitle = "Household income limits by AMI and household size",
+    caption = "**Source:** HUD FY 2023 MTSP Income Limits for Washington-Arlington-Alexandria, DC-VA-MD HUD Metro FMR Area"
+  ) +
+  theme(
+    axis.text.x = element_blank(),
+    panel.grid.major.y = element_blank(),
+    strip.text = element_text(face = "plain", color = "#383c3d", size = 28, hjust = 0),
+    plot.subtitle = element_markdown(margin = margin(t = -5, b = 5))
+  )
+
+ggsave("alx/alx-ami.png", width = 6.5, height = 4, units = "in", bg = "white")
+
+```
+
+[^1]: [FY 2023 MTSP Income Limits](https://www.huduser.gov/portal/datasets/il/il2023/2023sum_mtsp.odn?inputname=METRO47900M47900*Washington-Arlington-Alexandria%2C+DC-VA-MD+HUD+Metro+FMR+Area&area_choice=hmfa&year=2023#top) (Accessed 2024-01-19)
+
+\newpage
+
+### Fair Market Rents
+
+Models where the rent subsidy is calculated based on Fair Market Rents (FMR) use the current Small Area Fair Market Rents (SAFMR) adopted by the Arlington Redevelopment and Housing Authority for 2023. SAFMRs are provided by ZIP code.
+
+While actual subsidy amounts will depend on the ZIP code where the tenant lives, models will use the average values (by unit size) across all ZIP codes. This is a simplification to avoid making assumptions about the geographic distribution of participating households.
+
+```{r}
+#| label: fmrs
+
+# ARHA Proposed Payment Standard 2023
+
+fmrs_all <- tibble(
+  ZIP = c("22301", "22302", "22304", "22305", "22311", "22312", "22313", "22314"),
+  bedroom0 = c(2013, 1980, 1914, 1859, 1936, 1848, 1782, 2563),
+  bedroom1 = c(2046, 2013, 1947, 1892, 1969, 1870, 1815, 2607),
+  bedroom2 = c(2332, 2288, 2211, 2156, 2244, 2134, 2068, 2970),
+  bedroom3 = c(2915, 2860, 2761, 2695, 2805, 2673, 2585, 3718),
+  bedroom4 = c(3476, 3410, 3300, 3212, 3344, 3179, 3080, 4433)
+) |> 
+  pivot_longer(
+    2:6,
+    names_to = "bedrooms",
+    values_to = "FMR"
   ) |> 
-  kbl(booktabs = T, linesep = "", format = "latex") |> 
-  kable_styling(full_width = T)
+  pivot_wider(
+    names_from = ZIP,
+    values_from = FMR
+  ) |> 
+  mutate(
+    average = rowMeans(across(2:9))
+    )
+
+fmrs_avg <- fmrs_all |> 
+  select(bedrooms, "fmr_avg" = average)
+
+```
+
+```{r}
+#| label: fmrs-plot
+#| eval: false
+
+fmrs_plot <- fmrs_all |> 
+  pivot_longer(
+    2:10,
+    names_to = "area",
+    values_to = "fmr"
+  ) |> 
+  mutate(
+    type = case_when(
+      area == "FMR" ~ "Average",
+      .default = "ZIP code"
+    ), .before = 2
+  ) |> 
+  mutate(
+    area = str_replace_all(area, "FMR", "Average"),
+    area = fct_other(
+      fct_reorder(area, fmr),
+      drop = "Average", other_level = "Average"
+      )
+  ) |> 
+  mutate(
+    bedrooms = case_match(
+      bedrooms,
+      "bedroom0" ~ "Studio",
+      "bedroom1" ~ "1 bedroom",
+      "bedroom2" ~ "2 bedroom",
+      "bedroom3" ~ "3 bedroom",
+      "bedroom4" ~ "4 bedroom",
+    ),
+    bedrooms = fct_inorder(bedrooms)
+  ) |> 
+  filter(bedrooms != "4 bedroom")
+
+ggplot(fmrs_plot, aes(x = fmr, y = area, fill = type)) +
+  facet_wrap(~bedrooms, scales = "free_y") +
+  geom_col() +
+  geom_text(
+    data = filter(fmrs_plot, area %in% c("Average", "22314", "22313")),
+    aes(label = label_currency(accuracy = 1)(fmr)), size = 9, color = "white", nudge_x = -300
+    ) +
+  scale_x_continuous(labels = label_currency(), expand = c(0, 0)) +
+  scale_fill_hda() +
+  theme_hda(base_size = 26) +
+  labs(
+    title = "ARHA 2023 Payment Standards",
+    subtitle = "Based on HUD FY 2023 Small Area Fair Market Rents (SAFMR) by ZIP code and unit size",
+    caption = "**Source:** Arlington Redevelopment and Housing Authority, \"Proposed Payment Standard 2023\""
+  ) +
+  theme(
+    axis.text.x = element_blank(),
+    panel.grid.major.y = element_blank(),
+    strip.text = element_text(face = "plain", color = "#383c3d", size = 28, hjust = 0),
+    plot.subtitle = element_markdown(margin = margin(t = -5, b = 2))
+  )
+
+ggsave("alx-safmr.png", width = 6.5, height = 4, units = "in", bg = "white")
+
+```
+
+```{r}
+#| label: tbl-fmrs
+#| tbl-cap: "ARHA 2023 Payment Standards"
+#| tbl-pos: H
+
+fmrs_tbl <- fmrs_all |> 
+  pivot_longer(
+    2:10,
+    names_to = "ZIP code",
+    values_to = "fmr"
+  ) |> 
+  mutate(
+    bedrooms = case_match(
+      bedrooms,
+      "bedroom0" ~ "Studio",
+      "bedroom1" ~ "1 bedroom",
+      "bedroom2" ~ "2 bedroom",
+      "bedroom3" ~ "3 bedroom",
+      "bedroom4" ~ "4 bedroom",
+    ),
+    bedrooms = fct_inorder(bedrooms),
+    `ZIP code` = str_to_title(`ZIP code`)
+  ) |> 
+  filter(bedrooms != "4 bedroom") |> 
+  pivot_wider(
+      names_from = bedrooms,
+      values_from = fmr
+    )
+
+if (knitr::is_html_output()) {
+
+  fmrs_tbl |>
+    filter(`ZIP code` != "Average") |> 
+    gt(
+      rowname_col = "ZIP code"
+    ) |> 
+    cols_width(
+      everything() ~ px(100)
+    ) |> 
+    cols_align(
+      align = "center",
+      columns = 2:5
+    ) |> 
+    cols_align(
+      align = "left",
+      columns = 1
+    ) |> 
+    fmt_currency(columns = 2:5, currency = "USD", decimals = 0) |> 
+    tab_source_note(
+      source_note = md("**Note:** Payment standards for 4 bedroom units not shown.")
+      ) |> 
+    tab_style(
+      style = cell_text(weight = "bold"),
+      locations = cells_column_labels()
+    ) |> 
+    tab_style(
+      style = cell_text(align = "left"),
+      locations = cells_body(columns = 1)
+    ) |> 
+    grand_summary_rows(
+      columns = 2:5,
+      fns = Average ~ mean(.),
+      fmt = ~ fmt_currency(., currency = "USD", decimals = 2)
+    )
+  
+} else {
+
+  fmrs_tbl |>
+    mutate(
+      across(
+        2:5,
+        ~ if_else(
+          row_number() %in% grep("Average", `ZIP code`),
+          paste0("$", formatC(as.numeric(.x), format = "f", digits = 2, big.mark = ",")),
+          paste0("$", formatC(as.numeric(.x), format = "f", digits = 0, big.mark = ","))
+          )
+        )
+      ) |> 
+    kbl(booktabs = T, align = "lcccc", linesep = "") |> 
+    row_spec(0, bold = T) |> 
+    row_spec(9, bold = T) |> 
+    kable_styling(full_width = T, latex_options = "HOLD_position")
+  
+}
 
 ```

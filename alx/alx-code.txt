@@ -1,0 +1,27 @@
+library(tidyverse)
+
+# Distribution of households by AMI
+sC_ami <- c(`30% AMI` = 0.25, `40% AMI` = 0.50, `50% AMI` = 0.25)
+
+# Distribution of households by unit size
+sC_unit <- c(`bedroom1` = 1/3, `bedroom2` = 1/3, `bedroom3` = 1/3)
+
+# Distribution of household sizes by unit size
+sC_person <- list(
+    `bedroom1` = c(`person2` = 1),
+    `bedroom2` = c(`person2` = 0.5, `person3` = 0.5),
+    `bedroom3` = c(`person3` = 0.5, `person4` = 0.5)
+  )
+
+# Create data frame with 15 different permutations of AMI, unit size, and household size
+sC_hh_type <- expand.grid(
+  AMI = names(sC_ami),
+  bedrooms = names(sC_unit),
+  hh_size = unlist(lapply(names(sC_person), function(unit) names(sC_person[[unit]])))
+  ) |>
+  distinct() |> 
+  filter(
+    !(bedrooms == "bedroom1" & !hh_size == "person2"),
+    !(bedrooms == "bedroom2" & hh_size == "person4"),
+    !(bedrooms == "bedroom3" & hh_size == "person2")
+  )
