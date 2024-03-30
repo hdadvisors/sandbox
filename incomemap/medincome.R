@@ -5,8 +5,7 @@ library(sf)
 library(tigris)
 library(scales)
 
-b19013_defns <- load_variables(2021, "acs5") |> 
-  filter(name == "B19013_001")
+
 
 medincome <- get_acs(
   geography = "tract",
@@ -20,7 +19,11 @@ medincome <- get_acs(
     str_detect(NAME, "Richmond city") | 
       str_detect(NAME, "Henrico") | 
       str_detect(NAME, "Chesterfield")) |> 
-  mutate(NAME = str_remove_all(NAME, "; Virginia"))
+  mutate(NAME = str_remove_all(NAME, "; Virginia")) |> 
+  mutate(AMI = percent(estimate/109400)) |> #FY 2023 Median Income
+  st_transform(crs = "+proj=longlat +datum=WGS84")
+
+write_rds(medincome, "incomemap/medincome.rds")
 
 
 
@@ -30,12 +33,21 @@ medincome <- get_acs(
 pal <- colorNumeric(palette = "Blues", domain = medincome$estimate)
 
 
-leaflet() |> 
-  addTiles() |>
-  addPolygons(data = medincome, 
+leaflet() %>%
+  addTiles() |> 
+  addPolygons(data = medincome,
               color = ~pal(estimate),
               fillOpacity = 0.6,
               opacity = 1,
               weight = 1,
-              popup = scales::dollar_format(estimate))
+              popup = ~paste("Location:", NAME, "<br>",
+                             "2022 Median Household Income:", 
+                             scales::dollar(estimate), "<br>",
+                             "Percent AMI (using 2023 Median):", AMI)) |> 
+  addLegend(data = medincome,
+            pal = pal, 
+            values = ~estimate,
+            title = "Median Household Income",
+            opacity = 0.6,
+            position = "bottomright")
   

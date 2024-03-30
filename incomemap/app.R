@@ -6,27 +6,42 @@ library(scales)
 library(leaflet.extras)
 
 
-
-medincome <- get_acs(
-  geography = "tract",
-  state = "VA",
-  table = "B19013",
-  year = 2022,
-  survey = "acs5",
-  geometry = TRUE
-) |> 
-  filter(
-    str_detect(NAME, "Richmond city") | 
-      str_detect(NAME, "Henrico") | 
-      str_detect(NAME, "Chesterfield")) |> 
-  mutate(NAME = str_remove(NAME, "; Virginia")) |> 
-  mutate(AMI = percent(estimate/109400)) #FY 2023 Median Income
+medincome <- read_rds("medincome.rds")
+# medincome <- get_acs(
+#   geography = "tract",
+#   state = "VA",
+#   table = "B19013",
+#   year = 2022,
+#   survey = "acs5",
+#   geometry = TRUE
+# ) |> 
+#   filter(
+#     str_detect(NAME, "Richmond city") | 
+#       str_detect(NAME, "Henrico") | 
+#       str_detect(NAME, "Chesterfield")) |> 
+#   mutate(NAME = str_remove(NAME, "; Virginia")) |> 
+  # mutate(AMI = percent(estimate/109400)) |> #FY 2023 Median Income
+  # st_transform(crs = "+proj=longlat +datum=WGS84")
 
 
 # Define UI
+
+tags$style(HTML("
+  .shiny-output {
+    width: 100vw !important;
+    height: 100vh !important;
+  }
+"))
+
 ui <- fluidPage(
+  tags$style(HTML("
+    .shiny-output {
+      width: 100vw !important;
+      height: 100vh !important;
+    }
+  ")),
   titlePanel("Median Household Income by Census Tract"),
-  leafletOutput("map", width = "100%", height = "100%")
+  leafletOutput("map")
 )
 
 # Define server logic
@@ -36,7 +51,7 @@ server <- function(input, output, session) {
   
   output$map <- renderLeaflet({
     leaflet() %>%
-      addTiles() %>%
+      addTiles() |> 
       addPolygons(data = medincome,
                   color = ~pal(estimate),
                   fillOpacity = 0.6,
