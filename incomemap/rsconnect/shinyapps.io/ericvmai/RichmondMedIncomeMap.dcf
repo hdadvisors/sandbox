@@ -1,0 +1,13 @@
+name: RichmondMedIncomeMap
+title: RichmondMedIncomeMap
+username: ericvmai
+account: ericvmai
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 11614833
+bundleId: 8432460
+url: https://ericvmai.shinyapps.io/RichmondMedIncomeMap/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: medincome.R
