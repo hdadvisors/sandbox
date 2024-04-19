@@ -3,7 +3,7 @@ library(scales)
 library(hdatools)
 library(readxl)
 
-adu_raw <- read_xlsx("sandbox/jcc/va-adu-ratios.xlsx")
+adu_raw <- read_xlsx("va-adu-ratios.xlsx")
 
 ## Data 1 -------------------
 
@@ -99,7 +99,7 @@ ggplot(adu_1,
 
 ## Plot 2 -------------------
 
-ggplot(adu,
+ggplot(adu_2,
        aes(
          x = affordable,
          y = density,
@@ -146,10 +146,12 @@ ggplot(adu,
     y = "Density bonus\n",
     caption = "**Source:** Va. Code Ann. § 15.2-2305 and § 15.2-2305.1."
   ) +
-  theme_hfv() +
+  theme_hfv(base_size = 16) +
   theme(
     axis.title = element_text(),
     #axis.title.y = element_text(angle = 0, vjust = 1, hjust = 0),
     axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1),
     panel.grid.major.x = element_line(color = "#cbcdcc", size = 0.05)
   )
+
+ggsave("adu.png", bg = "white", height = 3, width = 5.36)
