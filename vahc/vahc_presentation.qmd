@@ -1,0 +1,40 @@
+---
+title: "How Data Drives Understanding"
+subtitle: "Unveiling Housing Trends & BIPOC Impact"
+format:
+  revealjs:
+    incremental: true
+    self-contained: true
+    theme: ../custom.scss
+    template-partials: 
+      - ../slides/title-slide.html
+    height: 900
+    width: 1400
+    slide-number: c/t
+    logo: ../img/hfv_icon_white.png
+    from: markdown+emoji
+    footer: "Virginia Housing Counselors Conference | April 30, 2024"
+---
+
+## Agenda
+
+-   Intro
+-   Who is HFV?
+-   Why should you care about data?
+-   Homeownership rates
+-   
+
+## Bullets
+
+When you click the **Render** button a document will be generated that includes:
+
+-   Content authored with markdown
+-   Output from executable code
+
+## Code
+
+When you click the **Render** button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
