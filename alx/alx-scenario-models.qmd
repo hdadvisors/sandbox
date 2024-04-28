@@ -48,64 +48,7 @@ library(janitor)
 library(hdatools)
 ```
 
-```{r}
 
-funding <- tibble(
-  var = c("hh", "budget"),
-  PRS = c(36, 204000),
-  sA = c(56, 500000),
-  sB = c(150, 3030142),
-  sC = c(58, 500000)
-  ) 
-
-funding <- tibble(
-  var = c("Pilot Rental Subsidy", "LRSP Scenario A", "LRSP Scenario B", "LRSP Scenario C"),
-  budget = c(204000, 500000, 3030142, 500000),
-  hh = c(36, 56, 150, 58)
-  ) |> 
-  mutate(per_hh = budget/hh)
-
-funding_plot <- funding |> 
-  rowwise() |> 
-  mutate(data = list(tibble(
-    hh_served = 25:175,
-    projected_budget = per_hh * hh_served
-  ))) |> 
-  unnest(data) |> 
-  mutate(var = fct_reorder(var, projected_budget, mean))
-
-label_data <- funding |> 
-  mutate(hh_served = 100,  # Position for the label in the middle
-         projected_budget = 3750000) |> 
-  mutate(text = str_wrap("Average annual cost per household", 18)) |> 
-  mutate(per_hh = paste0("$", format(round(per_hh), big.mark = ",", trim = TRUE))) |> 
-  mutate(var = fct_reorder(var, projected_budget, mean))
-  
-ggplot(funding_plot, aes(x = hh_served, y = projected_budget/1000000, color = var, fill = var)) +
-  facet_wrap(~var, nrow = 1) +
-  geom_line(linewidth = 1.25, lineend = "round") +
-  geom_area(alpha = 0.5) +
-  geom_text(data = label_data, aes(label = text), size = 8, lineheight = 0.3, nudge_y = -0.45) +
-  geom_text(data = label_data, aes(label = per_hh), size = 16) +
-  scale_color_hda() +
-  scale_fill_hda() +
-  scale_y_continuous(
-    limits = c(0, 4),
-    breaks = seq(0, 4, 0.5),
-    expand = c(0.02, 0.01),
-    labels = label_currency(accuracy = 0.1, suffix = "M")
-    ) +
-  add_zero_line() +
-  labs(
-    title = "Projected funding scopes for local rental assistance programs",
-    subtitle = "Estimated annual program budget (millions) and households served",
-    caption = "**Notes:** Pilot Rental Subsidy data as of September 2023. Plots show range of 25 to 175 households served."
-  ) +
-  theme_hda(base_size = 26)
-
-ggsave("alx/alx-funding.png", width = 6.5, height = 4, units = "in", bg = "white")
-
-```
 
 ## Standard parameters
 
@@ -457,14 +400,12 @@ This scenario outlines a LRSP with a total annual allocation of \$500,000. The p
 |                                    | rent at 60% AMI and the affordable monthly\newline   |
 |                                    | rent at 40% AMI\newline                              |
 +------------------------------------+------------------------------------------------------+
-| *Distribution of unit sizes*\      | 25% - Studios\newline                                |
-| *among participants*               | 25% - 1-bedroom\newline                              |
-|                                    | 25% - 2-bedroom\newline                              |
-|                                    | 25% - 3-bedroom\newline                              |
-+------------------------------------+------------------------------------------------------+
-| *Distribution of incomes*\         | 25% - 30% AMI\newline                                |
-| *among participants*               | 50% - 40% AMI\newline                                |
-|                                    | 25% - 50% AMI\newline                                |
+| *Distribution of household*\       | 15% - 1-person\newline                               |
+| *sizes among participants*         | 15% - 2-person\newline                               |
+|                                    | 20% - 3-person\newline                               |
+|                                    | 20% - 4-person\newline                               |
+|                                    | 20% - 5-person\newline                               |
+|                                    | 10% - 6-person\newline                               |
 +------------------------------------+------------------------------------------------------+
 | *Administrative overhead*          | 15% of total program budget                          |
 +------------------------------------+------------------------------------------------------+
@@ -473,7 +414,7 @@ Notes:
 
 * No other eligibility conditions apply.
 * “Affordable monthly rent” is 30% of gross household income.
-* The subsidy calculated for each household is respective to their household size.
+* The subsidy calculated for each household is respective to their household size. No assumed breakdown of households by AMI is needed.
 * The administrative overhead includes housing-specific case management.
 
 \newpage
@@ -493,62 +434,22 @@ sA_overhead <- 0.15
 
 ```
 
-Assign household distributions by AMI and unit size (number of bedrooms):
+Assign household distributions by household size (number of persons):
 
 ```{r}
 #| echo: true
 
-# Distribution of households by AMI
-sA_ami <- c(`30% AMI` = 0.25, `40% AMI` = 0.50, `50% AMI` = 0.25)
-
-# Distribution of households by unit size
-sA_unit <- c(
-  `bedroom0` = 0.25, `bedroom1` = 0.25,
-  `bedroom2` = 0.25, `bedroom3` = 0.25
-  )
-
-```
-
-Subsidy amounts are determined by household size, but the model assumptions only provide a distribution of unit sizes. Therefore, we need to make reasonable assumptions about the distribution of different household sizes among each unit size, as defined by number of bedrooms (`bedrooms`). This breakdown is shown in the code below:
-
-* Studio: 100% 1-person
-* 1-bedroom: 100% 2-person
-* 2-bedroom: 70% 3-person, 30% 4-person
-* 3-bedroom: 50% 4-person, 50% 5-person
-
-```{r}
-#| echo: true
-
-# Distribution of household sizes by unit size
-sA_person <- list(
-    `bedroom0` = c(`person1` = 0.75, `person2` = 0.25),
-    `bedroom1` = c(`person2` = 1),
-    `bedroom2` = c(`person3` = 0.2, `person4` = 0.8),
-    `bedroom3` = c(`person4` = 0.2, `person5` = 0.5, `person6` = 0.3)
-  )
-
-```
-
-```{r}
-
-sA_person |>
-  enframe(name = "bedrooms", value = "persons") |> 
-  unnest(persons) |> 
-  mutate(person = names(persons)) |> 
-  pivot_wider(names_from = person, values_from = persons) |> 
-  mutate(
-    across(2:7, ~ as.character(.x)),
-    across(2:7, ~ replace_na(.x, "-"))
-    ) |> 
-  kbl(booktabs = T, align = "lcccccc", linesep = "") |> 
-  row_spec(0, bold = T) |> 
-  kable_styling(full_width = T, latex_options = "hold_position")
+# Distribution of households by household size
+sA_person <- tibble(
+  hh_size = paste0("person", 1:6),
+  pct = c(0.15, 0.15, 0.20, 0.20, 0.20, 0.10)
+)
 
 ```
 
 ### Calculations
 
-Calculate affordable rents at 40% AMI and 60% AMI for households with 1 to 5 persons (`hh_size`) to determine monthly subsidy amounts (`subsidy`): 
+Calculate affordable rents at 40% AMI and 60% AMI for households with 1 to 6 persons (`hh_size`) to determine monthly subsidy amounts (`subsidy`): 
 
 ```{r}
 #| echo: true
@@ -557,7 +458,7 @@ Calculate affordable rents at 40% AMI and 60% AMI for households with 1 to 5 per
 sA_subsidy <- hud_ami |> 
   filter(
     AMI %in% c("40% AMI", "60% AMI"), # 40% and 60% AMI only
-    str_detect(hh_size, "[123456]")    # 1-5 person households only
+    str_detect(hh_size, "[123456]")   # 1-6 person households only
     ) |> 
   mutate(
     aff_rent = income/12 * 0.3        # 30% of monthly income
@@ -583,91 +484,13 @@ sA_subsidy |>
 
 ```
 
-\newpage
-
-Create a function that tabulates the respective household distributions by AMI, household size, and unit type: 
-
-```{r}
-#| echo: true
-
-sA_dist_fn <- function() {
-  
-  # Build data frame with AMI and unit size distributions
-  dist <- expand.grid(
-    AMI = names(sA_ami),
-    bedrooms = names(sA_unit)
-  ) |>
-    # Calculate unique shares for both AMI and unit size
-    mutate(households = sA_ami[AMI] * sA_unit[bedrooms])
-
-  # Initialize an empty data frame for the final distribution
-  final_distribution <- data.frame()
-
-  # Iterate distribution by household size
-  for (bedroom in names(sA_person)) {
-    current_dist <- subset(dist, bedrooms == bedroom)
-
-    for (person_count in names(sA_person[[bedroom]])) {
-      current_dist$hh_size <- as.character(person_count)
-
-      current_dist$pct <- current_dist$households *
-        sA_person[[bedroom]][person_count]
-
-      final_distribution <- rbind(
-        final_distribution,
-        current_dist[, c("AMI", "bedrooms", "hh_size", "pct")]
-      )
-    }
-  }
-
-  final_distribution
-}
-
-sA_dist <- sA_dist_fn()
-
-```
-
-```{r}
-
-sA_dist |> 
-  arrange(AMI) |> 
-  kbl(booktabs = T, align = "lllc", linesep = "", row.names = FALSE) |> 
-  row_spec(0, bold = T) |> 
-  collapse_rows(columns = 1:2, valign = "top") |> 
-  kable_styling(full_width = T, latex_options = "hold_position", font_size = 8)
-
-```
-
-\newpage
-
-Because the subsidy amounts only vary by household size, unit size and AMI are no longer necessary. Sum the individual household shares by household size:
-
-```{r}
-#| echo: true
-
-# Household share subtotals by household size
-sA_hhsize <- sA_dist |>
-  summarise(pct = sum(pct), .by = hh_size)
-
-```
-
-```{r}
-
-sA_hhsize |> 
-  kbl(booktabs = T, align = "lc", linesep = "", row.names = FALSE) |> 
-  row_spec(0, bold = T) |> 
-  kable_styling(full_width = T, latex_options = "hold_position")
-
-```
-
-\
 Join the monthly subsidy amounts by household size (`subsidy`) and calculate annual subsidy per household (`subsidy_annual`):
 
 ```{r}
 #| echo: true
 
 # Annual subsidy per household size
-sA_subsidy_annual <- sA_hhsize |>
+sA_subsidy_annual <- sA_person |>
   left_join(sA_subsidy) |> 
   mutate(subsidy_annual = subsidy * 12)
 
@@ -683,27 +506,35 @@ sA_subsidy_annual |>
 ```
 
 \
-Determine each share of the total annual program budget (minus overhead costs) by household size (`budget`), then divide by the annual subsidy per household to calculate the estimates number of households served per household size (`hh_served`):
+Calculate the theoretical share of subsidy allocated for each household size (`subsidy_share`). Determine the number of households served (`hh_served`) by normalizing `subsidy_share` to the known budget, then calculate the budget share (`budget`) for each household size:
 
 ```{r}
 #| echo: true
 
-# Estimated budget and households served
+# Annual subsidy per household type
 sA_served <- sA_subsidy_annual |>
   mutate(
-    budget = (sA_budget * (1 - sA_overhead)) * pct,
-    hh_served = budget / subsidy_annual
-  )
+    subsidy_share = subsidy_annual * pct, # Subsidy per HH type
+    hh_served = pct*(sA_budget * (1 - sA_overhead))/sum(subsidy_share) # Adjust to known budget
+  ) |> 
+  mutate(budget = hh_served * subsidy_annual)
 
 ```
 
 ```{r}
 
-sA_served |> 
-  mutate(hh_served = formattable::digits(hh_served, 3)) |> 
-  kbl(booktabs = T, align = "lccccc", linesep = "", row.names = FALSE) |> 
+# OK
+
+sA_served |>
+  select(1, 4, 5, 7, 6) |> 
+  mutate(
+    across(3:4, ~formattable::digits(.x, 2)),
+    hh_served = formattable::digits(hh_served, 3)
+    ) |> 
+  adorn_totals(,,,,4,5) |> 
+  kbl(booktabs = T, align = "lcccc", linesep = "", row.names = FALSE) |> 
   row_spec(0, bold = T) |> 
-  kable_styling(full_width = T, latex_options = "hold_position")
+  kable_styling(full_width = T, latex_options = "hold_position", font_size = 8)
 
 ```
 
@@ -718,7 +549,7 @@ Round each estimate to the nearest whole number and determine total:
 
 # Rounded estimates with grand total
 sA_estimate <- sA_served |>
-  select(1, 5, 6) |> 
+  select(1, 7, 6) |> 
   mutate(
     hh_served = round(hh_served),
     hh_size = case_match(
@@ -752,15 +583,19 @@ sA_estimate |>
   row_spec(7, bold = T) |>
   kable_styling(full_width = T, latex_options = "hold_position")
 
+sA_total <- sum(round(sA_served$hh_served))
+
+sA_avg <- (sA_budget)/sA_total
+
 ```
 
 ::: callout-note
 ### Scenario A results
 
-*Average annual program cost per household: $8,928.57*
+*Average annual program cost per household: `{r} label_currency()(sA_avg)`*
 
 \
-Under Scenario A, a total program budget of \$500,000 with a 15% administrative overhead leaves \$425,000 to fund rental assistance. Given the assumed household distributions by AMI, unit size, and household size, the total number of households served is 56. Over half of these would be persons living on their own, or with one other person.
+Under Scenario A, a total program budget of \$500,000 with a 15% administrative overhead leaves \$425,000 to fund rental assistance. Given the assumed household distribution by household size, the total number of households served is `{r} sA_total`.
 :::
 
 \newpage
@@ -998,6 +833,12 @@ sB_budget |>
   add_header_above(c(" " = 3, "Estimated budget" = 2)) |> 
   kable_styling(full_width = T, latex_options = "hold_position")
 
+sB_rent <- sum(sB_budget$budget_rent)/2 # Remove totaled sum
+
+sB_total <- sum(sB_budget$budget_total)/2 # Remove totaled sum
+
+sB_avg <- (sB_total)/sB_hh_served
+
 ```
 
 \newpage
@@ -1005,10 +846,10 @@ sB_budget |>
 ::: callout-note
 ### Scenario B results
 
-*Average annual program cost per household: $20,200.95*
+*Average annual program cost per household: `{r} label_currency()(sB_avg)`*
 
 \
-Under Scenario B, a total of 150 households experiencing housing insecurity are served. Although two-thirds are individuals who have lower housing costs than households with children, the average cost per household is over twice that of Scenario A, due to the deep level of subsidy provided. The estimated annual cost for the rental assistance alone is \$2,424,114. Coupled with a higher administrative overhead for expanded case management (20%), the total projected funding required is \$3,030,142.50.
+Under Scenario B, a total of 150 households experiencing housing insecurity are served. Although two-thirds are individuals who have lower housing costs than households with children, the average cost per household is over twice that of Scenario A, due to the deep level of subsidy provided. The estimated annual cost for the rental assistance alone is `{r} label_currency(accuracy = 0.01)(sB_rent)`. Coupled with a higher administrative overhead for expanded case management (20%), the total projected funding required is `{r} label_currency(accuracy = 0.01)(sB_total)`.
 :::
 
 \newpage
@@ -1029,9 +870,11 @@ This scenario outlines a LRSP with a total annual allocation of $500,000. The pr
 | *Subsidy amount*                   | Difference between the SAFMR and\newline             |
 |                                    | 40% AMI of gross household income\newline            |
 +------------------------------------+------------------------------------------------------+
-| *Distribution of unit sizes*\      | 1/3 - 1-bedroom\newline                              |
-| *among participants*               | 1/3 - 2-bedroom\newline                              |
-|                                    | 1/3 - 3-bedroom\newline                              |
+| *Distribution of household*\       | 15% - 2-person\newline                               |
+| *sizes among participants*         | 25% - 3-person\newline                               |
+|                                    | 25% - 4-person\newline                               |
+|                                    | 25% - 5-person\newline                               |
+|                                    | 10% - 6-person\newline                               |
 +------------------------------------+------------------------------------------------------+
 | *Distribution of incomes*\         | 25% - 30% AMI\newline                                |
 | *among participants*               | 50% - 40% AMI\newline                                |
@@ -1045,6 +888,7 @@ Notes:
 * SAFMR refers to the Small Area Fair Market Rent as adopted by Alexandria Redevelopment and Housing Authority (ARHA) for 2023.
 * The affordable monthly rent is 40% of gross household income, not the standard 30%.
 * The subsidy calculated for each household is respective to their household size.
+* Families will only occupy 1-bedroom, 2-bedroom, or 3-bedroom units.
 * The administrative overhead includes housing-specific case management.
 
 \newpage
@@ -1064,7 +908,7 @@ sC_overhead <- 0.15
 
 ```
 
-Assign household distributions by AMI and unit size (number of bedrooms):
+Assign household distributions by AMI and household size (number of persons):
 
 ```{r}
 #| echo: true
@@ -1072,46 +916,52 @@ Assign household distributions by AMI and unit size (number of bedrooms):
 # Distribution of households by AMI
 sC_ami <- c(`30% AMI` = 0.25, `40% AMI` = 0.50, `50% AMI` = 0.25)
 
-# Distribution of households by unit size
-sC_unit <- c(`bedroom1` = 1/3, `bedroom2` = 1/3, `bedroom3` = 1/3)
+# Distribution of households by household size
+sC_person <- tibble(
+  hh_size = paste0("person", 2:6),
+  pct = c(0.15, 0.25, 0.25, 0.25, 0.10)
+)
 
 ```
 
-Under this scenario, only households with a dependent are eligible, so the model will exclude 1-person households. For simplicity, only households with 2 to 4 persons are considered. We will distribute household sizes by unit type accordingly:
+Because subsidy amounts will be calculated using SAFMR, we also need to estimate household shares across units by size (number of bedrooms). The model will use the following assumptions:
 
-* 1-bedroom: 100% 2-person
-* 2-bedroom: 20% 2-person, 60% 3-person, 20% 4-person
-* 3-bedroom: 20% 3-person, 40% 4-person, 20% 5-person, 20% 6-person
+* 2-person: 100% 1-bedroom
+* 3-person: 10% 1-bedroom, 90% 2-bedroom
+* 4-person: 80% 2-bedroom, 20% 3-bedroom
+* 5-person: 100% 3-bedroom
+* 6-person: 100% 3-bedroom
 
 ```{r}
 #| echo: true
 
 # Distribution of household sizes by unit size
-sC_person <- list(
-    `bedroom1` = c(`person2` = 1),
-    `bedroom2` = c(`person3` = 0.3, `person4` = 0.7),
-    `bedroom3` = c(`person4` = 0.3, `person5` = 0.4, `person6` = 0.3)
+sC_unit <- list(
+    `person2` = c(`bedroom1` = 1),
+    `person3` = c(`bedroom1` = 0.1, `bedroom2` = 0.9),
+    `person4` = c(`bedroom2` = 0.8, `bedroom3` = 0.2),
+    `person5` = c(`bedroom3` = 1),
+    `person6` = c(`bedroom3` = 1)
   )
 
 ```
 
 ```{r}
 
-sC_person |>
-  enframe(name = "bedrooms", value = "persons") |> 
-  unnest(persons) |> 
-  mutate(person = names(persons)) |> 
-  pivot_wider(names_from = person, values_from = persons) |> 
+sC_unit |>
+  enframe(name = "persons", value = "bedrooms") |> 
+  unnest(bedrooms) |> 
+  mutate(bedroom = names(bedrooms)) |> 
+  pivot_wider(names_from = bedroom, values_from = bedrooms) |> 
   mutate(
-    across(2:6, ~ as.character(.x)),
-    across(2:6, ~ replace_na(.x, "-"))
+    across(2:4, ~ as.character(.x)),
+    across(2:4, ~ replace_na(.x, "-"))
     ) |> 
-  kbl(booktabs = T, align = "lccccc", linesep = "") |> 
+  kbl(booktabs = T, align = "lccc", linesep = "") |> 
   row_spec(0, bold = T) |> 
   kable_styling(full_width = T, latex_options = "hold_position")
 
 ```
-
 
 \newpage
 
@@ -1122,12 +972,12 @@ Create data frame with all permutations for income, unit size, and household siz
 
 sC_hh_type <- expand.grid(
   AMI = names(sC_ami),
-  bedrooms = names(sC_unit),
-  hh_size = unlist(lapply(names(sC_person), function(unit) names(sC_person[[unit]])))
+  bedrooms = unlist(lapply(names(sC_unit), function(unit) names(sC_unit[[unit]]))),
+  hh_size = sC_person$hh_size
   ) |>
   distinct() |> 
   filter(
-    !(bedrooms == "bedroom1" & !hh_size == "person2"),
+    !(bedrooms == "bedroom1" & !hh_size %in% c("person2", "person3")),
     !(bedrooms == "bedroom2" & hh_size %in% c("person2", "person5", "person6")),
     !(bedrooms == "bedroom3" & hh_size %in% c("person2", "person3"))
   )
@@ -1145,26 +995,28 @@ Create a function that tabulates the respective household distributions by AMI, 
 
 sC_dist_fn <- function() {
   
-  # Build data frame with AMI and unit size distributions
+  # Build data frame with AMI and household size distributions
   dist <- expand.grid(
     AMI = names(sC_ami),
-    bedrooms = names(sC_unit)
+    hh_size = sC_person$hh_size
   ) |>
-    # Calculate unique shares for both AMI and unit size
-    mutate(households = sC_ami[AMI] * sC_unit[bedrooms])
+    mutate(
+      # Match hh_size with sC_person$hh_size to fetch the correct percentage
+      households = sC_ami[AMI] * sC_person$pct[match(hh_size, sC_person$hh_size)]
+    )
 
   # Initialize an empty data frame for the final distribution
   final_distribution <- data.frame()
 
-  # Iterate distribution by household size
-  for (bedroom in names(sC_person)) {
-    current_dist <- subset(dist, bedrooms == bedroom)
+  # Iterate distribution by unit size
+  for (person in unique(sC_hh_type$hh_size)) {
+    current_dist <- subset(dist, hh_size == person)
 
-    for (person_count in names(sC_person[[bedroom]])) {
-      current_dist$hh_size <- as.character(person_count)
+    for (bedroom_count in names(sC_unit[[person]])) {
+      current_dist$bedrooms <- as.character(bedroom_count)
 
       current_dist$pct <- current_dist$households *
-        sC_person[[bedroom]][person_count]
+        sC_unit[[person]][bedroom_count]
 
       final_distribution <- rbind(
         final_distribution,
@@ -1173,7 +1025,7 @@ sC_dist_fn <- function() {
     }
   }
 
-  final_distribution
+  return(final_distribution)
 }
 
 sC_dist <- sC_dist_fn()
@@ -1182,22 +1034,7 @@ sC_dist <- sC_dist_fn()
 
 \newpage
 
-```{r}
-
-# OK
-
-sC_dist |> 
-  arrange(AMI, bedrooms) |> 
-  mutate(pct = round(pct, 4)) |> 
-  kbl(booktabs = T, align = "lllc", linesep = "", row.names = FALSE) |> 
-  row_spec(0, bold = T) |> 
-  collapse_rows(columns = 1:2, valign = "top") |> 
-  kable_styling(full_width = T, latex_options = "hold_position", font_size = 8)
-
-```
-
-\
-Calculate affordable rents (`aff_rent`) at 30% AMI, 40% AMI, and 50% AMI for households with 2 to 4 persons (`hh_size`): 
+Calculate affordable rents (`aff_rent`) at 30% AMI, 40% AMI, and 50% AMI for households with 2 to 6 persons (`hh_size`): 
 
 ```{r}
 #| echo: true
@@ -1229,7 +1066,8 @@ sC_aff_rents |>
 
 ```
 
-\
+\newpage
+
 Join `sC_hh_type` with average FMR by unit size (`fmrs_avg`) and affordable rents (`sC_aff_rents`), then find difference between values to calculate the monthly subsidy (`subsidy`): 
 
 ```{r}
@@ -1244,8 +1082,6 @@ sC_subsidy <- sC_hh_type |>
 
 ```{r}
 
-# eval: false
-
 sC_subsidy_tbl <- sC_subsidy |> 
   arrange(AMI, bedrooms) |> 
   mutate(
@@ -1259,61 +1095,222 @@ sC_subsidy_tbl |>
   collapse_rows(columns = 1:2, valign = "top") |> 
   kable_styling(full_width = T, font_size = 8)
 
-  #kbl(row.names = FALSE, escape = F, format = "latex")
-  #kable_styling(full_width = T, latex_options = "hold_position")
-
 ```
+
+\newpage
 
 ::: callout-warning
 ### Some affordable rents almost equal to FMRs
-Note that the subsidy for two household types is negligible --- under \$50. (See red values.) These cases are the result of higher affordable rents among those earning 50% AMI or more, along with the higher 40% tenant contribution.
+Note that the subsidies for 5 household types are negligible --- under \$50. (See red values.) These cases are the result of higher affordable rents among those earning 50% AMI or more, along with the higher 40% tenant contribution.
 :::
 
-\
-For the purposes of this model, these household types with no or very little subsidy need will be excluded. We will evenly redistribute the shares for those types across all other permutations.
+For the purposes of this model, these household types with no or very little subsidy need will be excluded. The sum of their respective shares will be redistributed to the remaining 16 household combinations.
+
+Calculate total shares of excluded and remaining household types:
 
 ```{r}
 #| echo: true
 
-sC_redist <- sC_subsidy |> 
+sC_excl <- sC_subsidy |> 
   left_join(sC_dist, join_by(AMI, bedrooms, hh_size)) |> 
-  filter(subsidy > 50) |> 
   mutate(
-    pct_redist = pct + (1 - sum(pct))/n()
-    )
+    status = case_when(
+      subsidy < 50 ~ "exclude",
+      subsidy > 50 ~ "retain"
+    ),
+    .before = 7
+  )
 
 ```
 
 ```{r}
 
-# OK
+sC_excl |> 
+  summarise(pct = sum(pct), .by = status) |> 
+  kbl(booktabs = T, align = "lc", linesep = "") |> 
+  row_spec(0, bold = T) |> 
+  row_spec(2, color = "red") |> 
+  kable_styling(full_width = T, font_size = 8)
+
+```
+
+Evenly distributing this 0.175 across the remaining 16 combinations would not respect the original group distributions by AMI and household size. Therefore, this surplus share will be manually redistributed to each remaining combination to ensure the new AMI and household size group subtotals are as close to the original values as possible.
+
+First, we determine the change in shares by each AMI and household size group resulting from excluding the 5 invalid combinations.
+
+```{r}
+
+sC_excl_grp <- sC_excl |> 
+  select(1:3, 7:8) |> 
+  mutate(
+    pct_excl =
+      case_when(
+        status == "retain" ~ pct,
+        status == "exclude" ~ 0
+      )
+  )
+
+```
+
+Change in shares grouped by AMI:
+
+```{r}
+
+sC_excl_ami <- sC_excl_grp |> 
+  group_by(AMI) |> 
+  summarise(across(4:5, sum)) |> 
+  mutate(diff = pct_excl - pct)
+
+sC_excl_ami |> 
+  kbl(booktabs = T, align = "lccc", linesep = "") |> 
+  row_spec(0, bold = T) |> 
+  column_spec(4, color = if_else(sC_excl_ami$diff < 0, "red", "black")) |>
+  kable_styling(full_width = T, font_size = 8)
+
+```
+
+Change in shares grouped by household size:
+
+```{r}
+
+sC_excl_hhsize <- sC_excl_grp |> 
+  group_by(hh_size) |> 
+  summarise(across(4:5, sum)) |> 
+  mutate(diff = pct_excl - pct)
+
+sC_excl_hhsize |> 
+  kbl(booktabs = T, align = "lccc", linesep = "") |> 
+  row_spec(0, bold = T) |> 
+  column_spec(4, color = if_else(sC_excl_hhsize$diff < 0, "red", "black")) |>
+  kable_styling(full_width = T, font_size = 8)
+
+```
+
+\newpage
+
+In redistributing these shares, we will need to:
+
+* Significantly increase the remaining 50% AMI household types (4-person and 5-person in 3-bedroom units) to maintain overall balance across AMI groups
+* Reduce the corresponding shares in both 30% AMI and 40% AMI groups to maintain overall balance across household sizes
+* Slightly increase the 2-person, 3-person, and 6-person household types in both 30% AMI and 40% AMI groups to account for losses within 50% AMI category
+
+To accomplish this, the excluded share is divided into 16 parts ($p$):
+
+$$p = \frac{0.175}{16} = 0.0109375$$
+
+```{r}
+
+p <- 0.175/16
+
+```
+
+We can increase or decrease each household combination by a multiple of $p$ as long as the net increase across all households is $+16p$. 
+
+The following allocation reproduces the original AMI distribution, and a new household size distribution where each category is within $\pm 0.02$ of the original share.
+
+```{r}
+
+sC_redist <- sC_excl_grp |> 
+  filter(status == "retain") |> 
+  select(1, 2, 3, 5) |> 
+  arrange(AMI, hh_size, bedrooms) |> 
+  mutate(
+    p_shares = case_when(
+      AMI == "30% AMI" & bedrooms == "bedroom2" & hh_size == "person4" ~ 0,
+      AMI == "30% AMI" & bedrooms == "bedroom3" & hh_size == "person4" ~ -1,
+      AMI == "30% AMI" & bedrooms == "bedroom3" & hh_size == "person5" ~ -3,
+      AMI == "40% AMI" & bedrooms == "bedroom3" & hh_size == "person4" ~ -2,
+      AMI == "40% AMI" & bedrooms == "bedroom3" & hh_size == "person5" ~ -4,
+      AMI == "40% AMI" & bedrooms == "bedroom3" & hh_size == "person6" ~ 2,
+      AMI == "50% AMI" ~ 8,
+      .default = 1
+    ),
+    pct_redist = pct + (p*p_shares)
+  )
 
 sC_redist |> 
-  arrange(AMI, bedrooms) |> 
-  select(1:3, 6:8) |> 
-  mutate(
-    across(4:6, ~ round(.x, 4))
-    ) |> 
+  mutate(across(c(4,6), ~ round(.x, 4))) |> 
   kbl(booktabs = T, align = "lllccc", linesep = "", row.names = FALSE) |> 
   row_spec(0, bold = T) |> 
-  collapse_rows(columns = 1:2, valign = "top") |> 
+  collapse_rows(columns = 1:2, valign = "top", target = 1) |> 
   kable_styling(full_width = T, latex_options = "hold_position", font_size = 8)
 
 ```
 
 \newpage
 
-Calculate annual subsidy per household (`subsidy_annual`), determine each share of the total annual program budget (minus overhead costs) by household size (`budget`), then divide by the annual subsidy per household to calculate the estimates number of households served per household size (`hh_served`):
+New distribution of households by AMI:
+
+```{r}
+
+sC_redist |> 
+  group_by(AMI) |> 
+  select(-2) |> 
+  summarise(pct_redist = sum(pct_redist)) |> 
+  kbl(booktabs = T, align = "lc", linesep = "") |> 
+  row_spec(0, bold = T) |> 
+  kable_styling(full_width = T, font_size = 8)
+
+```
+
+New distribution of households by household size:
+
+```{r}
+
+sC_redist |> 
+  group_by(hh_size) |> 
+  select(-2) |> 
+  summarise(pct_redist = sum(pct_redist)) |> 
+  mutate(pct_redist = round(pct_redist, 4)) |> 
+  kbl(booktabs = T, align = "lc", linesep = "") |> 
+  row_spec(0, bold = T) |> 
+  kable_styling(full_width = T, font_size = 8)
+
+```
+
+\
+Rejoin the redistributed households with the calculated subsidy amounts per household:
 
 ```{r}
 #| echo: true
 
-# Annual subsidy per household size
-sC_subsidy_annual <- sC_redist |>
-  mutate(subsidy_annual = subsidy * 12) |> 
+sC_redist_subsidy <- sC_subsidy |> 
+  right_join(sC_redist, join_by(AMI, bedrooms, hh_size)) |> 
+  select(1:3, 6, 9)
+  
+```
+
+```{r}
+
+# OK
+
+sC_redist_subsidy |> 
+  arrange(AMI, bedrooms) |> 
   mutate(
-    budget = (sC_budget * (1 - sC_overhead)) * pct_redist,
-    hh_served = budget / subsidy_annual
+    subsidy = round(subsidy, 2),
+    pct_redist = round(pct_redist, 4)
+    ) |> 
+  kbl(booktabs = T, align = "lllcc", linesep = "", row.names = FALSE) |> 
+  row_spec(0, bold = T) |> 
+  collapse_rows(columns = 1:2, valign = "top", target = 1) |> 
+  kable_styling(full_width = T, latex_options = "hold_position", font_size = 8)
+
+```
+
+\newpage
+
+Calculate annual subsidy per household (`subsidy_annual`) and the theoretical share of subsidy allocated for each household (`subsidy_share`). Determine the number of households served (`hh_served`) by normalizing `subsidy_share` to the known budget:
+
+```{r}
+#| echo: true
+
+# Annual subsidy per household type
+sC_subsidy_annual <- sC_redist_subsidy |>
+  mutate(subsidy_annual = subsidy * 12) |> 
+  select(AMI, bedrooms, hh_size, "pct" = pct_redist, subsidy_annual) |> 
+  mutate(
+    subsidy_share = subsidy_annual * pct, # Subsidy per HH type
+    hh_served = pct*(sC_budget * (1 - sC_overhead))/sum(subsidy_share) # Adjust to known budget
   )
 
 ```
@@ -1323,25 +1320,28 @@ sC_subsidy_annual <- sC_redist |>
 # OK
 
 sC_subsidy_annual |>
-  select(1:3, 9:11) |> 
-  mutate(hh_served = formattable::digits(hh_served, 3)) |> 
+  select(-4) |> 
+  mutate(
+    across(4:5, ~ format(round(.x, digits = 2), nsmall = 2)),
+    hh_served = formattable::digits(hh_served, 3)
+    ) |> 
   arrange(AMI) |> 
   kbl(booktabs = T, align = "lllccc", linesep = "", row.names = FALSE) |> 
   row_spec(0, bold = T) |> 
-  collapse_rows(columns = 1:2, valign = "top") |> 
+  collapse_rows(columns = 1:2, valign = "top", target = 1) |> 
   kable_styling(full_width = T, latex_options = "hold_position", font_size = 8)
 
 ```
 
-
 \newpage
 
-Summarize the estimated budget and households served by AMI and household size:
+Calculate and summarize the estimated budget and households served by AMI and household size:
 
 ```{r}
 #| echo: true
 
 sC_served <- sC_subsidy_annual |> 
+  mutate(budget = hh_served * subsidy_annual) |> 
   summarise(
     budget = sum(budget),
     hh_served = sum(hh_served),
@@ -1355,7 +1355,11 @@ sC_served <- sC_subsidy_annual |>
 # OK
 
 sC_served |>
-  mutate(hh_served = formattable::digits(hh_served, 3)) |> 
+  adorn_totals() |> 
+  mutate(
+    budget = format(round(budget, digits = 2), nsmall = 2),
+    hh_served = formattable::digits(hh_served, 3)
+    ) |> 
   arrange(AMI) |> 
   kbl(booktabs = T, align = "llcc", linesep = "", row.names = FALSE) |> 
   row_spec(0, bold = T) |> 
@@ -1411,16 +1415,70 @@ sC_estimate |>
   row_spec(13, bold = T) |>
   kable_styling(full_width = T, latex_options = "hold_position")
 
+sC_total <- sum(round(sC_served$hh_served))
+
+sC_avg <- (sC_budget)/sC_total
+
 ```
 
 ::: callout-note
 ### Scenario C results
 
-*Average annual program cost per household: \$7,327.57*
+*Average annual program cost per household: `{r} label_currency()(sC_avg)`*
 
 \
-Under Scenario C, a total program budget of \$500,000 with a 15% administrative overhead leaves \$425,000 to fund rental assistance. Given the assumed household distributions by AMI, unit size, and household size, the total number of households served is 58. Over half of these would be 2- and 3-person households at 40% AMI.
+Under Scenario C, a total program budget of \$500,000 with a 15% administrative overhead leaves \$425,000 to fund rental assistance. Given the assumed household distributions by AMI, unit size, and household size, the total number of households served is `{r} sC_total`.
 :::
 
 
+```{r}
+
+#| eval: false
+
+funding <- tibble(
+  var = c("Pilot Rental Subsidy", "LRSP Scenario A", "LRSP Scenario B", "LRSP Scenario C"),
+  per_hh = c(7300, sA_avg, sB_avg, sC_avg),
+  )
+
+funding_plot <- funding |> 
+  rowwise() |> 
+  mutate(data = list(tibble(
+    hh_served = 25:175,
+    projected_budget = per_hh * hh_served
+  ))) |> 
+  unnest(data) |> 
+  mutate(var = fct_reorder(var, projected_budget, mean))
+
+label_data <- funding |> 
+  mutate(hh_served = 100,  # Position for the label in the middle
+         projected_budget = 3750000) |> 
+  mutate(text = str_wrap("Average  annual cost per household", 18)) |> 
+  mutate(per_hh = paste0("$", format(round(per_hh), big.mark = ",", trim = TRUE))) |> 
+  mutate(var = fct_reorder(var, projected_budget, mean))
+  
+ggplot(funding_plot, aes(x = hh_served, y = projected_budget/1000000, color = var, fill = var)) +
+  facet_wrap(~var, nrow = 1) +
+  geom_line(linewidth = 1.25, lineend = "round") +
+  geom_area(alpha = 0.5) +
+  geom_text(data = label_data, aes(label = text), size = 8, lineheight = 0.3, nudge_y = -0.45) +
+  geom_text(data = label_data, aes(label = per_hh), size = 16) +
+  scale_color_hda() +
+  scale_fill_hda() +
+  scale_y_continuous(
+    limits = c(0, 4),
+    breaks = seq(0, 4, 0.5),
+    expand = c(0.02, 0.01),
+    labels = label_currency(accuracy = 0.1, suffix = "M")
+    ) +
+  add_zero_line() +
+  labs(
+    title = "Projected funding scopes for local rental assistance programs",
+    subtitle = "Estimated annual program budget (millions) and households served",
+    caption = "**Notes:** Pilot Rental Subsidy data as of April 2024. Plots show range of 25 to 175 households served."
+  ) +
+  theme_hda(base_size = 26)
+
+ggsave("sandbox/alx/alx-funding.png", width = 6.5, height = 4, units = "in", bg = "white")
+
+```
 
