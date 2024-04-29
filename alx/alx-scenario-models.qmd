@@ -12,7 +12,7 @@ format:
     number-sections: true
     number-offset: 7
     number-depth: 1
-    mainfont: "Open Sans"
+    #mainfont: "Open Sans"
     fontsize: 10pt
     colorlinks: true
     reference-location: section
@@ -1130,7 +1130,7 @@ sC_excl |>
   kbl(booktabs = T, align = "lc", linesep = "") |> 
   row_spec(0, bold = T) |> 
   row_spec(2, color = "red") |> 
-  kable_styling(full_width = T, font_size = 8)
+  kable_styling(full_width = T)
 
 ```
 
@@ -1165,7 +1165,7 @@ sC_excl_ami |>
   kbl(booktabs = T, align = "lccc", linesep = "") |> 
   row_spec(0, bold = T) |> 
   column_spec(4, color = if_else(sC_excl_ami$diff < 0, "red", "black")) |>
-  kable_styling(full_width = T, font_size = 8)
+  kable_styling(full_width = T)
 
 ```
 
@@ -1182,7 +1182,7 @@ sC_excl_hhsize |>
   kbl(booktabs = T, align = "lccc", linesep = "") |> 
   row_spec(0, bold = T) |> 
   column_spec(4, color = if_else(sC_excl_hhsize$diff < 0, "red", "black")) |>
-  kable_styling(full_width = T, font_size = 8)
+  kable_styling(full_width = T)
 
 ```
 
@@ -1209,6 +1209,7 @@ We can increase or decrease each household combination by a multiple of $p$ as l
 The following allocation reproduces the original AMI distribution, and a new household size distribution where each category is within $\pm 0.02$ of the original share.
 
 ```{r}
+#| echo: true
 
 sC_redist <- sC_excl_grp |> 
   filter(status == "retain") |> 
@@ -1228,6 +1229,10 @@ sC_redist <- sC_excl_grp |>
     pct_redist = pct + (p*p_shares)
   )
 
+```
+
+```{r}
+
 sC_redist |> 
   mutate(across(c(4,6), ~ round(.x, 4))) |> 
   kbl(booktabs = T, align = "lllccc", linesep = "", row.names = FALSE) |> 
@@ -1239,9 +1244,10 @@ sC_redist |>
 
 \newpage
 
-New distribution of households by AMI:
+Original distribution of households by AMI retained:
 
 ```{r}
+#| echo: true
 
 sC_redist |> 
   group_by(AMI) |> 
@@ -1249,7 +1255,7 @@ sC_redist |>
   summarise(pct_redist = sum(pct_redist)) |> 
   kbl(booktabs = T, align = "lc", linesep = "") |> 
   row_spec(0, bold = T) |> 
-  kable_styling(full_width = T, font_size = 8)
+  kable_styling(full_width = T)
 
 ```
 
@@ -1264,7 +1270,7 @@ sC_redist |>
   mutate(pct_redist = round(pct_redist, 4)) |> 
   kbl(booktabs = T, align = "lc", linesep = "") |> 
   row_spec(0, bold = T) |> 
-  kable_styling(full_width = T, font_size = 8)
+  kable_styling(full_width = T)
 
 ```
 
@@ -1310,7 +1316,10 @@ sC_subsidy_annual <- sC_redist_subsidy |>
   select(AMI, bedrooms, hh_size, "pct" = pct_redist, subsidy_annual) |> 
   mutate(
     subsidy_share = subsidy_annual * pct, # Subsidy per HH type
-    hh_served = pct*(sC_budget * (1 - sC_overhead))/sum(subsidy_share) # Adjust to known budget
+    hh_served = # Adjust to known budget
+      pct*(
+        sC_budget * (1 - sC_overhead)
+        )/sum(subsidy_share) 
   )
 
 ```
@@ -1421,6 +1430,8 @@ sC_avg <- (sC_budget)/sC_total
 
 ```
 
+\newpage
+
 ::: callout-note
 ### Scenario C results
 
@@ -1432,7 +1443,6 @@ Under Scenario C, a total program budget of \$500,000 with a 15% administrative 
 
 
 ```{r}
-
 #| eval: false
 
 funding <- tibble(
