@@ -1,0 +1,1715 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  10pt,
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrartcl}
+
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+  \setmainfont[]{Arial}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[footskip=5mm,top=20mm,bottom=25mm,left=25mm,right=25mm]{geometry}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{1}
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+\renewcommand{\thepage}{A7-\arabic{page}}
+\renewcommand{\thesection}{A7.\arabic{section}}
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
+\@ifpackageloaded{fontawesome5}{}{\usepackage{fontawesome5}}
+\definecolor{quarto-callout-color}{HTML}{909090}
+\definecolor{quarto-callout-note-color}{HTML}{0758E5}
+\definecolor{quarto-callout-important-color}{HTML}{CC1914}
+\definecolor{quarto-callout-warning-color}{HTML}{EB9113}
+\definecolor{quarto-callout-tip-color}{HTML}{00A047}
+\definecolor{quarto-callout-caution-color}{HTML}{FC5300}
+\definecolor{quarto-callout-color-frame}{HTML}{acacac}
+\definecolor{quarto-callout-note-color-frame}{HTML}{4582ec}
+\definecolor{quarto-callout-important-color-frame}{HTML}{d9534f}
+\definecolor{quarto-callout-warning-color-frame}{HTML}{f0ad4e}
+\definecolor{quarto-callout-tip-color-frame}{HTML}{02b875}
+\definecolor{quarto-callout-caution-color-frame}{HTML}{fd7e14}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Appendix 7: Scenario Models Methodology},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Appendix 7: Scenario Models Methodology}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\vspace{-1.5cm}
+
+This document provides a step-by-step methodology to model three
+different Local Rent Supplement Program (LRSP) scenarios for the City of
+Alexandria. Data is created, transformed, and visualized using the R
+coding language. The R libraries used for this analysis are listed
+below.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(scales)}
+\FunctionTok{library}\NormalTok{(kableExtra)}
+\FunctionTok{library}\NormalTok{(formattable)}
+\FunctionTok{library}\NormalTok{(gt)}
+\FunctionTok{library}\NormalTok{(ggtext)}
+\FunctionTok{library}\NormalTok{(janitor)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Standard parameters}\label{standard-parameters}
+
+\subsection{Income limits}\label{income-limits}
+
+The models use HUD's FY 2023 Multifamily Tax Subsidy Projects (MTSP)
+Income Limits for Washington-Arlington-Alexandria, DC-VA-MD HUD Metro
+FMR Area.\footnote{\href{https://www.huduser.gov/portal/datasets/il/il2023/2023sum_mtsp.odn?inputname=METRO47900M47900*Washington-Arlington-Alexandria\%2C+DC-VA-MD+HUD+Metro+FMR+Area&area_choice=hmfa&year=2023\#top}{FY
+  2023 MTSP Income Limits} (Accessed 2024-01-19)} These are the official
+income limits used to determine eligibility for LIHTC projects and other
+affordable multifamily properties financed by tax-exempt bonds.
+
+While the MTSP limits differ slightly from the standard income limits
+used for Housing Choice Vouchers, public housing, and other
+HUD-supported assistance programs, they are used here because they
+publish limits for a greater range of AMI levels, including 40\% AMI and
+60\% AMI. The City of Alexandria generally uses MTSP limits for its
+housing programs.
+
+\begin{table}[H]
+
+\caption{\label{tbl-hud-ami}FY 2023 MTSP Income Limits for
+Washington-Arlington-Alexandria, DC-VA-MD HUD Metro FMR Area}
+
+\centering{
+
+\begin{tabu} to \linewidth {>{\raggedright}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X}
+\toprule
+\textbf{AMI} & \textbf{1 person} & \textbf{2 person} & \textbf{3 person} & \textbf{4 person} & \textbf{5 person} & \textbf{6 person}\\
+\midrule
+20\% AMI & \$21,100 & \$24,120 & \$27,140 & \$30,140 & \$32,460 & \$34,980\\
+30\% AMI & \$31,650 & \$36,180 & \$40,710 & \$45,210 & \$48,840 & \$52,470\\
+40\% AMI & \$42,200 & \$48,240 & \$54,280 & \$60,280 & \$65,210 & \$69,960\\
+50\% AMI & \$52,750 & \$60,300 & \$67,850 & \$75,350 & \$81,400 & \$87,450\\
+60\% AMI & \$63,300 & \$72,660 & \$81,420 & \$90,240 & \$97,460 & \$104,940\\
+70\% AMI & \$73,850 & \$84,240 & \$94,990 & \$105,490 & \$113,960 & \$122,430\\
+80\% AMI & \$84,400 & \$96,480 & \$108,560 & \$120,560 & \$130,240 & \$139,920\\
+\bottomrule
+\end{tabu}
+
+}
+
+\end{table}%
+
+\newpage
+
+\subsection{Fair Market Rents}\label{fair-market-rents}
+
+Models where the rent subsidy is calculated based on Fair Market Rents
+(FMR) use the current Small Area Fair Market Rents (SAFMR) adopted by
+the Alexandria Redevelopment and Housing Authority for 2023. SAFMRs are
+provided by ZIP code.
+
+While actual subsidy amounts will depend on the ZIP code where the
+tenant lives, models will use the average values (by unit size) across
+all ZIP codes. This is a simplification to avoid making assumptions
+about the geographic distribution of participating households.
+
+\begin{table}[H]
+
+\caption{\label{tbl-fmrs}ARHA 2023 Payment Standards}
+
+\centering{
+
+\begin{tabu} to \linewidth {>{\raggedright}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X}
+\toprule
+\textbf{ZIP code} & \textbf{Studio} & \textbf{1 bedroom} & \textbf{2 bedroom} & \textbf{3 bedroom} & \textbf{4 bedroom}\\
+\midrule
+22301 & \$2,013 & \$2,046 & \$2,332 & \$2,915 & \$3,476\\
+22302 & \$1,980 & \$2,013 & \$2,288 & \$2,860 & \$3,410\\
+22304 & \$1,914 & \$1,947 & \$2,211 & \$2,761 & \$3,300\\
+22305 & \$1,859 & \$1,892 & \$2,156 & \$2,695 & \$3,212\\
+22311 & \$1,936 & \$1,969 & \$2,244 & \$2,805 & \$3,344\\
+22312 & \$1,848 & \$1,870 & \$2,134 & \$2,673 & \$3,179\\
+22313 & \$1,782 & \$1,815 & \$2,068 & \$2,585 & \$3,080\\
+22314 & \$2,563 & \$2,607 & \$2,970 & \$3,718 & \$4,433\\
+\textbf{Average} & \textbf{\$1,986.88} & \textbf{\$2,019.88} & \textbf{\$2,300.38} & \textbf{\$2,876.50} & \textbf{\$3,429.25}\\
+\bottomrule
+\end{tabu}
+
+}
+
+\end{table}%
+
+\newpage
+
+\section{Scenario A - Reduce Cost Burden for 30\% to 50\% AMI
+Households}\label{scenario-a---reduce-cost-burden-for-30-to-50-ami-households}
+
+This scenario outlines a LRSP with a total annual allocation of
+\$500,000. The primary goal of the program is to reduce housing cost
+burden among households with incomes between 30\% and 50\% AMI. The
+model uses the following inputs to estimate the number of households
+served.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4022}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5978}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Variable}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Input}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\emph{Total program budget} & \$500,000\newline \\
+\emph{Eligibility} & Household income between\newline
+30\% and 50\% AMI\newline \\
+\emph{Subsidy amount} & Difference between the affordable
+monthly\newline rent at 60\% AMI and the affordable monthly\newline rent
+at 40\% AMI\newline \\
+\begin{minipage}[t]{\linewidth}\raggedright
+\emph{Distribution of household}\\
+\emph{sizes among participants}\strut
+\end{minipage} & 15\% - 1-person\newline
+15\% - 2-person\newline
+20\% - 3-person\newline
+20\% - 4-person\newline
+20\% - 5-person\newline
+10\% - 6-person\newline \\
+\emph{Administrative overhead} & 15\% of total program budget \\
+\end{longtable}
+
+Notes:
+
+\begin{itemize}
+\tightlist
+\item
+  No other eligibility conditions apply.
+\item
+  ``Affordable monthly rent'' is 30\% of gross household income.
+\item
+  The subsidy calculated for each household is respective to their
+  household size. No assumed breakdown of households by AMI is needed.
+\item
+  The administrative overhead includes housing-specific case management.
+\end{itemize}
+
+\newpage
+
+\subsection{Inputs}\label{inputs}
+
+Assign budget (dollars) and overhead costs (percent) variables:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Budget allocation}
+\NormalTok{sA\_budget }\OtherTok{\textless{}{-}} \DecValTok{500000}
+
+\CommentTok{\# Overhead percentage}
+\NormalTok{sA\_overhead }\OtherTok{\textless{}{-}} \FloatTok{0.15}
+\end{Highlighting}
+\end{Shaded}
+
+Assign household distributions by household size (number of persons):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Distribution of households by household size}
+\NormalTok{sA\_person }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}
+  \AttributeTok{hh\_size =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"person"}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{6}\NormalTok{),}
+  \AttributeTok{pct =} \FunctionTok{c}\NormalTok{(}\FloatTok{0.15}\NormalTok{, }\FloatTok{0.15}\NormalTok{, }\FloatTok{0.20}\NormalTok{, }\FloatTok{0.20}\NormalTok{, }\FloatTok{0.20}\NormalTok{, }\FloatTok{0.10}\NormalTok{)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Calculations}\label{calculations}
+
+Calculate affordable rents at 40\% AMI and 60\% AMI for households with
+1 to 6 persons (\texttt{hh\_size}) to determine monthly subsidy amounts
+(\texttt{subsidy}):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Monthly subsidy about by household size}
+\NormalTok{sA\_subsidy }\OtherTok{\textless{}{-}}\NormalTok{ hud\_ami }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{filter}\NormalTok{(}
+\NormalTok{    AMI }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"40\% AMI"}\NormalTok{, }\StringTok{"60\% AMI"}\NormalTok{), }\CommentTok{\# 40\% and 60\% AMI only}
+    \FunctionTok{str\_detect}\NormalTok{(hh\_size, }\StringTok{"[123456]"}\NormalTok{)   }\CommentTok{\# 1{-}6 person households only}
+\NormalTok{    ) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{aff\_rent =}\NormalTok{ income}\SpecialCharTok{/}\DecValTok{12} \SpecialCharTok{*} \FloatTok{0.3}        \CommentTok{\# 30\% of monthly income}
+\NormalTok{  ) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{3}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{pivot\_wider}\NormalTok{(}
+    \AttributeTok{names\_from =}\NormalTok{ AMI,}
+    \AttributeTok{values\_from =}\NormalTok{ aff\_rent}
+\NormalTok{  ) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{subsidy =} \StringTok{\textasciigrave{}}\AttributeTok{60\% AMI}\StringTok{\textasciigrave{}} \SpecialCharTok{{-}} \StringTok{\textasciigrave{}}\AttributeTok{40\% AMI}\StringTok{\textasciigrave{}}   \CommentTok{\# Calculate subsidy}
+\NormalTok{  ) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{select}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tabu} to \linewidth {>{\raggedright}X>{\centering}X}
+\toprule
+\textbf{hh\_size} & \textbf{subsidy}\\
+\midrule
+person1 & 527.50\\
+person2 & 610.50\\
+person3 & 678.50\\
+person4 & 749.00\\
+person5 & 806.25\\
+person6 & 874.50\\
+\bottomrule
+\end{tabu}
+
+\newpage
+
+Join the monthly subsidy amounts by household size (\texttt{subsidy})
+and calculate annual subsidy per household (\texttt{subsidy\_annual}):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Annual subsidy per household size}
+\NormalTok{sA\_subsidy\_annual }\OtherTok{\textless{}{-}}\NormalTok{ sA\_person }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{left\_join}\NormalTok{(sA\_subsidy) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{subsidy\_annual =}\NormalTok{ subsidy }\SpecialCharTok{*} \DecValTok{12}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tabu} to \linewidth {>{\raggedright}X>{\centering}X>{\centering}X>{\centering}X}
+\toprule
+\textbf{hh\_size} & \textbf{pct} & \textbf{subsidy} & \textbf{subsidy\_annual}\\
+\midrule
+person1 & 0.15 & 527.50 & 6330.00\\
+person2 & 0.15 & 610.50 & 7326.00\\
+person3 & 0.20 & 678.50 & 8142.00\\
+person4 & 0.20 & 749.00 & 8988.00\\
+person5 & 0.20 & 806.25 & 9675.00\\
+person6 & 0.10 & 874.50 & 10494.00\\
+\bottomrule
+\end{tabu}
+
+\hfill\break
+
+Calculate the theoretical share of subsidy allocated for each household
+size (\texttt{subsidy\_share}). Determine the number of households
+served (\texttt{hh\_served}) by normalizing \texttt{subsidy\_share} to
+the known budget, then calculate the budget share (\texttt{budget}) for
+each household size:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Annual subsidy per household type}
+\NormalTok{sA\_served }\OtherTok{\textless{}{-}}\NormalTok{ sA\_subsidy\_annual }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{subsidy\_share =}\NormalTok{ subsidy\_annual }\SpecialCharTok{*}\NormalTok{ pct, }\CommentTok{\# Subsidy per HH type}
+    \AttributeTok{hh\_served =} \CommentTok{\# Adjust to known budget}
+\NormalTok{      pct}\SpecialCharTok{*}\NormalTok{(}
+\NormalTok{        sA\_budget }\SpecialCharTok{*}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ sA\_overhead)}
+\NormalTok{        )}\SpecialCharTok{/}\FunctionTok{sum}\NormalTok{(subsidy\_share) }
+\NormalTok{  ) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{budget =}\NormalTok{ hh\_served }\SpecialCharTok{*}\NormalTok{ subsidy\_annual)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tabu} to \linewidth {>{\raggedright}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X}
+\toprule
+\textbf{hh\_size} & \textbf{subsidy\_annual} & \textbf{subsidy\_share} & \textbf{budget} & \textbf{hh\_served}\\
+\midrule
+person1 & 6330.00 & 949.50 & 47706.23 & 7.537\\
+person2 & 7326.00 & 1098.90 & 55212.62 & 7.537\\
+person3 & 8142.00 & 1628.40 & 81816.57 & 10.049\\
+person4 & 8988.00 & 1797.60 & 90317.78 & 10.049\\
+person5 & 9675.00 & 1935.00 & 97221.24 & 10.049\\
+person6 & 10494.00 & 1049.40 & 52725.56 & 5.024\\
+Total & - & - & 425000.00 & 50.244\\
+\bottomrule
+\end{tabu}
+
+\newpage
+
+\subsection{Model results}\label{model-results}
+
+Round each estimate to the nearest whole number and determine total:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Rounded estimates with grand total}
+\NormalTok{sA\_estimate }\OtherTok{\textless{}{-}}\NormalTok{ sA\_served }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{select}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{6}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{hh\_served =} \FunctionTok{round}\NormalTok{(hh\_served),}
+    \AttributeTok{hh\_size =} \FunctionTok{case\_match}\NormalTok{(}
+\NormalTok{      hh\_size,}
+      \StringTok{"person1"} \SpecialCharTok{\textasciitilde{}} \StringTok{"1 person"}\NormalTok{,}
+      \StringTok{"person2"} \SpecialCharTok{\textasciitilde{}} \StringTok{"2 person"}\NormalTok{,}
+      \StringTok{"person3"} \SpecialCharTok{\textasciitilde{}} \StringTok{"3 person"}\NormalTok{,}
+      \StringTok{"person4"} \SpecialCharTok{\textasciitilde{}} \StringTok{"4 person"}\NormalTok{,}
+      \StringTok{"person5"} \SpecialCharTok{\textasciitilde{}} \StringTok{"5 person"}\NormalTok{,}
+      \StringTok{"person6"} \SpecialCharTok{\textasciitilde{}} \StringTok{"6 person"}
+\NormalTok{    )}
+\NormalTok{  ) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{adorn\_totals}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}[H]
+
+\caption{\label{tbl-sA}Scenario A - Estimated Households Served by
+Household Size}
+
+\centering{
+
+\begin{tabu} to \linewidth {>{\raggedright}X>{\centering}X>{\centering}X}
+\toprule
+\textbf{Household size} & \textbf{Annual cost} & \textbf{Households served}\\
+\midrule
+1 person & \$47,706 & 8\\
+2 person & \$55,213 & 8\\
+3 person & \$81,817 & 10\\
+4 person & \$90,318 & 10\\
+5 person & \$97,221 & 10\\
+6 person & \$52,726 & 5\\
+\textbf{Total} & \textbf{\$425,000} & \textbf{51}\\
+\bottomrule
+\end{tabu}
+
+}
+
+\end{table}%
+
+\hfill\break
+
+\begin{tcolorbox}[enhanced jigsaw, breakable, toprule=.15mm, opacitybacktitle=0.6, colframe=quarto-callout-note-color-frame, colback=white, opacityback=0, coltitle=black, colbacktitle=quarto-callout-note-color!10!white, rightrule=.15mm, toptitle=1mm, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Scenario A results}, bottomtitle=1mm, bottomrule=.15mm, leftrule=.75mm, arc=.35mm, left=2mm]
+
+\emph{Average annual program cost per household: \$9,803.92}
+
+\hfill\break
+Under Scenario A, a total program budget of \$500,000 with a 15\%
+administrative overhead leaves \$425,000 to fund rental assistance.
+Given the assumed household distribution by household size, the total
+number of households served is 51.
+
+\end{tcolorbox}
+
+\newpage
+
+\section{Scenario B - Stabilize Unhoused
+Persons}\label{scenario-b---stabilize-unhoused-persons}
+
+This scenario outlines a LRSP serving a total of 150 households
+experiencing housing insecurity. The primary goal of the program is to
+provide deep rental assistance to help these households achieve housing
+stability and avoid homelessness. The model uses the following inputs to
+estimate the annual program cost required to serve 150 households.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4022}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5978}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Variable}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Input}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\emph{Total households served} & 150\newline \\
+\emph{Eligibility} & Household/individual determined to be\newline
+homeless in City's annual Point-in-Time count\newline \\
+\emph{Subsidy amount} & Difference between the affordable
+monthly\newline rent at 60\% AMI and the households' current\newline
+affordable monthly rent\newline \\
+\begin{minipage}[t]{\linewidth}\raggedright
+\emph{Distribution of household types}\\
+\emph{among participants}\strut
+\end{minipage} & 2/3 - Single-person\newline
+1/3 - Household with children\newline \\
+\begin{minipage}[t]{\linewidth}\raggedright
+\emph{Distribution of unit sizes}\\
+\emph{among participants}\strut
+\end{minipage} & 2/3 - Studios\newline
+1/3 - 2-bedroom\newline \\
+\begin{minipage}[t]{\linewidth}\raggedright
+\emph{Distribution of incomes}\\
+\emph{among participants}\strut
+\end{minipage} & 50\% - SSI income\newline
+50\% - \$1,500 per month\newline \\
+\emph{Administrative overhead} & 20\% of total program budget \\
+\end{longtable}
+
+Notes:
+
+\begin{itemize}
+\tightlist
+\item
+  No other eligibility conditions apply.
+\item
+  ``Affordable monthly rent'' is 30\% of gross household income.
+\item
+  The subsidy calculated for each household is respective to their
+  household size.
+\item
+  The administrative overhead is higher than Scenario A to accommodate
+  more intensive case management requirements for persons experiencing
+  homelessness.
+\end{itemize}
+
+\newpage
+
+\subsection{Inputs}\label{inputs-1}
+
+Assign households served and overhead costs (percent) variables:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Total households served}
+\NormalTok{sB\_hh\_served }\OtherTok{\textless{}{-}} \DecValTok{150}
+
+\CommentTok{\# Overhead percentage}
+\NormalTok{sB\_overhead }\OtherTok{\textless{}{-}} \FloatTok{0.20}
+\end{Highlighting}
+\end{Shaded}
+
+We can reasonably assume that all single-person households will live in
+studios, while all households with children will live in 2-bedroom
+units. Therefore, we do not need separate distribution shares for each.
+However, we do need to determine more specific household sizes.
+
+For this model, among households with children, we will assume the
+following breakdown, as shown in the code below:
+
+\begin{itemize}
+\tightlist
+\item
+  1/2 are 2-person (adult and child)
+\item
+  1/4 are 3-person (adult and two children, or two adults and child)
+\item
+  1/4 are 4-person (adult and three children, or two adults and two
+  children)
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Distribution of households by size}
+\NormalTok{sB\_person }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}
+  \StringTok{\textasciigrave{}}\AttributeTok{person1}\StringTok{\textasciigrave{}} \OtherTok{=} \FloatTok{0.667}\NormalTok{, }\CommentTok{\# 2/3}
+  \StringTok{\textasciigrave{}}\AttributeTok{person2}\StringTok{\textasciigrave{}} \OtherTok{=} \FloatTok{0.167}\NormalTok{, }\CommentTok{\# 1/2 of 1/3}
+  \StringTok{\textasciigrave{}}\AttributeTok{person3}\StringTok{\textasciigrave{}} \OtherTok{=} \FloatTok{0.083}\NormalTok{, }\CommentTok{\# 1/4 of 1/3}
+  \StringTok{\textasciigrave{}}\AttributeTok{person4}\StringTok{\textasciigrave{}} \OtherTok{=} \FloatTok{0.083}  \CommentTok{\# 1/4 of 1/3}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+Assign household distribution by income and calculate :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Distribution of households by income}
+\NormalTok{sB\_income }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{ssi}\StringTok{\textasciigrave{}} \OtherTok{=} \FloatTok{0.5}\NormalTok{, }\StringTok{\textasciigrave{}}\AttributeTok{1500}\StringTok{\textasciigrave{}} \OtherTok{=} \FloatTok{0.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Because SSI amounts depend on whether the beneficiary lives alone or is
+married, their affordable rents will vary. However, due to the
+relatively small share of households in this model that could include
+two married adults, we will assume that any persons enrolled in SSI
+receive benefits for an individual. The current monthly SSI amount for
+an eligible individual is \$943.\footnote{\href{https://www.ssa.gov/oact/cola/SSI.html}{SSI
+  Federal Payment Amounts for 2024} (Accessed 2024-01-19)}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Monthly SSI income for eligible individual}
+\NormalTok{sB\_ssi }\OtherTok{\textless{}{-}} \DecValTok{943}
+\end{Highlighting}
+\end{Shaded}
+
+\newpage
+
+\subsection{Calculations}\label{calculations-1}
+
+Calculate affordable rents for SSI income and \$1,500/month
+(\texttt{income\_source}) for households with 1 to 4 persons
+(\texttt{hh\_size}) to determine monthly subsidy amounts
+(\texttt{subsidy}):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Monthly subsidy about by household size}
+\NormalTok{sB\_subsidy }\OtherTok{\textless{}{-}}\NormalTok{ hud\_ami }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{filter}\NormalTok{(}
+\NormalTok{    AMI }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"60\% AMI"}\NormalTok{),        }\CommentTok{\# 60\% AMI only}
+    \FunctionTok{str\_detect}\NormalTok{(hh\_size, }\StringTok{"[1234]"}\NormalTok{) }\CommentTok{\# 1{-}4 person households only}
+\NormalTok{    ) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{aff\_rent\_60ami =}\NormalTok{ income}\SpecialCharTok{/}\DecValTok{12} \SpecialCharTok{*} \FloatTok{0.3} \CommentTok{\# 30\% of monthly income}
+\NormalTok{  ) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{select}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{mutate}\NormalTok{(}
+    \StringTok{\textasciigrave{}}\AttributeTok{ssi}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ sB\_ssi }\SpecialCharTok{*} \FloatTok{0.3}\NormalTok{,  }\CommentTok{\# 30\% of SSI}
+    \StringTok{\textasciigrave{}}\AttributeTok{1500}\StringTok{\textasciigrave{}} \OtherTok{=} \DecValTok{1500} \SpecialCharTok{*} \FloatTok{0.3} \CommentTok{\# 30\% of $1,500}
+\NormalTok{  ) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{pivot\_longer}\NormalTok{(}
+    \DecValTok{3}\SpecialCharTok{:}\DecValTok{4}\NormalTok{,}
+    \AttributeTok{names\_to =} \StringTok{"income\_source"}\NormalTok{,}
+    \AttributeTok{values\_to =} \StringTok{"aff\_rent"}
+\NormalTok{  ) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{subsidy =}\NormalTok{ aff\_rent\_60ami }\SpecialCharTok{{-}}\NormalTok{ aff\_rent }\CommentTok{\# Calculate subsidy}
+\NormalTok{  ) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{select}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tabu} to \linewidth {>{\raggedright}X>{\raggedright}X>{\centering}X}
+\toprule
+\textbf{income\_source} & \textbf{hh\_size} & \textbf{subsidy}\\
+\midrule
+ & person1 & 1299.60\\
+\cmidrule{2-3}
+ & person2 & 1533.60\\
+\cmidrule{2-3}
+ & person3 & 1752.60\\
+\cmidrule{2-3}
+\multirow[t]{-4}{*}{\raggedright\arraybackslash ssi} & person4 & 1973.10\\
+\cmidrule{1-3}
+ & person1 & 1132.50\\
+\cmidrule{2-3}
+ & person2 & 1366.50\\
+\cmidrule{2-3}
+ & person3 & 1585.50\\
+\cmidrule{2-3}
+\multirow[t]{-4}{*}{\raggedright\arraybackslash 1500} & person4 & 1806.00\\
+\bottomrule
+\end{tabu}
+
+\newpage
+
+Tabulate unique shares for both income source and household size:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sB\_dist }\OtherTok{\textless{}{-}} \FunctionTok{expand.grid}\NormalTok{(}
+  \AttributeTok{income\_source =} \FunctionTok{names}\NormalTok{(sB\_income),}
+  \AttributeTok{hh\_size =} \FunctionTok{names}\NormalTok{(sB\_person)}
+\NormalTok{  ) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{pct =}\NormalTok{ sB\_income[income\_source] }\SpecialCharTok{*}\NormalTok{ sB\_person[hh\_size])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tabu} to \linewidth {>{\raggedright}X>{\raggedright}X>{\centering}X}
+\toprule
+\textbf{income\_source} & \textbf{hh\_size} & \textbf{pct}\\
+\midrule
+ & person1 & 0.3335\\
+\cmidrule{2-3}
+ & person2 & 0.0835\\
+\cmidrule{2-3}
+ & person3 & 0.0415\\
+\cmidrule{2-3}
+\multirow[t]{-4}{*}{\raggedright\arraybackslash ssi} & person4 & 0.0415\\
+\cmidrule{1-3}
+ & person1 & 0.3335\\
+\cmidrule{2-3}
+ & person2 & 0.0835\\
+\cmidrule{2-3}
+ & person3 & 0.0415\\
+\cmidrule{2-3}
+\multirow[t]{-4}{*}{\raggedright\arraybackslash 1500} & person4 & 0.0415\\
+\bottomrule
+\end{tabu}
+
+\hfill\break
+\hfill\break
+Multiply each household share by the total number of households served
+(150) to determine the respective number served for each group
+(\texttt{hh\_served}), rounded to the nearest whole number:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sB\_served }\OtherTok{\textless{}{-}}\NormalTok{ sB\_dist }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{hh\_served =} \FunctionTok{round}\NormalTok{(pct }\SpecialCharTok{*}\NormalTok{ sB\_hh\_served)) }
+\end{Highlighting}
+\end{Shaded}
+
+\newpage
+
+\subsection{Model results}\label{model-results-1}
+
+Join the monthly subsidy amounts(\texttt{subsidy}) by income source and
+household size and calculate annual subsidy per household
+(\texttt{subsidy\_annual}). Multiply that figure by the number of
+households served to calculate the rental assistance required
+(\texttt{budget\_rent}), then re-total to account for overhead costs
+(\texttt{budget\_total}):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sB\_budget }\OtherTok{\textless{}{-}}\NormalTok{ sB\_served }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{left\_join}\NormalTok{(sB\_subsidy, }\FunctionTok{join\_by}\NormalTok{(income\_source, hh\_size)) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{subsidy\_annual =}\NormalTok{ subsidy }\SpecialCharTok{*} \DecValTok{12}\NormalTok{,}
+    \AttributeTok{budget\_rent =}\NormalTok{ subsidy\_annual }\SpecialCharTok{*}\NormalTok{ hh\_served,}
+    \AttributeTok{budget\_total =}\NormalTok{ budget\_rent}\SpecialCharTok{/}\NormalTok{(}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ sB\_overhead)}
+\NormalTok{    ) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{select}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(income\_source)) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{adorn\_totals}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}[H]
+
+\caption{\label{tbl-sB}Scenario B - Estimated annual budget by income
+source and household size}
+
+\centering{
+
+\begin{tabu} to \linewidth {>{\raggedright}X>{\raggedright}X>{\centering}X>{\centering}X>{\centering}X}
+\toprule
+\multicolumn{3}{c}{ } & \multicolumn{2}{c}{Estimated budget} \\
+\cmidrule(l{3pt}r{3pt}){4-5}
+\textbf{Income source} & \textbf{Household size} & \textbf{Households served} & \textbf{Rental assistance} & \textbf{Overhead included}\\
+\midrule
+ & 1 person & 50 & \$779,760.00 & \$974,700.00\\
+\cmidrule{2-5}
+ & 2 person & 13 & \$239,241.60 & \$299,052.00\\
+\cmidrule{2-5}
+ & 3 person & 6 & \$126,187.20 & \$157,734.00\\
+\cmidrule{2-5}
+\multirow[t]{-4}{*}{\raggedright\arraybackslash SSI} & 4 person & 6 & \$142,063.20 & \$177,579.00\\
+\cmidrule{1-5}
+ & 1 person & 50 & \$679,500.00 & \$849,375.00\\
+\cmidrule{2-5}
+ & 2 person & 13 & \$213,174.00 & \$266,467.50\\
+\cmidrule{2-5}
+ & 3 person & 6 & \$114,156.00 & \$142,695.00\\
+\cmidrule{2-5}
+\multirow[t]{-4}{*}{\raggedright\arraybackslash \$1,500/month} & 4 person & 6 & \$130,032.00 & \$162,540.00\\
+\cmidrule{1-5}
+\textbf{Total} & \textbf{-} & \textbf{150} & \textbf{\$2,424,114.00} & \textbf{\$3,030,142.50}\\
+\bottomrule
+\end{tabu}
+
+}
+
+\end{table}%
+
+\hfill\break
+
+\begin{tcolorbox}[enhanced jigsaw, breakable, toprule=.15mm, opacitybacktitle=0.6, colframe=quarto-callout-note-color-frame, colback=white, opacityback=0, coltitle=black, colbacktitle=quarto-callout-note-color!10!white, rightrule=.15mm, toptitle=1mm, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Scenario B results}, bottomtitle=1mm, bottomrule=.15mm, leftrule=.75mm, arc=.35mm, left=2mm]
+
+\emph{Average annual program cost per household: \$20,200.95}
+
+\hfill\break
+Under Scenario B, a total of 150 households experiencing housing
+insecurity are served. Although two-thirds are individuals who have
+lower housing costs than households with children, the average cost per
+household is over twice that of Scenario A, due to the deep level of
+subsidy provided. The estimated annual cost for the rental assistance
+alone is \$2,424,114.00. Coupled with a higher administrative overhead
+for expanded case management (20\%), the total projected funding
+required is \$3,030,142.50.
+
+\end{tcolorbox}
+
+\newpage
+
+\section{Scenario C -- Reduce Severe Cost Burden for Lower-Income
+Working
+Families}\label{scenario-c-reduce-severe-cost-burden-for-lower-income-working-families}
+
+This scenario outlines a LRSP with a total annual allocation of
+\$500,000. The primary goal of the program is to reduce housing cost
+burden among households with incomes between 30\% and 50\% AMI.
+Households must have one working adult and one or more dependent. The
+model uses the following inputs to estimate the number of households
+served.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4022}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5978}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Variable}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Input}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\emph{Total program budget} & \$500,000\newline \\
+\emph{Eligibility} & Household income between 30\% and 50\% AMI\newline
+At least one working adult\newline At least one dependent\newline \\
+\emph{Subsidy amount} & Difference between the SAFMR and\newline
+40\% AMI of gross household income\newline \\
+\begin{minipage}[t]{\linewidth}\raggedright
+\emph{Distribution of household}\\
+\emph{sizes among participants}\strut
+\end{minipage} & 15\% - 2-person\newline
+25\% - 3-person\newline
+25\% - 4-person\newline
+25\% - 5-person\newline
+10\% - 6-person\newline \\
+\begin{minipage}[t]{\linewidth}\raggedright
+\emph{Distribution of incomes}\\
+\emph{among participants}\strut
+\end{minipage} & 25\% - 30\% AMI\newline
+50\% - 40\% AMI\newline
+25\% - 50\% AMI\newline \\
+\emph{Administrative overhead} & 15\% of total program budget \\
+\end{longtable}
+
+Notes:
+
+\begin{itemize}
+\tightlist
+\item
+  SAFMR refers to the Small Area Fair Market Rent as adopted by
+  Alexandria Redevelopment and Housing Authority (ARHA) for 2023.
+\item
+  The affordable monthly rent is 40\% of gross household income, not the
+  standard 30\%.
+\item
+  The subsidy calculated for each household is respective to their
+  household size.
+\item
+  Families will only occupy 1-bedroom, 2-bedroom, or 3-bedroom units.
+\item
+  The administrative overhead includes housing-specific case management.
+\end{itemize}
+
+\newpage
+
+\subsection{Inputs}\label{inputs-2}
+
+Assign budget (dollars) and overhead costs (percent) variables:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Budget allocation}
+\NormalTok{sC\_budget }\OtherTok{\textless{}{-}} \DecValTok{500000}
+
+\CommentTok{\# Overhead percentage}
+\NormalTok{sC\_overhead }\OtherTok{\textless{}{-}} \FloatTok{0.15}
+\end{Highlighting}
+\end{Shaded}
+
+Assign household distributions by AMI and household size (number of
+persons):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Distribution of households by AMI}
+\NormalTok{sC\_ami }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{30\% AMI}\StringTok{\textasciigrave{}} \OtherTok{=} \FloatTok{0.25}\NormalTok{, }\StringTok{\textasciigrave{}}\AttributeTok{40\% AMI}\StringTok{\textasciigrave{}} \OtherTok{=} \FloatTok{0.50}\NormalTok{, }\StringTok{\textasciigrave{}}\AttributeTok{50\% AMI}\StringTok{\textasciigrave{}} \OtherTok{=} \FloatTok{0.25}\NormalTok{)}
+
+\CommentTok{\# Distribution of households by household size}
+\NormalTok{sC\_person }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}
+  \AttributeTok{hh\_size =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"person"}\NormalTok{, }\DecValTok{2}\SpecialCharTok{:}\DecValTok{6}\NormalTok{),}
+  \AttributeTok{pct =} \FunctionTok{c}\NormalTok{(}\FloatTok{0.15}\NormalTok{, }\FloatTok{0.25}\NormalTok{, }\FloatTok{0.25}\NormalTok{, }\FloatTok{0.25}\NormalTok{, }\FloatTok{0.10}\NormalTok{)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Because subsidy amounts will be calculated using SAFMR, we also need to
+estimate household shares across units by size (number of bedrooms). The
+model will use the following assumptions:
+
+\begin{itemize}
+\tightlist
+\item
+  2-person: 100\% 1-bedroom
+\item
+  3-person: 10\% 1-bedroom, 90\% 2-bedroom
+\item
+  4-person: 80\% 2-bedroom, 20\% 3-bedroom
+\item
+  5-person: 100\% 3-bedroom
+\item
+  6-person: 100\% 3-bedroom
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Distribution of household sizes by unit size}
+\NormalTok{sC\_unit }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}
+    \StringTok{\textasciigrave{}}\AttributeTok{person2}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{bedroom1}\StringTok{\textasciigrave{}} \OtherTok{=} \DecValTok{1}\NormalTok{),}
+    \StringTok{\textasciigrave{}}\AttributeTok{person3}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{bedroom1}\StringTok{\textasciigrave{}} \OtherTok{=} \FloatTok{0.1}\NormalTok{, }\StringTok{\textasciigrave{}}\AttributeTok{bedroom2}\StringTok{\textasciigrave{}} \OtherTok{=} \FloatTok{0.9}\NormalTok{),}
+    \StringTok{\textasciigrave{}}\AttributeTok{person4}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{bedroom2}\StringTok{\textasciigrave{}} \OtherTok{=} \FloatTok{0.8}\NormalTok{, }\StringTok{\textasciigrave{}}\AttributeTok{bedroom3}\StringTok{\textasciigrave{}} \OtherTok{=} \FloatTok{0.2}\NormalTok{),}
+    \StringTok{\textasciigrave{}}\AttributeTok{person5}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{bedroom3}\StringTok{\textasciigrave{}} \OtherTok{=} \DecValTok{1}\NormalTok{),}
+    \StringTok{\textasciigrave{}}\AttributeTok{person6}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{bedroom3}\StringTok{\textasciigrave{}} \OtherTok{=} \DecValTok{1}\NormalTok{)}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tabu} to \linewidth {>{\raggedright}X>{\centering}X>{\centering}X>{\centering}X}
+\toprule
+\textbf{persons} & \textbf{bedroom1} & \textbf{bedroom2} & \textbf{bedroom3}\\
+\midrule
+person2 & 1 & - & -\\
+person3 & 0.1 & 0.9 & -\\
+person4 & - & 0.8 & 0.2\\
+person5 & - & - & 1\\
+person6 & - & - & 1\\
+\bottomrule
+\end{tabu}
+
+\newpage
+
+Create data frame with all permutations for income, unit size, and
+household sizes. Exclude non-valid combinations of unit and household
+size:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sC\_hh\_type }\OtherTok{\textless{}{-}} \FunctionTok{expand.grid}\NormalTok{(}
+  \AttributeTok{AMI =} \FunctionTok{names}\NormalTok{(sC\_ami),}
+  \AttributeTok{bedrooms =} \FunctionTok{unlist}\NormalTok{(}\FunctionTok{lapply}\NormalTok{(}\FunctionTok{names}\NormalTok{(sC\_unit), }\ControlFlowTok{function}\NormalTok{(unit) }\FunctionTok{names}\NormalTok{(sC\_unit[[unit]]))),}
+  \AttributeTok{hh\_size =}\NormalTok{ sC\_person}\SpecialCharTok{$}\NormalTok{hh\_size}
+\NormalTok{  ) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{distinct}\NormalTok{() }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{filter}\NormalTok{(}
+    \SpecialCharTok{!}\NormalTok{(bedrooms }\SpecialCharTok{==} \StringTok{"bedroom1"} \SpecialCharTok{\&} \SpecialCharTok{!}\NormalTok{hh\_size }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"person2"}\NormalTok{, }\StringTok{"person3"}\NormalTok{)),}
+    \SpecialCharTok{!}\NormalTok{(bedrooms }\SpecialCharTok{==} \StringTok{"bedroom2"} \SpecialCharTok{\&}\NormalTok{ hh\_size }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"person2"}\NormalTok{, }\StringTok{"person5"}\NormalTok{, }\StringTok{"person6"}\NormalTok{)),}
+    \SpecialCharTok{!}\NormalTok{(bedrooms }\SpecialCharTok{==} \StringTok{"bedroom3"} \SpecialCharTok{\&}\NormalTok{ hh\_size }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"person2"}\NormalTok{, }\StringTok{"person3"}\NormalTok{))}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Calculations}\label{calculations-2}
+
+Create a function to tabulates respective household distributions by
+AMI, household size, and unit type:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sC\_dist\_fn }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{() \{}
+  
+  \CommentTok{\# Build data frame with AMI and household size distributions}
+\NormalTok{  dist }\OtherTok{\textless{}{-}} \FunctionTok{expand.grid}\NormalTok{(}
+    \AttributeTok{AMI =} \FunctionTok{names}\NormalTok{(sC\_ami),}
+    \AttributeTok{hh\_size =}\NormalTok{ sC\_person}\SpecialCharTok{$}\NormalTok{hh\_size}
+\NormalTok{  ) }\SpecialCharTok{|\textgreater{}}
+    \CommentTok{\# Match hh\_size with sC\_person$hh\_size to fetch the correct percentage}
+    \FunctionTok{mutate}\NormalTok{(}\AttributeTok{households =}\NormalTok{ sC\_ami[AMI] }\SpecialCharTok{*}\NormalTok{ sC\_person}\SpecialCharTok{$}\NormalTok{pct[}\FunctionTok{match}\NormalTok{(hh\_size, sC\_person}\SpecialCharTok{$}\NormalTok{hh\_size)])}
+
+  \CommentTok{\# Initialize an empty data frame for the final distribution}
+\NormalTok{  final\_distribution }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{()}
+
+  \CommentTok{\# Iterate distribution by unit size}
+  \ControlFlowTok{for}\NormalTok{ (person }\ControlFlowTok{in} \FunctionTok{unique}\NormalTok{(sC\_hh\_type}\SpecialCharTok{$}\NormalTok{hh\_size)) \{}
+\NormalTok{    current\_dist }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(dist, hh\_size }\SpecialCharTok{==}\NormalTok{ person)}
+
+    \ControlFlowTok{for}\NormalTok{ (bedroom\_count }\ControlFlowTok{in} \FunctionTok{names}\NormalTok{(sC\_unit[[person]])) \{}
+\NormalTok{      current\_dist}\SpecialCharTok{$}\NormalTok{bedrooms }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(bedroom\_count)}
+
+\NormalTok{      current\_dist}\SpecialCharTok{$}\NormalTok{pct }\OtherTok{\textless{}{-}}\NormalTok{ current\_dist}\SpecialCharTok{$}\NormalTok{households }\SpecialCharTok{*}
+\NormalTok{        sC\_unit[[person]][bedroom\_count]}
+
+\NormalTok{      final\_distribution }\OtherTok{\textless{}{-}} \FunctionTok{rbind}\NormalTok{(}
+\NormalTok{        final\_distribution,}
+\NormalTok{        current\_dist[, }\FunctionTok{c}\NormalTok{(}\StringTok{"AMI"}\NormalTok{, }\StringTok{"bedrooms"}\NormalTok{, }\StringTok{"hh\_size"}\NormalTok{, }\StringTok{"pct"}\NormalTok{)]}
+\NormalTok{      )}
+\NormalTok{    \}}
+\NormalTok{  \}}
+
+  \FunctionTok{return}\NormalTok{(final\_distribution)}
+\NormalTok{\}}
+
+\NormalTok{sC\_dist }\OtherTok{\textless{}{-}} \FunctionTok{sC\_dist\_fn}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\newpage
+
+Calculate affordable rents (\texttt{aff\_rent}) at 30\% AMI, 40\% AMI,
+and 50\% AMI for households with 2 to 6 persons (\texttt{hh\_size}):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Monthly affordable rents by household size}
+\NormalTok{sC\_aff\_rents }\OtherTok{\textless{}{-}}\NormalTok{ hud\_ami }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{filter}\NormalTok{(}
+\NormalTok{    AMI }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"30\% AMI"}\NormalTok{, }\StringTok{"40\% AMI"}\NormalTok{, }\StringTok{"50\% AMI"}\NormalTok{), }\CommentTok{\# 30\%, 40\%, and 50\% AMI only}
+    \FunctionTok{str\_detect}\NormalTok{(hh\_size, }\StringTok{"[23456]"}\NormalTok{) }\CommentTok{\# 2{-}6 person households only}
+\NormalTok{    ) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{aff\_rent =}\NormalTok{ income}\SpecialCharTok{/}\DecValTok{12} \SpecialCharTok{*} \FloatTok{0.4} \CommentTok{\# 40\% of monthly income}
+\NormalTok{  ) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begingroup\fontsize{8}{10}\selectfont
+
+\begin{tabu} to \linewidth {>{\raggedright}X>{\raggedright}X>{\centering}X}
+\toprule
+\textbf{AMI} & \textbf{hh\_size} & \textbf{aff\_rent}\\
+\midrule
+ & person2 & 1206.00\\
+\cmidrule{2-3}
+ & person3 & 1357.00\\
+\cmidrule{2-3}
+ & person4 & 1507.00\\
+\cmidrule{2-3}
+ & person5 & 1628.00\\
+\cmidrule{2-3}
+\multirow[t]{-5}{*}{\raggedright\arraybackslash 30\% AMI} & person6 & 1749.00\\
+\cmidrule{1-3}
+ & person2 & 1608.00\\
+\cmidrule{2-3}
+ & person3 & 1809.33\\
+\cmidrule{2-3}
+ & person4 & 2009.33\\
+\cmidrule{2-3}
+ & person5 & 2173.67\\
+\cmidrule{2-3}
+\multirow[t]{-5}{*}{\raggedright\arraybackslash 40\% AMI} & person6 & 2332.00\\
+\cmidrule{1-3}
+ & person2 & 2010.00\\
+\cmidrule{2-3}
+ & person3 & 2261.67\\
+\cmidrule{2-3}
+ & person4 & 2511.67\\
+\cmidrule{2-3}
+ & person5 & 2713.33\\
+\cmidrule{2-3}
+\multirow[t]{-5}{*}{\raggedright\arraybackslash 50\% AMI} & person6 & 2915.00\\
+\bottomrule
+\end{tabu}
+\endgroup{}
+
+\newpage
+
+Join \texttt{sC\_hh\_type} with average FMR by unit size
+(\texttt{fmrs\_avg}) and affordable rents (\texttt{sC\_aff\_rents}),
+then find difference between values to calculate the monthly subsidy
+(\texttt{subsidy}):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sC\_subsidy }\OtherTok{\textless{}{-}}\NormalTok{ sC\_hh\_type }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{left\_join}\NormalTok{(sC\_aff\_rents, }\FunctionTok{join\_by}\NormalTok{(AMI, hh\_size)) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{left\_join}\NormalTok{(fmrs\_avg) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{subsidy =}\NormalTok{ fmr\_avg }\SpecialCharTok{{-}}\NormalTok{ aff\_rent)}
+\end{Highlighting}
+\end{Shaded}
+
+\begingroup\fontsize{8}{10}\selectfont
+
+\begin{tabu} to \linewidth {>{\raggedright}X>{\raggedright}X>{\raggedright}X>{\centering}X>{\centering}X>{}c}
+\toprule
+\textbf{AMI} & \textbf{bedrooms} & \textbf{hh\_size} & \textbf{aff\_rent} & \textbf{fmr\_avg} & \textbf{subsidy}\\
+\midrule
+ &  & person2 & 1206.00 & 2019.88 & \textcolor{black}{813.88}\\
+\cmidrule{3-6}
+ & \multirow[t]{-2}{*}{\raggedright\arraybackslash bedroom1} & person3 & 1357.00 & 2019.88 & \textcolor{black}{662.88}\\
+\cmidrule{2-6}
+ &  & person3 & 1357.00 & 2300.38 & \textcolor{black}{943.38}\\
+\cmidrule{3-6}
+ & \multirow[t]{-2}{*}{\raggedright\arraybackslash bedroom2} & person4 & 1507.00 & 2300.38 & \textcolor{black}{793.38}\\
+\cmidrule{2-6}
+ &  & person4 & 1507.00 & 2876.50 & \textcolor{black}{1369.50}\\
+\cmidrule{3-6}
+ &  & person5 & 1628.00 & 2876.50 & \textcolor{black}{1248.50}\\
+\cmidrule{3-6}
+\multirow[t]{-7}{*}[2\dimexpr\aboverulesep+\belowrulesep+\cmidrulewidth]{\raggedright\arraybackslash 30\% AMI} & \multirow[t]{-3}{*}{\raggedright\arraybackslash bedroom3} & person6 & 1749.00 & 2876.50 & \textcolor{black}{1127.50}\\
+\cmidrule{1-6}
+ &  & person2 & 1608.00 & 2019.88 & \textcolor{black}{411.88}\\
+\cmidrule{3-6}
+ & \multirow[t]{-2}{*}{\raggedright\arraybackslash bedroom1} & person3 & 1809.33 & 2019.88 & \textcolor{black}{210.54}\\
+\cmidrule{2-6}
+ &  & person3 & 1809.33 & 2300.38 & \textcolor{black}{491.04}\\
+\cmidrule{3-6}
+ & \multirow[t]{-2}{*}{\raggedright\arraybackslash bedroom2} & person4 & 2009.33 & 2300.38 & \textcolor{black}{291.04}\\
+\cmidrule{2-6}
+ &  & person4 & 2009.33 & 2876.50 & \textcolor{black}{867.17}\\
+\cmidrule{3-6}
+ &  & person5 & 2173.67 & 2876.50 & \textcolor{black}{702.83}\\
+\cmidrule{3-6}
+\multirow[t]{-7}{*}[2\dimexpr\aboverulesep+\belowrulesep+\cmidrulewidth]{\raggedright\arraybackslash 40\% AMI} & \multirow[t]{-3}{*}{\raggedright\arraybackslash bedroom3} & person6 & 2332.00 & 2876.50 & \textcolor{black}{544.50}\\
+\cmidrule{1-6}
+ &  & person2 & 2010.00 & 2019.88 & \textcolor{red}{9.88}\\
+\cmidrule{3-6}
+ & \multirow[t]{-2}{*}{\raggedright\arraybackslash bedroom1} & person3 & 2261.67 & 2019.88 & \textcolor{red}{-241.79}\\
+\cmidrule{2-6}
+ &  & person3 & 2261.67 & 2300.38 & \textcolor{red}{38.71}\\
+\cmidrule{3-6}
+ & \multirow[t]{-2}{*}{\raggedright\arraybackslash bedroom2} & person4 & 2511.67 & 2300.38 & \textcolor{red}{-211.29}\\
+\cmidrule{2-6}
+ &  & person4 & 2511.67 & 2876.50 & \textcolor{black}{364.83}\\
+\cmidrule{3-6}
+ &  & person5 & 2713.33 & 2876.50 & \textcolor{black}{163.17}\\
+\cmidrule{3-6}
+\multirow[t]{-7}{*}[2\dimexpr\aboverulesep+\belowrulesep+\cmidrulewidth]{\raggedright\arraybackslash 50\% AMI} & \multirow[t]{-3}{*}{\raggedright\arraybackslash bedroom3} & person6 & 2915.00 & 2876.50 & \textcolor{red}{-38.50}\\
+\bottomrule
+\end{tabu}
+\endgroup{}
+
+\hfill\break
+
+\begin{tcolorbox}[enhanced jigsaw, breakable, toprule=.15mm, opacitybacktitle=0.6, colframe=quarto-callout-warning-color-frame, colback=white, opacityback=0, coltitle=black, colbacktitle=quarto-callout-warning-color!10!white, rightrule=.15mm, toptitle=1mm, titlerule=0mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Some affordable rents almost equal to FMRs}, bottomtitle=1mm, bottomrule=.15mm, leftrule=.75mm, arc=.35mm, left=2mm]
+
+Note that the subsidies for 5 household types are negligible --- under
+\$50. (See red values.) These cases are the result of higher affordable
+rents among those earning 50\% AMI or more, along with the higher 40\%
+tenant contribution.
+
+\end{tcolorbox}
+
+\hfill\break
+For the purposes of this model, these household types with no or very
+little subsidy need will be excluded. The sum of their respective shares
+will be redistributed to the remaining 16 household combinations.
+
+\newpage
+
+Calculate total shares of excluded and remaining household types:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sC\_excl }\OtherTok{\textless{}{-}}\NormalTok{ sC\_subsidy }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{left\_join}\NormalTok{(sC\_dist, }\FunctionTok{join\_by}\NormalTok{(AMI, bedrooms, hh\_size)) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{status =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{      subsidy }\SpecialCharTok{\textless{}} \DecValTok{50} \SpecialCharTok{\textasciitilde{}} \StringTok{"exclude"}\NormalTok{,}
+\NormalTok{      subsidy }\SpecialCharTok{\textgreater{}} \DecValTok{50} \SpecialCharTok{\textasciitilde{}} \StringTok{"retain"}
+\NormalTok{    ),}
+    \AttributeTok{.before =} \DecValTok{7}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tabu} to \linewidth {>{\raggedright}X>{\centering}X}
+\toprule
+\textbf{status} & \textbf{pct}\\
+\midrule
+retain & 0.825\\
+\textcolor{red}{exclude} & \textcolor{red}{0.175}\\
+\bottomrule
+\end{tabu}
+
+\hfill\break
+\hfill\break
+Evenly distributing this 0.175 across the remaining 16 combinations
+would not respect the original group distributions by AMI and household
+size. Therefore, this surplus share will be manually redistributed to
+each remaining combination to ensure the new AMI and household size
+group subtotals are as close to the original values as possible.
+
+First, we determine the change in shares by each AMI and household size
+group resulting from excluding the 5 invalid combinations.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sC\_excl\_grp }\OtherTok{\textless{}{-}}\NormalTok{ sC\_excl }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{select}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{, }\DecValTok{7}\SpecialCharTok{:}\DecValTok{8}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{pct\_excl =}
+      \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{        status }\SpecialCharTok{==} \StringTok{"retain"} \SpecialCharTok{\textasciitilde{}}\NormalTok{ pct,}
+\NormalTok{        status }\SpecialCharTok{==} \StringTok{"exclude"} \SpecialCharTok{\textasciitilde{}} \DecValTok{0}
+\NormalTok{      )}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+Change in shares grouped by AMI:
+
+\begin{tabu} to \linewidth {>{\raggedright}X>{\centering}X>{\centering}X>{}c}
+\toprule
+\textbf{AMI} & \textbf{pct} & \textbf{pct\_excl} & \textbf{diff}\\
+\midrule
+30\% AMI & 0.25 & 0.250 & \textcolor{black}{0.000}\\
+40\% AMI & 0.50 & 0.500 & \textcolor{black}{0.000}\\
+50\% AMI & 0.25 & 0.075 & \textcolor{red}{-0.175}\\
+\bottomrule
+\end{tabu}
+
+\hfill\break
+\hfill\break
+Change in shares grouped by household size:
+
+\begin{tabu} to \linewidth {>{\raggedright}X>{\centering}X>{\centering}X>{}c}
+\toprule
+\textbf{hh\_size} & \textbf{pct} & \textbf{pct\_excl} & \textbf{diff}\\
+\midrule
+person2 & 0.15 & 0.1125 & \textcolor{red}{-0.0375}\\
+person3 & 0.25 & 0.1875 & \textcolor{red}{-0.0625}\\
+person4 & 0.25 & 0.2000 & \textcolor{red}{-0.0500}\\
+person5 & 0.25 & 0.2500 & \textcolor{black}{0.0000}\\
+person6 & 0.10 & 0.0750 & \textcolor{red}{-0.0250}\\
+\bottomrule
+\end{tabu}
+
+\newpage
+
+In redistributing these shares, we will need to:
+
+\begin{itemize}
+\tightlist
+\item
+  Significantly increase the remaining 50\% AMI household types
+  (4-person and 5-person in 3-bedroom units) to maintain overall balance
+  across AMI groups
+\item
+  Reduce the corresponding shares in both 30\% AMI and 40\% AMI groups
+  to maintain overall balance across household sizes
+\item
+  Slightly increase the 2-person, 3-person, and 6-person household types
+  in both 30\% AMI and 40\% AMI groups to account for losses within 50\%
+  AMI category
+\end{itemize}
+
+To accomplish this, the excluded share is divided into 16 parts (\(p\)):
+
+\[p = \frac{0.175}{16} = 0.0109375\]
+
+We can increase or decrease each household combination by a multiple of
+\(p\) as long as the net increase across all households is \(+16p\).
+
+The following allocation reproduces the original AMI distribution, and a
+new household size distribution where each category is within
+\(\pm 0.02\) of the original share.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sC\_redist }\OtherTok{\textless{}{-}}\NormalTok{ sC\_excl\_grp }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{filter}\NormalTok{(status }\SpecialCharTok{==} \StringTok{"retain"}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{select}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{arrange}\NormalTok{(AMI, hh\_size, bedrooms) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{p\_shares =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{      AMI }\SpecialCharTok{==} \StringTok{"30\% AMI"} \SpecialCharTok{\&}\NormalTok{ bedrooms }\SpecialCharTok{==} \StringTok{"bedroom2"} \SpecialCharTok{\&}\NormalTok{ hh\_size }\SpecialCharTok{==} \StringTok{"person4"} \SpecialCharTok{\textasciitilde{}} \DecValTok{0}\NormalTok{,}
+\NormalTok{      AMI }\SpecialCharTok{==} \StringTok{"30\% AMI"} \SpecialCharTok{\&}\NormalTok{ bedrooms }\SpecialCharTok{==} \StringTok{"bedroom3"} \SpecialCharTok{\&}\NormalTok{ hh\_size }\SpecialCharTok{==} \StringTok{"person4"} \SpecialCharTok{\textasciitilde{}} \SpecialCharTok{{-}}\DecValTok{1}\NormalTok{,}
+\NormalTok{      AMI }\SpecialCharTok{==} \StringTok{"30\% AMI"} \SpecialCharTok{\&}\NormalTok{ bedrooms }\SpecialCharTok{==} \StringTok{"bedroom3"} \SpecialCharTok{\&}\NormalTok{ hh\_size }\SpecialCharTok{==} \StringTok{"person5"} \SpecialCharTok{\textasciitilde{}} \SpecialCharTok{{-}}\DecValTok{3}\NormalTok{,}
+\NormalTok{      AMI }\SpecialCharTok{==} \StringTok{"40\% AMI"} \SpecialCharTok{\&}\NormalTok{ bedrooms }\SpecialCharTok{==} \StringTok{"bedroom3"} \SpecialCharTok{\&}\NormalTok{ hh\_size }\SpecialCharTok{==} \StringTok{"person4"} \SpecialCharTok{\textasciitilde{}} \SpecialCharTok{{-}}\DecValTok{2}\NormalTok{,}
+\NormalTok{      AMI }\SpecialCharTok{==} \StringTok{"40\% AMI"} \SpecialCharTok{\&}\NormalTok{ bedrooms }\SpecialCharTok{==} \StringTok{"bedroom3"} \SpecialCharTok{\&}\NormalTok{ hh\_size }\SpecialCharTok{==} \StringTok{"person5"} \SpecialCharTok{\textasciitilde{}} \SpecialCharTok{{-}}\DecValTok{4}\NormalTok{,}
+\NormalTok{      AMI }\SpecialCharTok{==} \StringTok{"40\% AMI"} \SpecialCharTok{\&}\NormalTok{ bedrooms }\SpecialCharTok{==} \StringTok{"bedroom3"} \SpecialCharTok{\&}\NormalTok{ hh\_size }\SpecialCharTok{==} \StringTok{"person6"} \SpecialCharTok{\textasciitilde{}} \DecValTok{2}\NormalTok{,}
+\NormalTok{      AMI }\SpecialCharTok{==} \StringTok{"50\% AMI"} \SpecialCharTok{\textasciitilde{}} \DecValTok{8}\NormalTok{,}
+      \AttributeTok{.default =} \DecValTok{1}
+\NormalTok{    ),}
+    \AttributeTok{pct\_redist =}\NormalTok{ pct }\SpecialCharTok{+}\NormalTok{ (p}\SpecialCharTok{*}\NormalTok{p\_shares)}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begingroup\fontsize{8}{10}\selectfont
+
+\begin{tabu} to \linewidth {>{\raggedright}X>{\raggedright}X>{\raggedright}X>{\centering}X>{\centering}X>{\centering}X}
+\toprule
+\textbf{AMI} & \textbf{bedrooms} & \textbf{hh\_size} & \textbf{pct} & \textbf{p\_shares} & \textbf{pct\_redist}\\
+\midrule
+ &  & person2 & 0.0375 & 1 & 0.0484\\
+\cmidrule{3-6}
+ & \multirow[t]{-2}{*}{\raggedright\arraybackslash bedroom1} & person3 & 0.0063 & 1 & 0.0172\\
+\cmidrule{2-6}
+ &  & person3 & 0.0562 & 1 & 0.0672\\
+\cmidrule{3-6}
+ & \multirow[t]{-2}{*}{\raggedright\arraybackslash bedroom2} & person4 & 0.0500 & 0 & 0.0500\\
+\cmidrule{2-6}
+ &  & person4 & 0.0125 & -1 & 0.0016\\
+\cmidrule{3-6}
+ &  & person5 & 0.0625 & -3 & 0.0297\\
+\cmidrule{3-6}
+\multirow[t]{-7}{*}[2\dimexpr\aboverulesep+\belowrulesep+\cmidrulewidth]{\raggedright\arraybackslash 30\% AMI} & \multirow[t]{-3}{*}{\raggedright\arraybackslash bedroom3} & person6 & 0.0250 & 1 & 0.0359\\
+\cmidrule{1-6}
+ &  & person2 & 0.0750 & 1 & 0.0859\\
+\cmidrule{3-6}
+ & \multirow[t]{-2}{*}{\raggedright\arraybackslash bedroom1} & person3 & 0.0125 & 1 & 0.0234\\
+\cmidrule{2-6}
+ &  & person3 & 0.1125 & 1 & 0.1234\\
+\cmidrule{3-6}
+ & \multirow[t]{-2}{*}{\raggedright\arraybackslash bedroom2} & person4 & 0.1000 & 1 & 0.1109\\
+\cmidrule{2-6}
+ &  & person4 & 0.0250 & -2 & 0.0031\\
+\cmidrule{3-6}
+ &  & person5 & 0.1250 & -4 & 0.0813\\
+\cmidrule{3-6}
+\multirow[t]{-7}{*}[2\dimexpr\aboverulesep+\belowrulesep+\cmidrulewidth]{\raggedright\arraybackslash 40\% AMI} & \multirow[t]{-3}{*}{\raggedright\arraybackslash bedroom3} & person6 & 0.0500 & 2 & 0.0719\\
+\cmidrule{1-6}
+ &  & person4 & 0.0125 & 8 & 0.1000\\
+\cmidrule{3-6}
+\multirow[t]{-2}{*}{\raggedright\arraybackslash 50\% AMI} & \multirow[t]{-2}{*}{\raggedright\arraybackslash bedroom3} & person5 & 0.0625 & 8 & 0.1500\\
+\bottomrule
+\end{tabu}
+\endgroup{}
+
+\newpage
+
+Original distribution of households by AMI retained:
+
+\begin{tabu} to \linewidth {>{\raggedright}X>{\centering}X}
+\toprule
+\textbf{AMI} & \textbf{pct\_redist}\\
+\midrule
+30\% AMI & 0.25\\
+40\% AMI & 0.50\\
+50\% AMI & 0.25\\
+\bottomrule
+\end{tabu}
+
+\hfill\break
+\hfill\break
+New distribution of households by household size:
+
+\begin{tabu} to \linewidth {>{\raggedright}X>{\centering}X}
+\toprule
+\textbf{hh\_size} & \textbf{pct\_redist}\\
+\midrule
+person2 & 0.1344\\
+person3 & 0.2313\\
+person4 & 0.2656\\
+person5 & 0.2609\\
+person6 & 0.1078\\
+\bottomrule
+\end{tabu}
+
+\hfill\break
+\hfill\break
+Rejoin the redistributed households with the calculated subsidy amounts
+per household:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sC\_redist\_subsidy }\OtherTok{\textless{}{-}}\NormalTok{ sC\_subsidy }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{right\_join}\NormalTok{(sC\_redist, }\FunctionTok{join\_by}\NormalTok{(AMI, bedrooms, hh\_size)) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{select}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{9}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begingroup\fontsize{8}{10}\selectfont
+
+\begin{tabu} to \linewidth {>{\raggedright}X>{\raggedright}X>{\raggedright}X>{\centering}X>{\centering}X}
+\toprule
+\textbf{AMI} & \textbf{bedrooms} & \textbf{hh\_size} & \textbf{subsidy} & \textbf{pct\_redist}\\
+\midrule
+ &  & person2 & 813.88 & 0.0484\\
+\cmidrule{3-5}
+ & \multirow[t]{-2}{*}{\raggedright\arraybackslash bedroom1} & person3 & 662.88 & 0.0172\\
+\cmidrule{2-5}
+ &  & person3 & 943.38 & 0.0672\\
+\cmidrule{3-5}
+ & \multirow[t]{-2}{*}{\raggedright\arraybackslash bedroom2} & person4 & 793.38 & 0.0500\\
+\cmidrule{2-5}
+ &  & person4 & 1369.50 & 0.0016\\
+\cmidrule{3-5}
+ &  & person5 & 1248.50 & 0.0297\\
+\cmidrule{3-5}
+\multirow[t]{-7}{*}[2\dimexpr\aboverulesep+\belowrulesep+\cmidrulewidth]{\raggedright\arraybackslash 30\% AMI} & \multirow[t]{-3}{*}{\raggedright\arraybackslash bedroom3} & person6 & 1127.50 & 0.0359\\
+\cmidrule{1-5}
+ &  & person2 & 411.88 & 0.0859\\
+\cmidrule{3-5}
+ & \multirow[t]{-2}{*}{\raggedright\arraybackslash bedroom1} & person3 & 210.54 & 0.0234\\
+\cmidrule{2-5}
+ &  & person3 & 491.04 & 0.1234\\
+\cmidrule{3-5}
+ & \multirow[t]{-2}{*}{\raggedright\arraybackslash bedroom2} & person4 & 291.04 & 0.1109\\
+\cmidrule{2-5}
+ &  & person4 & 867.17 & 0.0031\\
+\cmidrule{3-5}
+ &  & person5 & 702.83 & 0.0813\\
+\cmidrule{3-5}
+\multirow[t]{-7}{*}[2\dimexpr\aboverulesep+\belowrulesep+\cmidrulewidth]{\raggedright\arraybackslash 40\% AMI} & \multirow[t]{-3}{*}{\raggedright\arraybackslash bedroom3} & person6 & 544.50 & 0.0719\\
+\cmidrule{1-5}
+ &  & person4 & 364.83 & 0.1000\\
+\cmidrule{3-5}
+\multirow[t]{-2}{*}{\raggedright\arraybackslash 50\% AMI} & \multirow[t]{-2}{*}{\raggedright\arraybackslash bedroom3} & person5 & 163.17 & 0.1500\\
+\bottomrule
+\end{tabu}
+\endgroup{}
+
+\newpage
+
+Calculate annual subsidy per household (\texttt{subsidy\_annual}) and
+the theoretical share of subsidy allocated for each household
+(\texttt{subsidy\_share}). Determine the number of households served
+(\texttt{hh\_served}) by normalizing \texttt{subsidy\_share} to the
+known budget:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Annual subsidy per household type}
+\NormalTok{sC\_subsidy\_annual }\OtherTok{\textless{}{-}}\NormalTok{ sC\_redist\_subsidy }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{subsidy\_annual =}\NormalTok{ subsidy }\SpecialCharTok{*} \DecValTok{12}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{select}\NormalTok{(AMI, bedrooms, hh\_size, }\StringTok{"pct"} \OtherTok{=}\NormalTok{ pct\_redist, subsidy\_annual) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{subsidy\_share =}\NormalTok{ subsidy\_annual }\SpecialCharTok{*}\NormalTok{ pct, }\CommentTok{\# Subsidy per HH type}
+    \AttributeTok{hh\_served =} \CommentTok{\# Adjust to known budget}
+\NormalTok{      pct}\SpecialCharTok{*}\NormalTok{(}
+\NormalTok{        sC\_budget }\SpecialCharTok{*}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ sC\_overhead)}
+\NormalTok{        )}\SpecialCharTok{/}\FunctionTok{sum}\NormalTok{(subsidy\_share) }
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begingroup\fontsize{8}{10}\selectfont
+
+\begin{tabu} to \linewidth {>{\raggedright}X>{\raggedright}X>{\raggedright}X>{\centering}X>{\centering}X>{\centering}X}
+\toprule
+\textbf{AMI} & \textbf{bedrooms} & \textbf{hh\_size} & \textbf{subsidy\_annual} & \textbf{subsidy\_share} & \textbf{hh\_served}\\
+\midrule
+ &  & person2 & 9766.50 & 473.06 & 3.257\\
+\cmidrule{3-6}
+ & \multirow[t]{-2}{*}{\raggedright\arraybackslash bedroom1} & person3 & 7954.50 & 136.72 & 1.156\\
+\cmidrule{2-6}
+ &  & person3 & 11320.50 & 760.60 & 4.518\\
+\cmidrule{3-6}
+ & \multirow[t]{-2}{*}{\raggedright\arraybackslash bedroom2} & person4 & 9520.50 & 476.03 & 3.362\\
+\cmidrule{2-6}
+ &  & person4 & 16434.00 & 25.68 & 0.105\\
+\cmidrule{3-6}
+ &  & person5 & 14982.00 & 444.78 & 1.996\\
+\cmidrule{3-6}
+\multirow[t]{-7}{*}[2\dimexpr\aboverulesep+\belowrulesep+\cmidrulewidth]{\raggedright\arraybackslash 30\% AMI} & \multirow[t]{-3}{*}{\raggedright\arraybackslash bedroom3} & person6 & 13530.00 & 486.23 & 2.416\\
+\cmidrule{1-6}
+ &  & person2 & 4942.50 & 424.75 & 5.778\\
+\cmidrule{3-6}
+ & \multirow[t]{-2}{*}{\raggedright\arraybackslash bedroom1} & person3 & 2526.50 & 59.21 & 1.576\\
+\cmidrule{2-6}
+ &  & person3 & 5892.50 & 727.36 & 8.300\\
+\cmidrule{3-6}
+ & \multirow[t]{-2}{*}{\raggedright\arraybackslash bedroom2} & person4 & 3492.50 & 387.45 & 7.459\\
+\cmidrule{2-6}
+ &  & person4 & 10406.00 & 32.52 & 0.210\\
+\cmidrule{3-6}
+ &  & person5 & 8434.00 & 685.26 & 5.463\\
+\cmidrule{3-6}
+\multirow[t]{-7}{*}[2\dimexpr\aboverulesep+\belowrulesep+\cmidrulewidth]{\raggedright\arraybackslash 40\% AMI} & \multirow[t]{-3}{*}{\raggedright\arraybackslash bedroom3} & person6 & 6534.00 & 469.63 & 4.833\\
+\cmidrule{1-6}
+ &  & person4 & 4378.00 & 437.80 & 6.724\\
+\cmidrule{3-6}
+\multirow[t]{-2}{*}{\raggedright\arraybackslash 50\% AMI} & \multirow[t]{-2}{*}{\raggedright\arraybackslash bedroom3} & person5 & 1958.00 & 293.70 & 10.086\\
+\bottomrule
+\end{tabu}
+\endgroup{}
+
+\newpage
+
+Calculate and summarize the estimated budget and households served by
+AMI and household size:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sC\_served }\OtherTok{\textless{}{-}}\NormalTok{ sC\_subsidy\_annual }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{budget =}\NormalTok{ hh\_served }\SpecialCharTok{*}\NormalTok{ subsidy\_annual) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{summarise}\NormalTok{(}
+    \AttributeTok{budget =} \FunctionTok{sum}\NormalTok{(budget),}
+    \AttributeTok{hh\_served =} \FunctionTok{sum}\NormalTok{(hh\_served),}
+    \AttributeTok{.by =} \FunctionTok{c}\NormalTok{(AMI, hh\_size)}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begingroup\fontsize{8}{10}\selectfont
+
+\begin{tabu} to \linewidth {>{\raggedright}X>{\raggedright}X>{\centering}X>{\centering}X}
+\toprule
+\textbf{AMI} & \textbf{hh\_size} & \textbf{budget} & \textbf{hh\_served}\\
+\midrule
+ & person2 & 31808.22 & 3.257\\
+\cmidrule{2-4}
+ & person3 & 60334.15 & 5.673\\
+\cmidrule{2-4}
+ & person4 & 33733.82 & 3.467\\
+\cmidrule{2-4}
+ & person5 & 29906.27 & 1.996\\
+\cmidrule{2-4}
+\multirow[t]{-5}{*}[4\dimexpr\aboverulesep+\belowrulesep+\cmidrulewidth]{\raggedright\arraybackslash 30\% AMI} & person6 & 32693.73 & 2.416\\
+\cmidrule{1-4}
+ & person2 & 28559.34 & 5.778\\
+\cmidrule{2-4}
+ & person3 & 52887.90 & 9.876\\
+\cmidrule{2-4}
+ & person4 & 28238.06 & 7.669\\
+\cmidrule{2-4}
+ & person5 & 46076.10 & 5.463\\
+\cmidrule{2-4}
+\multirow[t]{-5}{*}[4\dimexpr\aboverulesep+\belowrulesep+\cmidrulewidth]{\raggedright\arraybackslash 40\% AMI} & person6 & 31577.35 & 4.833\\
+\cmidrule{1-4}
+ & person4 & 29437.07 & 6.724\\
+\cmidrule{2-4}
+\multirow[t]{-2}{*}[1\dimexpr\aboverulesep+\belowrulesep+\cmidrulewidth]{\raggedright\arraybackslash 50\% AMI} & person5 & 19747.98 & 10.086\\
+\cmidrule{1-4}
+Total & - & 425000.00 & 67.239\\
+\bottomrule
+\end{tabu}
+\endgroup{}
+
+\newpage
+
+\subsection{Model results}\label{model-results-2}
+
+Round each estimate to the nearest whole number and determine total:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Rounded estimates with grand total}
+\NormalTok{sC\_estimate }\OtherTok{\textless{}{-}}\NormalTok{ sC\_served }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{arrange}\NormalTok{(AMI, hh\_size) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{hh\_served =} \FunctionTok{round}\NormalTok{(hh\_served),}
+    \AttributeTok{hh\_size =} \FunctionTok{case\_match}\NormalTok{(}
+\NormalTok{      hh\_size,}
+      \StringTok{"person2"} \SpecialCharTok{\textasciitilde{}} \StringTok{"2 person"}\NormalTok{,}
+      \StringTok{"person3"} \SpecialCharTok{\textasciitilde{}} \StringTok{"3 person"}\NormalTok{,}
+      \StringTok{"person4"} \SpecialCharTok{\textasciitilde{}} \StringTok{"4 person"}\NormalTok{,}
+      \StringTok{"person5"} \SpecialCharTok{\textasciitilde{}} \StringTok{"5 person"}\NormalTok{,}
+      \StringTok{"person6"} \SpecialCharTok{\textasciitilde{}} \StringTok{"6 person"}
+\NormalTok{    )}
+\NormalTok{  ) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{adorn\_totals}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}[H]
+
+\caption{\label{tbl-sC}Scenario C - Estimated Households Served by
+Household Size}
+
+\centering{
+
+\begin{tabu} to \linewidth {>{\raggedright}X>{\raggedright}X>{\centering}X>{\centering}X}
+\toprule
+\textbf{Income} & \textbf{Household size} & \textbf{Budget} & \textbf{Households served}\\
+\midrule
+ & 2 person & \$31,808 & 3\\
+\cmidrule{2-4}
+ & 3 person & \$60,334 & 6\\
+\cmidrule{2-4}
+ & 4 person & \$33,734 & 3\\
+\cmidrule{2-4}
+ & 5 person & \$29,906 & 2\\
+\cmidrule{2-4}
+\multirow[t]{-5}{*}[4\dimexpr\aboverulesep+\belowrulesep+\cmidrulewidth]{\raggedright\arraybackslash 30\% AMI} & 6 person & \$32,694 & 2\\
+\cmidrule{1-4}
+ & 2 person & \$28,559 & 6\\
+\cmidrule{2-4}
+ & 3 person & \$52,888 & 10\\
+\cmidrule{2-4}
+ & 4 person & \$28,238 & 8\\
+\cmidrule{2-4}
+ & 5 person & \$46,076 & 5\\
+\cmidrule{2-4}
+\multirow[t]{-5}{*}[4\dimexpr\aboverulesep+\belowrulesep+\cmidrulewidth]{\raggedright\arraybackslash 40\% AMI} & 6 person & \$31,577 & 5\\
+\cmidrule{1-4}
+ & 4 person & \$29,437 & 7\\
+\cmidrule{2-4}
+\multirow[t]{-2}{*}[1\dimexpr\aboverulesep+\belowrulesep+\cmidrulewidth]{\raggedright\arraybackslash 50\% AMI} & 5 person & \$19,748 & 10\\
+\cmidrule{1-4}
+\textbf{Total} & \textbf{-} & \textbf{\$425,000} & \textbf{67}\\
+\bottomrule
+\end{tabu}
+
+}
+
+\end{table}%
+
+\hfill\break
+
+\begin{tcolorbox}[enhanced jigsaw, breakable, toprule=.15mm, opacitybacktitle=0.6, colframe=quarto-callout-note-color-frame, colback=white, opacityback=0, coltitle=black, colbacktitle=quarto-callout-note-color!10!white, rightrule=.15mm, toptitle=1mm, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Scenario C results}, bottomtitle=1mm, bottomrule=.15mm, leftrule=.75mm, arc=.35mm, left=2mm]
+
+\emph{Average annual program cost per household: \$7,462.69}
+
+\hfill\break
+Under Scenario C, a total program budget of \$500,000 with a 15\%
+administrative overhead leaves \$425,000 to fund rental assistance.
+Given the assumed household distributions by AMI, unit size, and
+household size, the total number of households served is 67.
+
+\end{tcolorbox}
+
+
+
+\end{document}

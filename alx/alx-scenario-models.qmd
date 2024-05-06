@@ -1,21 +1,29 @@
 ---
 title: "Appendix 7: Scenario Models Methodology"
 format:
-  html:
-    theme: flatly
-    author: "Jonathan Knopf (jonathan@hdadvisors.net)"
-    number-sections: true
-    number-offset: [1,6]
-    number-depth: 2
+  #html:
+  #  theme: flatly
+  #  author: "Jonathan Knopf (jonathan@hdadvisors.net)"
+  #  number-sections: true
+  #  number-offset: [1,6]
+  #  number-depth: 2
   pdf:
-    documentclass: scrreprt
+    keep-tex: true
+    documentclass: scrartcl
     number-sections: true
     number-offset: 7
     number-depth: 1
-    #mainfont: "Open Sans"
+    mainfont: "Arial"
     fontsize: 10pt
     colorlinks: true
     reference-location: section
+    geometry: 
+    #  - heightrounded
+      - footskip=5mm
+      - top=20mm
+      - bottom=25mm
+      - left=25mm
+      - right=25mm
     include-in-header: 
       - text: |
           \renewcommand{\thepage}{A7-\arabic{page}}
@@ -23,10 +31,10 @@ format:
 execute:
   echo: false
   warning: false
-  #freeze: auto
+  freeze: auto
 ---
 
-## Setup
+\vspace{-1.5cm}
 
 This document provides a step-by-step methodology to model three different Local Rent Supplement Program (LRSP) scenarios for the City of Alexandria. Data is created, transformed, and visualized using the R coding language. The R libraries used for this analysis are listed below.
 
@@ -48,11 +56,9 @@ library(janitor)
 library(hdatools)
 ```
 
+# Standard parameters
 
-
-## Standard parameters
-
-### Income limits
+## Income limits
 
 The models use HUD's FY 2023 Multifamily Tax Subsidy Projects (MTSP) Income Limits for Washington-Arlington-Alexandria, DC-VA-MD HUD Metro FMR Area.[^1] These are the official income limits used to determine eligibility for LIHTC projects and other affordable multifamily properties financed by tax-exempt bonds.
 
@@ -163,22 +169,29 @@ hud_plot <- hud_ami |>
       "person5" ~ "5 person",
       "person6" ~ "6 person"
     ),
-    hh_size = fct_inorder(hh_size)
+    hh_size = fct_inorder(hh_size),
+    rent = income/12*0.3
   )
 
-ggplot(hud_plot, aes(x = income, y = fct_rev(hh_size), label = label_currency(accuracy = 1)(income))) +
+ggplot(hud_plot, aes(x = income, y = fct_rev(hh_size))) +
   facet_wrap(~AMI, scales = "free_y") +
   geom_col(aes(fill = AMI)) +
   scale_fill_hda(-1) +
+  scale_color_hda(-1) +
   #geom_col(fill = "#445ca9") +
   geom_text(
-    size = 9, color = "white", nudge_x = -9000
+    aes(label = label_currency(accuracy = 1)(income)),
+    size = 9, color = "white", nudge_x = -3000, hjust = 1
     ) +
-  scale_x_continuous(labels = label_currency(), expand = c(0, 0)) +
+  geom_text(
+    aes(label = label_currency(accuracy = 1)(rent), color = AMI),
+    size = 9, fontface = "italic", nudge_x = 3000, hjust = 0
+    ) +
+  scale_x_continuous(labels = label_currency(), expand = c(0, 0), limits = c(0, 130000)) +
   theme_hda(base_size = 26) +
   labs(
     title = "HUD FY 2023 Multifamily Tax Subsidy Projects income limits",
-    subtitle = "Household income limits by AMI and household size",
+    subtitle = "Household income limits and affordable **rents** by AMI and household size",
     caption = "**Source:** HUD FY 2023 MTSP Income Limits for Washington-Arlington-Alexandria, DC-VA-MD HUD Metro FMR Area"
   ) +
   theme(
@@ -188,7 +201,7 @@ ggplot(hud_plot, aes(x = income, y = fct_rev(hh_size), label = label_currency(ac
     plot.subtitle = element_markdown(margin = margin(t = -5, b = 5))
   )
 
-ggsave("alx/alx-ami.png", width = 6.5, height = 4, units = "in", bg = "white")
+ggsave("sandbox/alx/alx-ami.png", width = 6.5, height = 4, units = "in", bg = "white")
 
 ```
 
@@ -196,9 +209,9 @@ ggsave("alx/alx-ami.png", width = 6.5, height = 4, units = "in", bg = "white")
 
 \newpage
 
-### Fair Market Rents
+## Fair Market Rents
 
-Models where the rent subsidy is calculated based on Fair Market Rents (FMR) use the current Small Area Fair Market Rents (SAFMR) adopted by the Arlington Redevelopment and Housing Authority for 2023. SAFMRs are provided by ZIP code.
+Models where the rent subsidy is calculated based on Fair Market Rents (FMR) use the current Small Area Fair Market Rents (SAFMR) adopted by the Alexandria Redevelopment and Housing Authority for 2023. SAFMRs are provided by ZIP code.
 
 While actual subsidy amounts will depend on the ZIP code where the tenant lives, models will use the average values (by unit size) across all ZIP codes. This is a simplification to avoid making assumptions about the geographic distribution of participating households.
 
@@ -245,12 +258,12 @@ fmrs_plot <- fmrs_all |>
   ) |> 
   mutate(
     type = case_when(
-      area == "FMR" ~ "Average",
+      area == "average" ~ "Average",
       .default = "ZIP code"
     ), .before = 2
   ) |> 
   mutate(
-    area = str_replace_all(area, "FMR", "Average"),
+    area = str_replace_all(area, "average", "Average"),
     area = fct_other(
       fct_reorder(area, fmr),
       drop = "Average", other_level = "Average"
@@ -266,15 +279,15 @@ fmrs_plot <- fmrs_all |>
       "bedroom4" ~ "4 bedroom",
     ),
     bedrooms = fct_inorder(bedrooms)
-  ) |> 
-  filter(bedrooms != "4 bedroom")
+  )
+  #filter(bedrooms != "4 bedroom")
 
 ggplot(fmrs_plot, aes(x = fmr, y = area, fill = type)) +
   facet_wrap(~bedrooms, scales = "free_y") +
   geom_col() +
   geom_text(
     data = filter(fmrs_plot, area %in% c("Average", "22314", "22313")),
-    aes(label = label_currency(accuracy = 1)(fmr)), size = 9, color = "white", nudge_x = -300
+    aes(label = label_currency(accuracy = 1)(fmr)), size = 9, color = "white", nudge_x = -500
     ) +
   scale_x_continuous(labels = label_currency(), expand = c(0, 0)) +
   scale_fill_hda() +
@@ -291,7 +304,7 @@ ggplot(fmrs_plot, aes(x = fmr, y = area, fill = type)) +
     plot.subtitle = element_markdown(margin = margin(t = -5, b = 2))
   )
 
-ggsave("alx-safmr.png", width = 6.5, height = 4, units = "in", bg = "white")
+ggsave("sandbox/alx/alx-safmr.png", width = 6.5, height = 4, units = "in", bg = "white")
 
 ```
 
@@ -318,7 +331,7 @@ fmrs_tbl <- fmrs_all |>
     bedrooms = fct_inorder(bedrooms),
     `ZIP code` = str_to_title(`ZIP code`)
   ) |> 
-  filter(bedrooms != "4 bedroom") |> 
+  #filter(bedrooms != "4 bedroom") |> 
   pivot_wider(
       names_from = bedrooms,
       values_from = fmr
@@ -336,13 +349,13 @@ if (knitr::is_html_output()) {
     ) |> 
     cols_align(
       align = "center",
-      columns = 2:5
+      columns = 2:6
     ) |> 
     cols_align(
       align = "left",
       columns = 1
     ) |> 
-    fmt_currency(columns = 2:5, currency = "USD", decimals = 0) |> 
+    fmt_currency(columns = 2:6, currency = "USD", decimals = 0) |> 
     tab_source_note(
       source_note = md("**Note:** Payment standards for 4 bedroom units not shown.")
       ) |> 
@@ -355,7 +368,7 @@ if (knitr::is_html_output()) {
       locations = cells_body(columns = 1)
     ) |> 
     grand_summary_rows(
-      columns = 2:5,
+      columns = 2:6,
       fns = Average ~ mean(.),
       fmt = ~ fmt_currency(., currency = "USD", decimals = 2)
     )
@@ -365,7 +378,7 @@ if (knitr::is_html_output()) {
   fmrs_tbl |>
     mutate(
       across(
-        2:5,
+        2:6,
         ~ if_else(
           row_number() %in% grep("Average", `ZIP code`),
           paste0("$", formatC(as.numeric(.x), format = "f", digits = 2, big.mark = ",")),
@@ -373,7 +386,7 @@ if (knitr::is_html_output()) {
           )
         )
       ) |> 
-    kbl(booktabs = T, align = "lcccc", linesep = "") |> 
+    kbl(booktabs = T, align = "lccccc", linesep = "") |> 
     row_spec(0, bold = T) |> 
     row_spec(9, bold = T) |> 
     kable_styling(full_width = T, latex_options = "HOLD_position")
@@ -384,7 +397,7 @@ if (knitr::is_html_output()) {
 
 \newpage
 
-## Scenario A - Reduce Cost Burden for 30% to 50% AMI Households
+# Scenario A - Reduce Cost Burden for 30% to 50% AMI Households
 
 This scenario outlines a LRSP with a total annual allocation of \$500,000. The primary goal of the program is to reduce housing cost burden among households with incomes between 30% and 50% AMI. The model uses the following inputs to estimate the number of households served.
 
@@ -419,7 +432,7 @@ Notes:
 
 \newpage
 
-### Inputs
+## Inputs
 
 Assign budget (dollars) and overhead costs (percent) variables:
 
@@ -447,7 +460,7 @@ sA_person <- tibble(
 
 ```
 
-### Calculations
+## Calculations
 
 Calculate affordable rents at 40% AMI and 60% AMI for households with 1 to 6 persons (`hh_size`) to determine monthly subsidy amounts (`subsidy`): 
 
@@ -484,6 +497,8 @@ sA_subsidy |>
 
 ```
 
+\newpage
+
 Join the monthly subsidy amounts by household size (`subsidy`) and calculate annual subsidy per household (`subsidy_annual`):
 
 ```{r}
@@ -499,6 +514,7 @@ sA_subsidy_annual <- sA_person |>
 ```{r}
 
 sA_subsidy_annual |> 
+  mutate(across(2:4, ~formattable::digits(.x, 2))) |> 
   kbl(booktabs = T, align = "lccc", linesep = "", row.names = FALSE) |> 
   row_spec(0, bold = T) |> 
   kable_styling(full_width = T, latex_options = "hold_position")
@@ -506,6 +522,7 @@ sA_subsidy_annual |>
 ```
 
 \
+
 Calculate the theoretical share of subsidy allocated for each household size (`subsidy_share`). Determine the number of households served (`hh_served`) by normalizing `subsidy_share` to the known budget, then calculate the budget share (`budget`) for each household size:
 
 ```{r}
@@ -515,7 +532,10 @@ Calculate the theoretical share of subsidy allocated for each household size (`s
 sA_served <- sA_subsidy_annual |>
   mutate(
     subsidy_share = subsidy_annual * pct, # Subsidy per HH type
-    hh_served = pct*(sA_budget * (1 - sA_overhead))/sum(subsidy_share) # Adjust to known budget
+    hh_served = # Adjust to known budget
+      pct*(
+        sA_budget * (1 - sA_overhead)
+        )/sum(subsidy_share) 
   ) |> 
   mutate(budget = hh_served * subsidy_annual)
 
@@ -528,19 +548,19 @@ sA_served <- sA_subsidy_annual |>
 sA_served |>
   select(1, 4, 5, 7, 6) |> 
   mutate(
-    across(3:4, ~formattable::digits(.x, 2)),
+    across(2:4, ~formattable::digits(.x, 2)),
     hh_served = formattable::digits(hh_served, 3)
     ) |> 
   adorn_totals(,,,,4,5) |> 
   kbl(booktabs = T, align = "lcccc", linesep = "", row.names = FALSE) |> 
   row_spec(0, bold = T) |> 
-  kable_styling(full_width = T, latex_options = "hold_position", font_size = 8)
+  kable_styling(full_width = T, latex_options = "hold_position")
 
 ```
 
 \newpage
 
-### Model results
+## Model results
 
 Round each estimate to the nearest whole number and determine total:
 
@@ -589,8 +609,10 @@ sA_avg <- (sA_budget)/sA_total
 
 ```
 
+\
+
 ::: callout-note
-### Scenario A results
+## Scenario A results
 
 *Average annual program cost per household: `{r} label_currency()(sA_avg)`*
 
@@ -600,7 +622,7 @@ Under Scenario A, a total program budget of \$500,000 with a 15% administrative 
 
 \newpage
 
-## Scenario B - Stabilize Unhoused Persons
+# Scenario B - Stabilize Unhoused Persons
 
 This scenario outlines a LRSP serving a total of 150 households experiencing housing insecurity. The primary goal of the program is to provide deep rental assistance to help these households achieve housing stability and avoid homelessness. The model uses the following inputs to estimate the annual program cost required to serve 150 households.
 
@@ -637,7 +659,7 @@ Notes:
 
 \newpage
 
-### Inputs
+## Inputs
 
 Assign households served and overhead costs (percent) variables:
 
@@ -697,7 +719,7 @@ sB_ssi <- 943
 
 \newpage
 
-### Calculations
+## Calculations
 
 Calculate affordable rents for SSI income and \$1,500/month (`income_source`) for households with 1 to 4 persons (`hh_size`) to determine monthly subsidy amounts (`subsidy`): 
 
@@ -734,6 +756,7 @@ sB_subsidy <- hud_ami |>
 
 sB_subsidy |>
   arrange(desc(income_source)) |> 
+  mutate(subsidy = formattable::digits(subsidy, 2)) |> 
   kbl(booktabs = T, align = "llc", linesep = "") |> 
   row_spec(0, bold = T) |> 
   collapse_rows(columns = 1, valign = "top") |> 
@@ -768,6 +791,7 @@ sB_dist |>
 ```
 
 \
+\
 Multiply each household share by the total number of households served (150) to determine the respective number served for each group (`hh_served`), rounded to the nearest whole number:
 
 ```{r}
@@ -780,7 +804,7 @@ sB_served <- sB_dist |>
 
 \newpage
 
-### Model results
+## Model results
 
 Join the monthly subsidy amounts(`subsidy`) by income source and household size and calculate annual subsidy per household (`subsidy_annual`). Multiply that figure by the number of households served to calculate the rental assistance required (`budget_rent`), then re-total to account for overhead costs (`budget_total`):
 
@@ -841,10 +865,10 @@ sB_avg <- (sB_total)/sB_hh_served
 
 ```
 
-\newpage
+\
 
 ::: callout-note
-### Scenario B results
+## Scenario B results
 
 *Average annual program cost per household: `{r} label_currency()(sB_avg)`*
 
@@ -854,7 +878,7 @@ Under Scenario B, a total of 150 households experiencing housing insecurity are 
 
 \newpage
 
-## Scenario C – Reduce Severe Cost Burden for Lower-Income Working Families
+# Scenario C – Reduce Severe Cost Burden for Lower-Income Working Families
 
 This scenario outlines a LRSP with a total annual allocation of $500,000. The primary goal of the program is to reduce housing cost burden among households with incomes between 30% and 50% AMI. Households must have one working adult and one or more dependent. The model uses the following inputs to estimate the number of households served.
 
@@ -893,7 +917,7 @@ Notes:
 
 \newpage
 
-### Inputs
+## Inputs
 
 Assign budget (dollars) and overhead costs (percent) variables:
 
@@ -984,11 +1008,9 @@ sC_hh_type <- expand.grid(
 
 ```
 
-\newpage
+## Calculations
 
-### Calculations
-
-Create a function that tabulates the respective household distributions by AMI, household size, and unit type: 
+Create a function to tabulates respective household distributions by AMI, household size, and unit type: 
 
 ```{r}
 #| echo: true
@@ -1000,10 +1022,8 @@ sC_dist_fn <- function() {
     AMI = names(sC_ami),
     hh_size = sC_person$hh_size
   ) |>
-    mutate(
-      # Match hh_size with sC_person$hh_size to fetch the correct percentage
-      households = sC_ami[AMI] * sC_person$pct[match(hh_size, sC_person$hh_size)]
-    )
+    # Match hh_size with sC_person$hh_size to fetch the correct percentage
+    mutate(households = sC_ami[AMI] * sC_person$pct[match(hh_size, sC_person$hh_size)])
 
   # Initialize an empty data frame for the final distribution
   final_distribution <- data.frame()
@@ -1097,14 +1117,17 @@ sC_subsidy_tbl |>
 
 ```
 
-\newpage
+\
 
 ::: callout-warning
-### Some affordable rents almost equal to FMRs
+## Some affordable rents almost equal to FMRs
 Note that the subsidies for 5 household types are negligible --- under \$50. (See red values.) These cases are the result of higher affordable rents among those earning 50% AMI or more, along with the higher 40% tenant contribution.
 :::
 
+\
 For the purposes of this model, these household types with no or very little subsidy need will be excluded. The sum of their respective shares will be redistributed to the remaining 16 household combinations.
+
+\newpage
 
 Calculate total shares of excluded and remaining household types:
 
@@ -1134,11 +1157,14 @@ sC_excl |>
 
 ```
 
+\
+\
 Evenly distributing this 0.175 across the remaining 16 combinations would not respect the original group distributions by AMI and household size. Therefore, this surplus share will be manually redistributed to each remaining combination to ensure the new AMI and household size group subtotals are as close to the original values as possible.
 
 First, we determine the change in shares by each AMI and household size group resulting from excluding the 5 invalid combinations.
 
 ```{r}
+#| echo: true
 
 sC_excl_grp <- sC_excl |> 
   select(1:3, 7:8) |> 
@@ -1169,6 +1195,8 @@ sC_excl_ami |>
 
 ```
 
+\
+\
 Change in shares grouped by household size:
 
 ```{r}
@@ -1247,7 +1275,6 @@ sC_redist |>
 Original distribution of households by AMI retained:
 
 ```{r}
-#| echo: true
 
 sC_redist |> 
   group_by(AMI) |> 
@@ -1259,6 +1286,8 @@ sC_redist |>
 
 ```
 
+\
+\
 New distribution of households by household size:
 
 ```{r}
@@ -1274,6 +1303,7 @@ sC_redist |>
 
 ```
 
+\
 \
 Rejoin the redistributed households with the calculated subsidy amounts per household:
 
@@ -1379,7 +1409,7 @@ sC_served |>
 
 \newpage
 
-### Model results
+## Model results
 
 Round each estimate to the nearest whole number and determine total:
 
@@ -1430,10 +1460,10 @@ sC_avg <- (sC_budget)/sC_total
 
 ```
 
-\newpage
+\
 
 ::: callout-note
-### Scenario C results
+## Scenario C results
 
 *Average annual program cost per household: `{r} label_currency()(sC_avg)`*
 
