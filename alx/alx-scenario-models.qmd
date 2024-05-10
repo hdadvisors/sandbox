@@ -191,7 +191,7 @@ ggplot(hud_plot, aes(x = income, y = fct_rev(hh_size))) +
   theme_hda(base_size = 26) +
   labs(
     title = "HUD FY 2023 Multifamily Tax Subsidy Projects income limits",
-    subtitle = "Household income limits and affordable **rents** by AMI and household size",
+    subtitle = "Household income limits and affordable *rents* by AMI and household size",
     caption = "**Source:** HUD FY 2023 MTSP Income Limits for Washington-Arlington-Alexandria, DC-VA-MD HUD Metro FMR Area"
   ) +
   theme(
@@ -201,7 +201,7 @@ ggplot(hud_plot, aes(x = income, y = fct_rev(hh_size))) +
     plot.subtitle = element_markdown(margin = margin(t = -5, b = 5))
   )
 
-ggsave("sandbox/alx/alx-ami.png", width = 6.5, height = 4, units = "in", bg = "white")
+ggsave("sandbox/alx/alx-ami.png", width = 6.5, height = 3.75, units = "in", bg = "white")
 
 ```
 
