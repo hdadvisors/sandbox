@@ -72,6 +72,9 @@ cspdc_500k <- get_cspdc_features(resolution = "500k")
 # Create CSPDC region at 5m resolution
 cspdc_5m <- get_cspdc_features(resolution = "5m")
 
+# Create SAW localities
+staunton
+
 ## Save and export ----------
 
 # Function to render and save map at specified resolution for all file formats
@@ -115,3 +118,39 @@ save_cspdc_maps(cspdc_500k)
 
 # Save 5m resolution maps
 save_cspdc_maps(cspdc_5m)
+
+# Function to render and save SAW locality pngs
+
+save_saw_maps <- function(input) {
+  
+  # Define file formats
+  file_type = c("png")
+  
+  # Create character string from input feature name
+  input_name <- deparse(substitute(input))
+  
+  # Assign colors by jurisdiction type
+  cols = c(
+    "County" = "grey90",
+    "City" = "grey60",
+    "Town" = "grey85"
+  )
+  
+  # Render ggplot map
+  map <- ggplot(input, aes(fill = type)) +
+    geom_sf(color = "white") +
+    scale_fill_manual(values = cols, guide = "none") +
+    theme_void()
+  
+  # Save map as graphic object in each format
+  for (type in file_type) {
+    
+    # Create file name for selected resolution and file format
+    file_name <- paste0("sandbox/cspdc/", input_name, ".", type)
+    
+    # Save object
+    ggsave(file_name, plot = map)
+    
+  }
+  
+}
