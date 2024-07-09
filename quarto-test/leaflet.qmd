@@ -41,7 +41,7 @@ library(sf)
 ashland <- st_read('https://services2.arcgis.com/sKZWgJlU6SekCzQV/arcgis/rest/services/Ashland_Boundary/FeatureServer/0/query?outFields=*&where=1%3D1&f=geojson', quiet = TRUE)
 
 leaflet(ashland) %>% 
-  addTiles() %>% 
+  addProviderTiles(providers$CartoDB.Positron) |> 
   addPolygons()
 
 ```
