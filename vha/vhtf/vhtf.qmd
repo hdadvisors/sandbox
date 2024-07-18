@@ -130,23 +130,44 @@ subtitle1 <- "Annual allocations for
   <span style='color:#0C4D4F'>**Loans**</span>,
   <span style='color:#A0D18E'>**Grants**</span>, and 
   <span style='color:#ECC51E'>**Administration** </span> 
-  (FY2014 - FY2024)"
+  (FY2014 - FY2025)"
+
+caption1 <- c(
+  "**Source:** Virginia Department of Housing and Community Development.\n
+  **Note:** FY25 funding not yet allocated or awared. Total amount approved in 2024-2026 Biennium Budget shown."
+  )
+
+allo_cols <- c(
+  "Loans" = "#0C4D4F",
+  "Grants" = "#A0D18E",
+  "Admin" = "#ECC51E",
+  "Budgeted" = "#0C4D4F"
+)
+
+allo_alpha <- c(
+  "Loans" = 1,
+  "Grants" = 1,
+  "Admin" = 1,
+  "Budgeted" = 0.75
+)
 
 vhtf_sum |> 
-  filter(data == "funding") |> 
-  ggplot(aes(year, value, fill = type)) +
+  filter(data %in% c("funding", "budget")) |> 
+  ggplot(aes(year, value, fill = type, alpha = type)) +
   geom_col() +
-  scale_fill_vha(-1) +
+  scale_fill_manual(values = allo_cols) +
+  scale_alpha_manual(values = allo_alpha) +
   scale_y_continuous(
-    breaks = seq(0, 80000000, 10000000),
-    expand = c(0.01, 0.05),
+    #breaks = seq(0, 80000000, 10000000),
+    breaks = c(0:8)*10000000,
+    expand = c(0.01, 0),
     labels = label_dollar(accuracy = 1, scale = 0.000001, suffix = "MM")
     ) +
   add_zero_line() +
   labs(
     title = "Virginia Housing Trust Fund budget allocations",
     subtitle = subtitle1,
-    caption = "**Source:** Virginia Department of Housing and Community Development."
+    caption = caption1
   ) +
   theme_vha(base_size = 40)
 

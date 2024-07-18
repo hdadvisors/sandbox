@@ -34,6 +34,7 @@ csv_files <- list.files(path = dir_output, pattern = "\\.csv$", full.names = TRU
 
 write_rds(csv_files, "regrid_va_csv/csv_files.rds")
 
+
 # Function to read CSV headers and create a presence vector
 read_csv_headers <- function(file_path) {
   # Read only the first row to get column names
@@ -142,15 +143,9 @@ va_statewide_2 <- assemble_csv(csv_files_2)
 va_statewide_3 <- assemble_csv(csv_files_3)
 va_statewide_4 <- assemble_csv(csv_files_4)
 
-write_csv(va_statewide_2, "regrid_va_all/va_statewide_2.csv")
+write_csv(va_statewide_4, "regrid_va_all/va_statewide_4.csv")
 
 # Combine all CSVs into statewide dataset
 va_statewide <- bind_rows(
   va_statewide_1, va_statewide_2, va_statewide_3, va_statewide_4
 )
-
-
-
-
-
-
