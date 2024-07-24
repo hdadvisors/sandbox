@@ -126,15 +126,15 @@ Annual allocations
 ```{r}
 #| label: allocations
 
-subtitle1 <- "Annual allocations for
-  <span style='color:#0C4D4F'>**Loans**</span>,
-  <span style='color:#A0D18E'>**Grants**</span>, and 
-  <span style='color:#ECC51E'>**Administration** </span> 
-  (FY2014 - FY2025)"
+subtitle1 <- c(
+  "Annual award totals for <span style='color:#0C4D4F'>**Loans**</span> and
+  <span style='color:#A0D18E'>**Grants**</span>, plus 
+  <span style='color:#ECC51E'>**Administrative Costs** </span> (FY2014 - FY2025)"
+  )
 
 caption1 <- c(
   "**Source:** Virginia Department of Housing and Community Development.\n
-  **Note:** FY25 funding not yet allocated or awared. Total amount approved in 2024-2026 Biennium Budget shown."
+  **Note:** The 2024-2026 Biennium Budget allocated $87.5 million to the VHTF in FY25. Awards have not yet been made."
   )
 
 allo_cols <- c(
@@ -158,20 +158,26 @@ vhtf_sum |>
   scale_fill_manual(values = allo_cols) +
   scale_alpha_manual(values = allo_alpha) +
   scale_y_continuous(
-    #breaks = seq(0, 80000000, 10000000),
     breaks = c(0:8)*10000000,
     expand = c(0.01, 0),
     labels = label_dollar(accuracy = 1, scale = 0.000001, suffix = "MM")
     ) +
   add_zero_line() +
   labs(
-    title = "Virginia Housing Trust Fund budget allocations",
+    title = "How the Virginia Housing Trust Fund is used",
     subtitle = subtitle1,
     caption = caption1
   ) +
-  theme_vha(base_size = 40)
+  theme_vha(base_size = 40) +
+  theme(
+    plot.caption = element_textbox_simple(
+      size = 33,
+      valign = 1,
+      margin = ggplot2::margin(t = 10, unit = "pt")
+      )
+    )
 
-ggsave("vhtf-annual-allocations.png", width = 8, height = 4.94, units = "in", bg = "white")
+ggsave("img/vhtf-annual-allocations.png", width = 8, height = 4.94, units = "in", bg = "white")
 
 ```
 
@@ -313,7 +319,7 @@ vhtf_sum |>
     subtitle = subtitle2,
     caption = "**Source:** Virginia Department of Housing and Community Development.<br>**Note:** Incomplete data for total loan applicants and awards from FY2016 through FY2019."
   ) +
-  theme_vha(base_size = 40) +
+  theme_vha(base_size = 10) +
   theme(
     plot.caption = element_textbox_simple(
       lineheight = 0.4,
