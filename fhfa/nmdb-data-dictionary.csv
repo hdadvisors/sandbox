@@ -1,0 +1,37 @@
+﻿SERIESID,TYPE,CATEGORY,LABEL,DETAILS
+TOT_LOANS,Total,Summary,Outstanding Loans,Active Loans Only
+PCT_LOANS,Percent,Summary,Percent Share of Loans,Share of All Outstanding Loans Nationwide
+TOT_LOANAMT,Total,Summary,Origination Loan Volume,Billions ($)
+MED_PAYMENT,Median,Summary,Median Monthly Payment,"Principal, Interest, and Escrow"
+AVE_PAYMENT,Average,Summary,Average Monthly Payment,"Principal, Interest, and Escrow"
+AVE_MTMLTV,Average,Mark-to-Market Loan-to-Value,Average LTV,
+PCT_MTMLTV_LE60,Percent,Mark-to-Market Loan-to-Value,60.0% or Below,
+PCT_MTMLTV_6170,Percent,Mark-to-Market Loan-to-Value,60.1 – 70.0%,
+PCT_MTMLTV_7180,Percent,Mark-to-Market Loan-to-Value,70.1 – 80.0%,
+PCT_MTMLTV_8190,Percent,Mark-to-Market Loan-to-Value,80.1 – 90.0%,
+PCT_MTMLTV_91100,Percent,Mark-to-Market Loan-to-Value,90.1 – 100.0%,
+PCT_MTMLTV_GT100,Percent,Mark-to-Market Loan-to-Value,Greater than 100.0%,
+AVE_INTRATE,Average,Contract Interest Rate at Origination,Average Interest Rate,
+PCT_INTRATE_LT_3,Percent,Contract Interest Rate at Origination,Less than 3.00%,
+PCT_INTRATE_3_4,Percent,Contract Interest Rate at Origination,3.00 – 3.99%,
+PCT_INTRATE_4_5,Percent,Contract Interest Rate at Origination,4.00 – 4.99%,
+PCT_INTRATE_5_6,Percent,Contract Interest Rate at Origination,5.00 – 5.99%,
+PCT_INTRATE_GE_6,Percent,Contract Interest Rate at Origination,6.00% or Greater,
+PCT_TERM_ARM_1_4,Percent,Adjustable Rate Mortgages,Originated within Past 4 Years,
+PCT_TERM_ARM_5PL,Percent,Adjustable Rate Mortgages,Originated More than 4 years Ago,
+PCT_TERM_FRM_15,Percent,Fixed Rate Mortgages,Terms 15 Years or Less,
+PCT_TERM_FRM_30,Percent,Fixed Rate Mortgages,Terms More than 15 Years,
+AVE_VANTAGESCR,Average,Credit Score at Current Quarter,Average Credit Score,
+PCT_VS_VERYPOOR,Percent,Credit Score at Current Quarter,Very Poor,300 – 499
+PCT_VS_POOR,Percent,Credit Score at Current Quarter,Poor ,500 – 600
+PCT_VS_FAIR,Percent,Credit Score at Current Quarter,Fair,601 – 660
+PCT_VS_GOOD,Percent,Credit Score at Current Quarter,Good,661 – 780
+PCT_VS_EXCELLENT,Percent,Credit Score at Current Quarter,Excellent,781 – 850
+AVE_LOAN_AGE,Average,Age of Mortgage Loan,Average Loan Age,Months
+PCT_TENURE_1_4,Percent,Age of Mortgage Loan,4.00 Years or Less,
+PCT_TENURE_5_7,Percent,Age of Mortgage Loan,4.01 – 7.00 Years,
+PCT_TENURE_8_10,Percent,Age of Mortgage Loan,7.01 – 10.00 Years,
+PCT_TENURE_11PL,Percent,Age of Mortgage Loan,More than 10.00 Years,
+PCT_GOVERNMENT,Percent,Percent Market Share,Government,Government Insured/Guaranteed/Direct Loans
+PCT_ENTERPRISE,Percent,Percent Market Share,Enterprise,Non-Government Loans Acquired by Enterprise
+PCT_OTHER,Percent,Percent Market Share,Other Conventional,"Non-Government, Non-Enterprise Loans"
