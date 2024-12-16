@@ -37,7 +37,7 @@ ui <- fixedPage(
   
     fluidRow(
       column(6,
-        markdown("#### **Competitive Loan Pool projects** (FY2014 - FY2023)"),
+        markdown("#### **Competitive Loan Pool projects** (FY2014 - FY2024)"),
         HTML("<p style='margin-bottom: 0px;'>Use these controls to view projects by individual House of Delegates or State Senate district. You can also filter projects by clicking on a district in the map. Click the \"Reset selection\" button to reload all data.</p>")
       ),
       column(2,
@@ -111,10 +111,10 @@ ui <- fixedPage(
         9,
         
         markdown(
-          "**Source:** Virginia Department of Housing and Community Development. Data includes all projects awarded funds from the Competitive Loan Pool of the Virginia Housing Trust Fund, from FY2014 to FY2023."),
+          "**Source:** Virginia Department of Housing and Community Development. Data includes all projects awarded funds from the Competitive Loan Pool of the Virginia Housing Trust Fund, from FY2014 to FY2024."),
         
         HTML(
-          "<b>Last updated:</b> January 8, 2024. <a href='https://github.com/hdadvisors/sandbox/tree/main/vha/vhtf/vhtf_dashboard'>View code on Github <i class='fa-brands fa-github'></i></a>"
+          "<b>Last updated:</b> December 16, 2024. <a href='https://github.com/hdadvisors/sandbox/tree/main/vha/vhtf/vhtf_dashboard'>View code on Github <i class='fa-brands fa-github'></i></a>"
           ),
         
         style = "padding-right: 25px;"

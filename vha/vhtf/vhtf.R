@@ -7,6 +7,7 @@ library(tidyverse)
 library(hdatools)
 library(scales)
 library(sysfonts)
+library(ggtext)
 
 knitr::opts_chunk$set(
   echo = FALSE,

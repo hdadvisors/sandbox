@@ -1,6 +1,6 @@
 ---
 title: "Virginia Housing Trust Fund"
-subtitle: "FY2014 - FY2024"
+subtitle: "FY2014 - FY2025"
 format:
   html:
     theme: flatly
@@ -19,13 +19,11 @@ Setup
 
 source("vhtf.R")
 
-library(ggtext)
+#setwd("R:/sandbox/vha/vhtf")
 
-#setwd("C:/Users/Jonathan/Documents/repos/sandbox/vha/vhtf")
+vhtf_raw <- read_csv("data/vhtf-projects-all.csv")
 
-vhtf_raw <- read_csv("vhtf-projects-all.csv")
-
-vhtf_sum <- read_csv("vhtf-summary.csv") |> 
+vhtf_sum <- read_csv("data/vhtf-summary.csv") |> 
   mutate(year = str_replace_all(year, "FY20", "FY"))
 
 ```
@@ -36,13 +34,13 @@ Load districts
 #| label: districts
 #| eval: false
 
-senate <- st_read("va_senate_2021.geojson", quiet = TRUE) |> 
+senate <- st_read("gis/va_senate_2021.geojson", quiet = TRUE) |> 
   st_transform(4326)
 
 senate$chamber <- "Senate"
 senate$DISTRICT <- paste("SD", senate$DISTRICT)
 
-house <- st_read("va_house_2021.geojson", quiet = TRUE) |> 
+house <- st_read("gis/va_house_2021.geojson", quiet = TRUE) |> 
   st_transform(4326)
 
 house$chamber <- "House"
@@ -66,7 +64,7 @@ districts$max_y <- sapply(st_geometry(districts), function(geom) {
   st_bbox(geom)[4]
 })
 
-write_rds(districts, "districts.rds")
+write_rds(districts, "data/districts.rds")
 
 ```
 
@@ -77,7 +75,8 @@ library(tigris)
 counties <- counties("va")
 
 vaco <- counties |> 
-  select(locality = NAMELSAD)
+  select(locality = NAMELSAD) |> 
+  st_transform(4326)
 
 ```
 
@@ -88,7 +87,12 @@ Geocode VHTF projects
 #| label: geocode
 #| eval: false
 
+# Updated: 2024-12-16
+
+library(sf)
 library(tidygeocoder)
+
+sf_use_s2(FALSE)
 
 vhtf_geocode <- vhtf_raw |> 
   
@@ -111,13 +115,15 @@ vhtf_geocode$popup <- paste(
   paste0("VHTF award: ", "$", formatC(as.numeric(vhtf_geocode$amt_vhtf), format = "f", digits = 0, big.mark = ","))
 )
 
+districts <- read_rds("data/districts.rds")
+
 vhtf_districts <- vhtf_geocode |> 
   st_join(filter(select(districts, 1:2, 4), chamber == "House")) |> 
   st_join(filter(select(districts, 1:2, 4), chamber == "Senate")) |> 
   st_join(vaco) |> 
-  select(1:25, house = 27, senate = 29)
+  select(1:25, house = 27, senate = 29, 30)
 
-write_rds(vhtf_districts, "vhtf-districts.rds")
+write_rds(vhtf_districts, "data/vhtf-districts.rds")
 
 ```
 
@@ -126,15 +132,21 @@ Annual allocations
 ```{r}
 #| label: allocations
 
+# Updated: 2024-12-16
+
 subtitle1 <- c(
   "Annual award totals for <span style='color:#0C4D4F'>**Loans**</span> and
   <span style='color:#A0D18E'>**Grants**</span>, plus 
   <span style='color:#ECC51E'>**Administrative Costs** </span> (FY2014 - FY2025)"
   )
 
+# caption1 <- c(
+#   "**Source:** Virginia Department of Housing and Community Development.\n
+#   **Note:** The 2024-2026 Biennium Budget allocated $87.5 million to the VHTF in FY25. Awards have not yet been made."
+#   )
+
 caption1 <- c(
-  "**Source:** Virginia Department of Housing and Community Development.\n
-  **Note:** The 2024-2026 Biennium Budget allocated $87.5 million to the VHTF in FY25. Awards have not yet been made."
+  "**Source:** Virginia Department of Housing and Community Development."
   )
 
 allo_cols <- c(
@@ -186,6 +198,8 @@ CLP units
 ```{r}
 #| label: units
 
+# Updated: 2024-12-16
+
 vhtf_raw |> 
   summarise(
     n = n(),
@@ -203,20 +217,29 @@ vhtf_raw |>
     vjust = -0.5
   ) +
   scale_y_continuous(
-    limits = c(0, 16500),
-    breaks = seq(0, 15000, 5000),
+    limits = c(0, 22000),
+    breaks = seq(5000, 20000, 5000),
     labels = label_comma(),
     expand = c(0.01, 0.05)
   ) +
   add_zero_line() +
   labs(
     title = "Affordable units produced by VHTF Competitive Loan Pool",
-    subtitle = "Cumulative total of units affordable at 80% AMI or below (FY2014 - FY2023)",
+    subtitle = "Cumulative total of units affordable at 80% AMI or below (FY2014 - FY2024)",
     caption = "**Source:** Virginia Department of Housing and Community Development."
   ) +
-  theme_vha(base_size = 40)
+  theme_vha(base_size = 40) +
+  theme(
+    axis.text.y = element_text(
+      hjust = 0, vjust = -0.5,
+      color = "grey70",
+      size = 30,
+      margin = margin(r = -32, unit = "pt")
+    )
+    #axis.text.y = element_blank()
+  )
 
-ggsave("vhtf-total-units.png", width = 8, height = 4.94, units = "in", bg = "white")
+ggsave("img/vhtf-total-units.png", width = 8, height = 4.94, units = "in", bg = "white")
 
 ```
 

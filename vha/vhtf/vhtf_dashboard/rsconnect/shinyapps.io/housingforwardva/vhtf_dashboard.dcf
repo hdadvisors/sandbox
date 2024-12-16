@@ -5,7 +5,7 @@ account: housingforwardva
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 10881200
-bundleId: 8119959
+bundleId: 9529005
 url: https://housingforwardva.shinyapps.io/vhtf_dashboard/
 version: 1
 asMultiple: FALSE

@@ -172,17 +172,17 @@ FY2023,Grants,hrg,Homelessness Reduction,funding,12900000
 FY2023,Grants,hrg,Homelessness Reduction,applicants,86
 FY2023,Grants,hrg,Homelessness Reduction,request,16800000
 FY2023,Grants,hrg,Homelessness Reduction,awardees,68
-FY2023,Grants,hrg,Homelessness Reduction,awarded,
+FY2023,Grants,hrg,Homelessness Reduction,awarded,12900000
 FY2023,Grants,hrg,Homelessness Reduction,leverage,
-FY2023,Grants,hrg,Homelessness Reduction,hh,
+FY2023,Grants,hrg,Homelessness Reduction,hh,2530
 FY2023,Admin,admin,Admin,funding,2100000
 FY2024,Loans,clp,Competitive Loan Pool,funding,60000000
-FY2024,Loans,clp,Competitive Loan Pool,applicants,
-FY2024,Loans,clp,Competitive Loan Pool,request,
-FY2024,Loans,clp,Competitive Loan Pool,awardees,
-FY2024,Loans,clp,Competitive Loan Pool,awarded,
-FY2024,Loans,clp,Competitive Loan Pool,leverage,
-FY2024,Loans,clp,Competitive Loan Pool,units,
+FY2024,Loans,clp,Competitive Loan Pool,applicants,100
+FY2024,Loans,clp,Competitive Loan Pool,request,71600000
+FY2024,Loans,clp,Competitive Loan Pool,awardees,66
+FY2024,Loans,clp,Competitive Loan Pool,awarded,60000000
+FY2024,Loans,clp,Competitive Loan Pool,leverage,1800000000
+FY2024,Loans,clp,Competitive Loan Pool,units,4634
 FY2024,Grants,hrg,Homelessness Reduction,funding,12900000
 FY2024,Grants,hrg,Homelessness Reduction,applicants,
 FY2024,Grants,hrg,Homelessness Reduction,request,
@@ -191,4 +191,7 @@ FY2024,Grants,hrg,Homelessness Reduction,awarded,
 FY2024,Grants,hrg,Homelessness Reduction,leverage,
 FY2024,Grants,hrg,Homelessness Reduction,hh,
 FY2024,Admin,admin,Admin,funding,2100000
-FY2025,Budgeted,budget,Budgeted,budget,87500000
+FY2025,Loans,clp,Competitive Loan Pool,funding,70000000
+FY2025,Grants,hrg,Homelessness Reduction,funding,14000000
+FY2025,Grants,psh,PSH Predevelopment,funding,500000
+FY2025,Admin,admin,Admin,funding,3000000
